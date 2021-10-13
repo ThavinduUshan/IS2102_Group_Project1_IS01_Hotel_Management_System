@@ -7,5 +7,5 @@ Here We are developing Our University 2nd Year Group Project.
 
 1. Thavindu Ushan
 2. Sethiya Nisal - 19020562
-3. Janani Samarawickrama - 19020767
+3. S.A.A.K.J.Samarawickrama - 19020767
 4. G.L.C. Galhena -19020252
