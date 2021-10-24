@@ -7,7 +7,7 @@
   <link rel="preconnect" href="https://fonts.googleapis.com">
   <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
   <link href="https://fonts.googleapis.com/css2?family=Open+Sans:wght@300;400;600;700;800&display=swap" rel="stylesheet">
-  <link rel="stylesheet" href="<?php echo URLROOT?>/public/css/style.css">
+  <link rel="stylesheet" href="<?php echo URLROOT?>/public/css/stylen.css">
   <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/@fortawesome/fontawesome-free@5.15.4/css/fontawesome.min.css" integrity="sha384-jLKHWM3JRmfMU0A5x5AkjWkw/EYfGUAGagvnfryNV3F9VqM98XiIH7VBGVoxVSc7" crossorigin="anonymous">
   <script src="https://use.fontawesome.com/a6a11daad8.js"></script>
   <title>GrindLay's Regency</title>
@@ -29,7 +29,7 @@
           <li><a href="<?php echo URLROOT; ?>/pages/facilities">Facilities</a></li>
           <li><a href="<?php echo URLROOT; ?>/pages/gallery">Gallery</a></li>
           <li><a href="<?php echo URLROOT; ?>/pages/contact">Contact</a></li>
-          <li><a href="<?php echo URLROOT; ?>/pages/issues">Issues</a></li>
+          <li><a href="<?php echo URLROOT; ?>/pages/issues">Complains</a></li>
           </ul>
         </div>
         <i class="fa fa-bars" onclick="showMenu()"></i>
@@ -85,7 +85,7 @@
           </div>
         </div>
         <div class="testimonial-col">
-          <img src="<?php echo URLROOT ?>/public/img/User1.jpg">
+          <img src="<?php echo URLROOT ?>/public/img/User2.jpg">
           <div>
             <p>Lorem ipsum dolor sit amet, consectetur adipisicing elit. Architecto commodi sapiente reprehenderit voluptates quasi molestiae hic aperiam nemo recusandae? Quod, adipisci voluptas! Beatae ab facere laboriosam unde aliquid quas dolore?</p>
             <h3>Sethiya Nisal</h3>
@@ -97,10 +97,10 @@
           </div>
         </div>
         <div class="testimonial-col">
-          <img src="<?php echo URLROOT ?>/public/img/User1.jpg">
+          <img src="<?php echo URLROOT ?>/public/img/User3.jpg">
           <div>
             <p>Lorem ipsum dolor sit amet, consectetur adipisicing elit. Architecto commodi sapiente reprehenderit voluptates quasi molestiae hic aperiam nemo recusandae? Quod, adipisci voluptas! Beatae ab facere laboriosam unde aliquid quas dolore?</p>
-            <h3>Sethiya Nisal</h3>
+            <h3>Lahriu Galhena</h3>
             <i class="fa fa-star"></i>
             <i class="fa fa-star"></i>
             <i class="fa fa-star"></i>
@@ -109,10 +109,10 @@
           </div>
         </div>
         <div class="testimonial-col">
-          <img src="<?php echo URLROOT ?>/public/img/User1.jpg">
+          <img src="<?php echo URLROOT ?>/public/img/User4.jpg">
           <div>
             <p>Lorem ipsum dolor sit amet, consectetur adipisicing elit. Architecto commodi sapiente reprehenderit voluptates quasi molestiae hic aperiam nemo recusandae? Quod, adipisci voluptas! Beatae ab facere laboriosam unde aliquid quas dolore?</p>
-            <h3>Sethiya Nisal</h3>
+            <h3>Janani Samarawickrama</h3>
             <i class="fa fa-star"></i>
             <i class="fa fa-star"></i>
             <i class="fa fa-star"></i>
