@@ -26,7 +26,7 @@
           <i class="fa fa-user-circle-o fa-2x"></i>
         </button>
         <div class="dropdown-content">
-          <a href="#">Settings</a>
+          <a href="<?php echo URLROOT ?>/admins/settings">Settings</a>
           <a href="<?php echo URLROOT; ?>/users/logout">Logout</a>
         </div>
       </div>
@@ -34,10 +34,10 @@
     </nav>
     <div class="admin-dashboard">
     <span class="admin-button-set">
-        <button type="button" class="admin-button"><a href="#">Manage Users</a></button>
+        <button type="button" class="admin-button"><a href="<?php echo URLROOT; ?>/admins/manageusers">Manage Users</a></button>
         <button type="button" class="admin-button"><a href="<?php echo URLROOT; ?>/users/register">Add Users</a></button>
         <button type="button" class="admin-button"><a href="#">Reports</a></button>
-        <button type="button" class="admin-button"><a href="#">Issues</a></button>
+        <button type="button" class="admin-button"><a href="<?php echo URLROOT; ?>/admins/manageissues">Issues</a></button>
     </span>
     <div class="row">
       <div class="admin-dashboard-col">
