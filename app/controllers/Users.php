@@ -117,6 +117,15 @@
           }
         }
 
+        //validating first name
+        if(empty($data['fname'])){
+          $data['fnameError'] = 'Please Enter the First Name';
+        }
+
+        //validating nic
+        if(empty($data['lname'])){
+          $data['lnameError'] = 'Please Enter the Last Name';
+        }
         //validating nic
         if(empty($data['nic'])){
           $data['nicError'] = 'Please Enter the NIC';
@@ -147,7 +156,7 @@
 
           //register the user from model
           if($this->userModel->register($data)){
-            header('location: ' . URLROOT . '/users/login');
+            header('location: ' . URLROOT . '/users/admin');
           }else{
             die('Something Went Wrong!');
           }
@@ -226,6 +235,18 @@
         header('location: ' . URLROOT . '/users/receptionist');
       }
 
+      if($_SESSION['UserTypeID'] == 3){
+        header('location: ' . URLROOT . '/users/cashier');
+      }
+
+      if($_SESSION['UserTypeID'] == 4){
+        header('location: ' . URLROOT . '/users/barman');
+      }
+
+      if($_SESSION['UserTypeID'] == 5){
+        header('location: ' . URLROOT . '/users/headchef');
+      }
+
     }
 
     public function logout(){
@@ -241,17 +262,15 @@
     public function receptionist(){
       $this->view('users/receptionist');
     }
+    public function cashier(){
+      $this->view('users/cashier');
+    }
+    public function headchef(){
+      $this->view('users/headchef');
+    }
+    public function barman(){
+      $this->view('users/barman');
+    }
 
-    public function contact(){
-      $this->view('users/contact');
-    }
-    public function facilities(){
-      $this->view('users/facilities');
-    }
-    public function gallery(){
-      $this->view('users/gallery');
-    }
-    public function issues(){
-      $this->view('users/issues');
-    }
+    
   }

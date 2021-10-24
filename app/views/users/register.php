@@ -17,7 +17,6 @@
 </head>
 <body>
   <section class="register">
-    <div>
       <nav>
         <a href="<?php echo URLROOT ?>/users/admin">
           <img src="<?php echo URLROOT;?>/public/img/logo-nav.jpg">
@@ -25,6 +24,7 @@
       </nav>
     </div>
   <div class="register-form">
+    
     <h1>Registration</h1>
     <form name="registerform" action="<?php echo URLROOT; ?>/users/register" method="post">
       <h3>User Infromation<hr></h3>
@@ -32,36 +32,57 @@
         <div class="register-col">
           <label>First Name: </label>
           <input type="text" placeholder="First Name" id="fname" name="fname">
+          <span class="error">
+            <p><?php echo $data['fnameError'];?></p>
+          </span>
         </div>
         <div class="register-col">
           <label>Last Name: </label>
           <input type="text" placeholder="Last Name" id="lname" name="lname">
+          <span class="error">
+            <p><?php echo $data['lnameError'];?></p>
+          </span>
         </div>
       </div>
       <div class="row">
         <div class="register-col">
           <label>Email: </label>
           <input type="email" placeholder="Email" id="email" name="email">
+          <span class="error">
+            <p><?php echo $data['emailError'];?></p>
+          </span>
         </div>
         <div class="register-col">
           <label>NIC: </label>
           <input type="text" placeholder="NIC Number" id="nic" name="nic">
+          <span class="error">
+            <p><?php echo $data['nicError'];?></p>
+          </span>
         </div>
       </div>
       <div class="row">
         <div class="register-col">
           <label>Mobile Number: </label>
           <input type="text" placeholder="Mobile Number" id="mobilenum" name="mobilenum">
+          <span class="error">
+            <p><?php echo $data['mobilenumError'];?></p>
+          </span>
         </div>
         <div class="register-col">
           <label>Fixed Line: </label>
           <input type="text" placeholder="Fixed-Line Number" id="fixednum" name="fixednum">
+          <span class="error">
+            <p><?php echo $data['fixednumError'];?></p>
+          </span>
         </div>
       </div>
       <div class="row">
         <div class="register-col">
           <label>Date of Birth: </label>
           <input type="date" placeholder="Date of Birth" id="dob" name="dob">
+          <span class="error">
+            <p><?php echo $data['dobError'];?></p>
+          </span>
         </div>
         <div class="register-col">
           <label for="gender">Gender :</label>
@@ -76,13 +97,16 @@
         <div class="register-col">
           <label>User Name: </label>
           <input type="text" placeholder="User Name" id="uname" name="uname">
+          <span class="error">
+            <p><?php echo $data['unameError'];?></p>
+          </span>
         </div>
         <div class="register-col">
           <label for="utypeid">User Type: :</label>
           <select id="drop" name="utypeid" >
             <option value="Admin" selected="selected">Admin</option>
             <option value="Receptionist">Receptionist</option>
-            <option value="Cashier">Restaurant Cashier</option>
+            <option value="Cashier">Cashier</option>
             <option value="Barman">Barman</option>
             <option value="HeadChef">Head Chef</option>
           </select>
@@ -92,10 +116,16 @@
         <div class="register-col">
           <label>Password: </label>
           <input type="password" placeholder="Password" id="psw" name="psw">
+          <span class="error">
+            <p><?php echo $data['pswError'];?></p>
+          </span>
         </div>
         <div class="register-col">
           <label>Re-Enter Password: </label>
           <input type="password" placeholder="Re-Enter Password" id="repsw" name="repsw">
+          <span class="error">
+            <p><?php echo $data['repswError'];?></p>
+          </span>
         </div>
       </div>
       <div class="row">
@@ -108,6 +138,7 @@
       </div>
     </form>
   </div>
+  <br><br><br>
 </section>
 </body>
 </html>
