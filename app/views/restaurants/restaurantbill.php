@@ -10,10 +10,10 @@
   <link rel="preconnect" href="https://fonts.googleapis.com">
   <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
   <link href="https://fonts.googleapis.com/css2?family=Open+Sans:wght@300;400;600;700;800&display=swap" rel="stylesheet">
-  <link rel="stylesheet" href="<?php echo URLROOT ?>/public/css/system.css">
+  <link rel="stylesheet" href="<?php echo URLROOT ?>/public/css/stylen.css">
   <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/@fortawesome/fontawesome-free@5.15.4/css/fontawesome.min.css" integrity="sha384-jLKHWM3JRmfMU0A5x5AkjWkw/EYfGUAGagvnfryNV3F9VqM98XiIH7VBGVoxVSc7" crossorigin="anonymous">
   <script src="https://use.fontawesome.com/a6a11daad8.js"></script>
-  <title>Admin</title>
+  <title>Restaurant Bill</title>
 </head>
 <body>
   <section class="system">
@@ -46,7 +46,28 @@
 
   <!-- System Block -->
 
-  <div class="sys-left-col"></div>
+  <div class="sys-left-col">
+  <div class="rest-dash-plus1">
+      <a href="<?php echo URLROOT ?>/restaurants/placekot">
+        <i class="fa fa-plus-square fa-4x" aria-hidden="true"></i>
+      </a>
+      <p>Place Order</p>
+    </div>
+
+    <div class="rest-dash-plus2">
+      <a href="<?php echo URLROOT ?>/restaurants/managefooditems">
+        <i class="fa fa-book fa-4x" aria-hidden="true"></i>
+      </a>
+      <p>View Food Items</p>
+    </div>
+
+    <div class="rest-dash-plus3">
+      <a href="<?php echo URLROOT; ?>/restaurants/addfooditem">
+        <i class="fa fa-plus-square fa-4x" aria-hidden="true"></i>
+      </a>
+      <p>Add Food Items</p>
+    </div>
+  </div>
   
 <!-- Right Block Bill -->
 
