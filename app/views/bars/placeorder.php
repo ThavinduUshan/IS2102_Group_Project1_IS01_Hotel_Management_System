@@ -110,24 +110,24 @@
               <td></td>
               <td></td>
               <td></td>
-              <td><a href="#"><i class="fa fa-pencil-square-o fa-lg" aria-hidden="true"></i></a></td>
-              <td><a href="#"><i class="fa fa-trash-o fa-lg" aria-hidden="true"></i></a></td>
+              <td><a style="color: #01661b;" href="#"><i class="fa fa-pencil-square-o fa-lg" aria-hidden="true"></i></a></td>
+              <td><a style="color: #01661b;" href="#"><i class="fa fa-trash-o fa-lg" aria-hidden="true"></i></a></td>
               </tr>
               <tr>
                 <td></td>
                 <td></td>
                 <td></td>
                 <td></td>
-                <td><a href="#"><i class="fa fa-pencil-square-o fa-lg" aria-hidden="true"></i></a></td>
-                <td><a href="#"><i class="fa fa-trash-o fa-lg" aria-hidden="true"></i></a></td>
+                <td><a style="color: #01661b;" href="#"><i class="fa fa-pencil-square-o fa-lg" aria-hidden="true"></i></a></td>
+                <td><a style="color: #01661b;" href="#"><i class="fa fa-trash-o fa-lg" aria-hidden="true"></i></a></td>
                 </tr>
                 <tr>
               <td></td>
               <td></td>
               <td></td>
               <td></td>
-              <td><a href="#"><i class="fa fa-pencil-square-o fa-lg" aria-hidden="true"></i></a></td>
-              <td><a href="#"><i class="fa fa-trash-o fa-lg" aria-hidden="true"></i></a></td>
+              <td><a style="color: #01661b;" href="#"><i class="fa fa-pencil-square-o fa-lg" aria-hidden="true"></i></a></td>
+              <td><a style="color: #01661b;" href="#"><i class="fa fa-trash-o fa-lg" aria-hidden="true"></i></a></td>
               </tr>
             </table>
             <br><br><br>
