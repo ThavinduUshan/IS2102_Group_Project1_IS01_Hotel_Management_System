@@ -50,7 +50,7 @@
 
   <div class="recep-dash-plus1">
       <a href="<?php echo URLROOT ?>/users/receptionist">
-        <i class="fa fa-plus-square fa-4x" aria-hidden="true"></i>
+        <i class="fa fa-home fa-4x" aria-hidden="true"></i>
       </a>
       <p>Dashboard</p>
     </div>
