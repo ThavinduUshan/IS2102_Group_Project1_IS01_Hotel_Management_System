@@ -57,7 +57,7 @@
             <div>
             <h2 class="manage-items-heading">Bar Items</h2><br>
 
-            <h4 class ="item-list-name">Liqor / Beverages</h4>
+            <h4 class ="item-list-name">Liquor / Beverages</h4>
 
             <!-- Drinks Table -->
             <table class="bar-item-table">

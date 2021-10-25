@@ -62,10 +62,10 @@
     </div>
 
     <div class="rest-dash-plus3">
-      <a href="<?php echo URLROOT; ?>/restaurants/addfooditem">
-        <i class="fa fa-plus-square fa-4x" aria-hidden="true"></i>
+      <a href="<?php echo URLROOT; ?>/users/cashier">
+        <i class="fa fa-home fa-4x" aria-hidden="true"></i>
       </a>
-      <p>Add Food Items</p>
+      <p>Dashboard</p>
     </div>
   </div>
   
