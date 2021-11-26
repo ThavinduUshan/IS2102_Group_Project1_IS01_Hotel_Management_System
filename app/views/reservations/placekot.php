@@ -18,7 +18,7 @@
 <body>
   <section class="system">
     <nav class="sys-nav" id="sysnav">
-      <a href="<?php echo URLROOT ?>/users/cashier">
+      <a href="<?php echo URLROOT ?>/users/receptionist">
           <img src="<?php echo URLROOT ?>/public/img/logo-nav.jpg">
       </a>
       <div class="dropdown">
@@ -26,7 +26,7 @@
           <i class="fa fa-user-circle-o fa-2x"></i>
         </button>
         <div class="dropdown-content">
-          <a href="<?php echo URLROOT ?>/restaurants/settings">Settings</a>
+          <a href="<?php echo URLROOT ?>/reservations/settings">Settings</a>
           <a href="<?php echo URLROOT; ?>/users/logout">Logout</a>
         </div>
       </div>
@@ -47,26 +47,21 @@
   <!-- System Block -->
 
   <div class="sys-left-col">
-  <div class="rest-dash-plus1">
-      <a href="<?php echo URLROOT ?>/restaurants/placekot">
-        <i class="fa fa-plus-square fa-4x" aria-hidden="true"></i>
-      </a>
-      <p>Place Order</p>
-    </div>
 
-    <div class="rest-dash-plus2">
-      <a href="<?php echo URLROOT ?>/restaurants/managefooditems">
-        <i class="fa fa-book fa-4x" aria-hidden="true"></i>
-      </a>
-      <p>View Food Items</p>
-    </div>
-
-    <div class="rest-dash-plus3">
-      <a href="<?php echo URLROOT; ?>/users/cashier">
+  <div class="recep-dash-plus1">
+      <a href="<?php echo URLROOT ?>/users/receptionist">
         <i class="fa fa-home fa-4x" aria-hidden="true"></i>
       </a>
       <p>Dashboard</p>
     </div>
+
+  <div class="recep-dash-plus1">
+      <a href="<?php echo URLROOT ?>/reservations/selectdate">
+        <i class="fa fa-plus-square fa-4x" aria-hidden="true"></i>
+      </a>
+      <p>Place Reservation</p>
+    </div>
+  </div>
   </div>
   
   <div class="sys-right-col">
@@ -97,16 +92,14 @@
       <form action="add.php">
 
         <select id="name" name="name">
-          <option value="item">Select the Food Item</option>
-          <option value="item 1">item 1</option>
-          <option value="item 2">item 2</option>
-          <option value="item 3">item 3</option>
+          <option value="item 1">Food item 1</option>
+          <option value="item 2">Food item 2</option>
+          <option value="item 3">Food item 3</option>
         </select><br><br>
 
         <input type="text" id="quantity" name="quantity" placeholder="Quantity"><br><br>
 
         <select id="potion" name="portion">
-        <option value="Small">Small</option>
           <option value="Normal">Normal</option>
           <option value="large">large</option>
         </select><br><br>
@@ -141,28 +134,14 @@
               <td><a href="#"><i class="fa fa-pencil-square-o fa-2x" aria-hidden="true"></i></a></td>
               <td><a href="#"><i class="fa fa-trash-o fa-2x" aria-hidden="true"></i></a></td>
               </tr>
-              <tr>
-              <td></td>
-              <td></td>
-              <td></td>
-              <td><a href="#"><i class="fa fa-pencil-square-o fa-2x" aria-hidden="true"></i></a></td>
-              <td><a href="#"><i class="fa fa-trash-o fa-2x" aria-hidden="true"></i></a></td>
-              </tr>
-              <tr>
-              <td></td>
-              <td></td>
-              <td></td>
-              <td><a href="#"><i class="fa fa-pencil-square-o fa-2x" aria-hidden="true"></i></a></td>
-              <td><a href="#"><i class="fa fa-trash-o fa-2x" aria-hidden="true"></i></a></td>
-              </tr>
 
-            </table><br>
+            </table><br><br>
 
             <div class="recep-kot-form">
       
             <form action="sendkot.php">
               <label for="snotes">Special Notes:</label><br>
-              <textarea name="" id="" cols="30" rows="8"></textarea><br><br>
+              <textarea name="" id="" cols="30" rows="3"></textarea><br><br>
               
               <div class="res-kot-details-place-button"> 
                 <a href="#roomplaceorder"><button type="submit">Send KOT</button></a>

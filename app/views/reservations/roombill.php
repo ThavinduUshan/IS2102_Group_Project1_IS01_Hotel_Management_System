@@ -13,12 +13,12 @@
   <link rel="stylesheet" href="<?php echo URLROOT ?>/public/css/stylen.css">
   <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/@fortawesome/fontawesome-free@5.15.4/css/fontawesome.min.css" integrity="sha384-jLKHWM3JRmfMU0A5x5AkjWkw/EYfGUAGagvnfryNV3F9VqM98XiIH7VBGVoxVSc7" crossorigin="anonymous">
   <script src="https://use.fontawesome.com/a6a11daad8.js"></script>
-  <title>Update Food Item</title>
+  <title>Room Bill</title>
 </head>
 <body>
   <section class="system">
     <nav class="sys-nav" id="sysnav">
-      <a href="<?php echo URLROOT ?>/users/cashier">
+      <a href="<?php echo URLROOT ?>/users/receptionist">
           <img src="<?php echo URLROOT ?>/public/img/logo-nav.jpg">
       </a>
       <div class="dropdown">
@@ -26,7 +26,7 @@
           <i class="fa fa-user-circle-o fa-2x"></i>
         </button>
         <div class="dropdown-content">
-          <a href="<?php echo URLROOT ?>/restaurants/settings">Settings</a>
+          <a href="<?php echo URLROOT ?>/reservations/settings">Settings</a>
           <a href="<?php echo URLROOT; ?>/users/logout">Logout</a>
         </div>
       </div>
@@ -47,69 +47,75 @@
   <!-- System Block -->
 
   <div class="sys-left-col">
-  <div class="rest-dash-plus1">
-      <a href="<?php echo URLROOT ?>/restaurants/placekot">
+  <div class="recep-dash-plus1">
+      <a href="<?php echo URLROOT ?>/reservations/selectdate">
         <i class="fa fa-plus-square fa-4x" aria-hidden="true"></i>
       </a>
-      <p>Place Order</p>
+      <p>Place Reservation</p>
     </div>
 
-    <div class="rest-dash-plus2">
-      <a href="<?php echo URLROOT ?>/restaurants/managefooditems">
-        <i class="fa fa-book fa-4x" aria-hidden="true"></i>
-      </a>
-      <p>View Food Items</p>
-    </div>
-
-    <div class="rest-dash-plus3">
-      <a href="<?php echo URLROOT; ?>/users/cashier">
+    <div class="bar-dash-plus1">
+      <a href="<?php echo URLROOT ?>/users/receptionist">
         <i class="fa fa-home fa-4x" aria-hidden="true"></i>
       </a>
       <p>Dashboard</p>
     </div>
   </div>
   
+<!-- Right Block Bill -->
+
   <div class="sys-right-col">
-    
-    <div class="rest-add-food">
-      <p>Item Details:</p>
+  <div class="recep-bill-right">
+ 
+<!-- Bill Heading -->
+
+    <div class="recep-bill-date">
+      <table>
+        <tr>
+          <td>Reservation No:</td>
+          <td>Room No:</td>
+        </tr>
+      </table>
     </div>
 
-    <div class="rest-add-food-form">
+    <div class="recep-bill-heading">
+      <p>Bill Details</p>
+    </div>
+
+<!-- Bill -->
+
+    <div class="recep-bill-form">
       
-      <form action="<?php echo URLROOT ?>/restaurants/updatefooditem" name="add-food-item-form" method="post">
-        <label for="itemname">Item Name:</label><br>
-        <input type="text" id="itemname" name="itemName" placeholder="Enter the Name"><br>
+      <form action="bill.php">
+        <div class="bill-form-left">
+          <label for="checkin">Checked In:</label><br>
+          <input type="text" id="checkin" name="checkin"><br><br>
+        </div>
 
-        <label for="category">Food Category:</label><br>
-        <select id="category" name="category">
-          <option value="Starter">Starter</option>
-          <option value="Soup">Soup</option>
-          <option value="Dish">Dish</option>
-          <option value="Dessert">Dessert</option>
-          <option value="Beverage">Beverage</option>
-        </select><br>
+        <label for="checkout">Cheked Out:</label><br>
+        <input type="text" id="checkout" name="checkout"><br><br>
 
-        <label for="portion">Portion:</label><br>
-        <select id="portion" name="portion">
-          <option value="Small">Small</option>
-          <option value="Regular">Regular</option>
-          <option value="Large">Large</option>
-        </select><br>
+        <div class="bill-form-right">
+          <label for="days" class="recep-bill-form-l1">Days:</label><br>
+          <input type="text" id="days" name="days"><br><br>
+        </div>
 
-        <label for="status">Availability</label><br>
-        <select id="status" name="status">
-            <option value="Available" selected="selected">Available</option>
-            <option value="Unavailable">Unavailable</option>
-          </select><br>
-        <label for="price">Price:</label><br>
-        <input type="text" id="price" name="price" placeholder="Price">
-        <br>
-        <input type="submit" name="submit" value="Update Item">
+        <label for="ptype">Package Type:</label><br>
+        <input type="text" id="ptype" name="ptype"><br><br>
+
       </form>
     </div>
 
+    <div class="recep-bill-2">
+      <form action="bill.php">
+        <label for="discount">Discount:</label>
+        <input type="text" id="discount" name="discount"></br>
+        <label for="tprice">Room Total Price:</label>
+        <input type="text" id="tprice" name="tprice"><br>
+        <input type="submit" name="submit" value="Close Reservation"><br><br>
+      </form>
+    </div>
   </div>
-
+  </div>
 </body>
 </html>

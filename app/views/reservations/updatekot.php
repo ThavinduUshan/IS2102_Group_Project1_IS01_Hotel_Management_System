@@ -13,12 +13,12 @@
   <link rel="stylesheet" href="<?php echo URLROOT ?>/public/css/stylen.css">
   <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/@fortawesome/fontawesome-free@5.15.4/css/fontawesome.min.css" integrity="sha384-jLKHWM3JRmfMU0A5x5AkjWkw/EYfGUAGagvnfryNV3F9VqM98XiIH7VBGVoxVSc7" crossorigin="anonymous">
   <script src="https://use.fontawesome.com/a6a11daad8.js"></script>
-  <title>Place KOT</title>
+  <title>Update KOT</title>
 </head>
 <body>
   <section class="system">
     <nav class="sys-nav" id="sysnav">
-      <a href="<?php echo URLROOT ?>/users/cashier">
+      <a href="<?php echo URLROOT ?>/users/receptionist">
           <img src="<?php echo URLROOT ?>/public/img/logo-nav.jpg">
       </a>
       <div class="dropdown">
@@ -26,7 +26,7 @@
           <i class="fa fa-user-circle-o fa-2x"></i>
         </button>
         <div class="dropdown-content">
-          <a href="<?php echo URLROOT ?>/restaurants/settings">Settings</a>
+          <a href="<?php echo URLROOT ?>/reservations/settings">Settings</a>
           <a href="<?php echo URLROOT; ?>/users/logout">Logout</a>
         </div>
       </div>
@@ -47,22 +47,15 @@
   <!-- System Block -->
 
   <div class="sys-left-col">
-  <div class="rest-dash-plus1">
-      <a href="<?php echo URLROOT ?>/restaurants/placekot">
+  <div class="recep-dash-plus1">
+      <a href="<?php echo URLROOT ?>/reservations/selectdate">
         <i class="fa fa-plus-square fa-4x" aria-hidden="true"></i>
       </a>
-      <p>Place Order</p>
+      <p>Place Reservation</p>
     </div>
 
-    <div class="rest-dash-plus2">
-      <a href="<?php echo URLROOT ?>/restaurants/managefooditems">
-        <i class="fa fa-book fa-4x" aria-hidden="true"></i>
-      </a>
-      <p>View Food Items</p>
-    </div>
-
-    <div class="rest-dash-plus3">
-      <a href="<?php echo URLROOT; ?>/users/cashier">
+    <div class="bar-dash-plus1">
+      <a href="<?php echo URLROOT ?>/users/receptionist">
         <i class="fa fa-home fa-4x" aria-hidden="true"></i>
       </a>
       <p>Dashboard</p>
@@ -97,7 +90,6 @@
       <form action="add.php">
 
         <select id="name" name="name">
-          <option value="item">Select the Food Item</option>
           <option value="item 1">item 1</option>
           <option value="item 2">item 2</option>
           <option value="item 3">item 3</option>
@@ -106,12 +98,18 @@
         <input type="text" id="quantity" name="quantity" placeholder="Quantity"><br><br>
 
         <select id="potion" name="portion">
-        <option value="Small">Small</option>
           <option value="Normal">Normal</option>
           <option value="large">large</option>
         </select><br><br>
       
-        <input type="submit" value="Add the Food Item">
+        <input type="submit" value="Add the Food Item"><br><br>
+
+        <label for="status">Status:</label>
+        <select id="status" name="status">
+          <option value="Available">Available</option>
+          <option value="Unavailable">Unavailable</option>
+        </select><br><br>
+
       
       </form>
     </div>
@@ -138,40 +136,32 @@
               <td></td>
               <td></td>
               <td></td>
-              <td><a href="#"><i class="fa fa-pencil-square-o fa-2x" aria-hidden="true"></i></a></td>
-              <td><a href="#"><i class="fa fa-trash-o fa-2x" aria-hidden="true"></i></a></td>
-              </tr>
-              <tr>
-              <td></td>
-              <td></td>
-              <td></td>
-              <td><a href="#"><i class="fa fa-pencil-square-o fa-2x" aria-hidden="true"></i></a></td>
-              <td><a href="#"><i class="fa fa-trash-o fa-2x" aria-hidden="true"></i></a></td>
-              </tr>
-              <tr>
-              <td></td>
-              <td></td>
-              <td></td>
-              <td><a href="#"><i class="fa fa-pencil-square-o fa-2x" aria-hidden="true"></i></a></td>
-              <td><a href="#"><i class="fa fa-trash-o fa-2x" aria-hidden="true"></i></a></td>
+              <td><a href="#"><i class="fa fa-pencil-square-o" aria-hidden="true"></i></a></td>
+              <td><a href="#"><i class="fa fa-trash-o" aria-hidden="true"></i></a></td>
               </tr>
 
-            </table><br>
+            </table><br><br>
 
             <div class="recep-kot-form">
       
             <form action="sendkot.php">
               <label for="snotes">Special Notes:</label><br>
-              <textarea name="" id="" cols="30" rows="8"></textarea><br><br>
+              <textarea name="" id="" cols="30" rows="3"></textarea><br><br>
               
-              <div class="res-kot-details-place-button"> 
-                <a href="#roomplaceorder"><button type="submit">Send KOT</button></a>
-              </div><br><br>
+              <div class="res-kot-details-update-button"> 
+                <a href="#roomplaceorder"><button type="submit">Update KOT</button></a>
+              </div>
+
+              <div class="res-kot-details-cancel-button"> 
+                <a href="#roomplaceorder"><button type="submit">Cancel KOT</button></a>
+              </div><br>
+
             </form>
             
             </div>
                 
-            </div>
+          </div>
+
 
 
   </div>

@@ -18,7 +18,7 @@
 <body>
   <section class="system">
     <nav class="sys-nav" id="sysnav">
-      <a href="<?php echo URLROOT ?>/users/headchef">
+      <a href="<?php echo URLROOT ?>/users/receptionist">
           <img src="<?php echo URLROOT ?>/public/img/logo-nav.jpg">
       </a>
       <div class="dropdown">
@@ -26,7 +26,7 @@
           <i class="fa fa-user-circle-o fa-2x"></i>
         </button>
         <div class="dropdown-content">
-          <a href="<?php echo URLROOT ?>/kitchens/settings">Settings</a>
+          <a href="<?php echo URLROOT ?>/reservations/settings">Settings</a>
           <a href="<?php echo URLROOT; ?>/users/logout">Logout</a>
         </div>
       </div>
@@ -49,24 +49,17 @@
   <div class="sys-left-col">
 
   <div class="bar-dash-plus1">
-      <a href="<?php echo URLROOT ?>/users/headchef">
+      <a href="<?php echo URLROOT ?>/users/receptionist">
         <i class="fa fa-home fa-4x" aria-hidden="true"></i>
       </a>
-      <p>Dashborad</p>
+      <p>Dashboard</p>
     </div>
 
-    <div class="bar-dash-plus2">
-      <a href="<?php echo URLROOT ?>/kitchens/managefooditems">
-        <i class="fa fa-book fa-4x" aria-hidden="true"></i>
-      </a>
-      <p>View food Items</p>
-    </div>
-
-    <div class="bar-dash-plus3">
-      <a href="<?php echo URLROOT ?>/kitchens/addsnackitem">
+  <div class="recep-dash-plus1">
+      <a href="<?php echo URLROOT ?>/reservations/selectdate">
         <i class="fa fa-plus-square fa-4x" aria-hidden="true"></i>
       </a>
-      <p>Add Snack Item</p>
+      <p>Place Reservation</p>
     </div>
   </div>
   <div class="sys-right-col">
@@ -78,15 +71,17 @@
 
     <div class = "User-detailset">
       <label class="User-detailset-labels">Name :</label>
-      <input type="text"  class = "User-detailset-spaces1" placeholder="First name" > <input type="text"  class = "User-detailset-spaces" placeholder="Last name" > <br>
+      <input type="text"  class = "User-detailset-spaces1" placeholder="first name" > <input type="text"  class = "User-detailset-spaces" placeholder="last name" > <br>
       <label class="User-detailset-labels">Email :</label> &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
-      <input type="text"  class = "User-detailset-spaces2" placeholder="Email"><br>
+      <input type="text"  class = "User-detailset-spaces2" ><br>
       <label class="User-detailset-labels">Mobile Phone :</label>
-      <input type="text"  class = "User-detailset-spaces2" placeholder="Mobile Number"><br>
-      <label class="User-detailset-labels">Fixed No. :</label>&nbsp;&nbsp;&nbsp;
-      <input type="text"  class = "User-detailset-spaces2" placeholder="Fixed Number"><br>
+      <input type="text"  class = "User-detailset-spaces2" ><br>
+      <label class="User-detailset-labels">Land Phone :</label>&nbsp;&nbsp;&nbsp;
+      <input type="text"  class = "User-detailset-spaces2" ><br>
       <label class="User-detailset-labels">Date of Birth :</label>
       <input type="text"  class = "User-detailset-spaces3" ><i class="fa fa-calendar" aria-hidden="true"></i><br>
+      <label class="User-detailset-labels">Address :</label>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
+      <input type="text"  class = "User-detailset-spaces2" ><br>
     </div><br><br>
 
     <h5 class ="User-subheading">Account Details</h5>
@@ -94,13 +89,13 @@
 
   <div class = "User-detailset2">
     <label class="User-detailset-labels">User Name :</label>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
-    <input type="text"  class = "User-detailset-spaces" placeholder="Username"> <br>
+    <input type="text"  class = "User-detailset-spaces" > <br>
     <label class="User-detailset-labels">Password :</label>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
-    <input type="text"  class = "User-detailset-spaces" placeholder="Current Password"><br>
+    <input type="text"  class = "User-detailset-spaces" ><br>
     <label class="User-detailset-labels">New Password :</label>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
-    <input type="text"  class = "User-detailset-spaces" placeholder="New password"><br>
+    <input type="text"  class = "User-detailset-spaces" ><br>
     <label class="User-detailset-labels">Re enter New Password:</label>
-    <input type="text"  class = "User-detailset-spaces" placeholder="Re-Enter New Password" ><br>
+    <input type="text"  class = "User-detailset-spaces" ><br>
     <button type="submit" class="User-button" name='update'>Update Details</button>
   </div><br><br>
   </div>

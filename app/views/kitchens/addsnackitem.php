@@ -112,7 +112,7 @@
         <span class="error">
             <p><?php echo $data['priceError'];?></p>
         </span>
-        <br><br>
+        <br>
         <input type="submit" name="submit" value="Add Item">
       </form>
     </div>
