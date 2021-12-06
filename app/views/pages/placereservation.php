@@ -34,50 +34,30 @@
   <div class="sys-right-col">
     
     <div class="recep-resform-right">
-      
-      <!-- Reservation Heading -->
-
-    <div class="recep-resform-room">
-      <table>
-        <tr>
-          <td>Room No:</td>
-        </tr>
-      </table>
-    </div>
 
     <div class="recep-reserv-form">
       
       <form action="recerve.php">
 
-        <label for="cname">Customer Name:</label>
+        <label for="cname">Customer Name: *</label>
         <input type="text" id="cname" name="cname"><br><br>
 
-        <label for="cid">Customer ID:</label>
+        <label for="cid">Customer ID: *</label>
         <input type="text" id="cid" name="cid"><br><br>
 
-        <label for="cnum">Customer Mobile:</label>
+        <label for="cnum">Customer Mobile: *</label>
         <input type="text" id="cnum" name="cnum"><br><br>
 
-        <label for="ptype">Package Type:</label>
+        <label for="ptype">Package Type: *</label>
         <select id="ptype" name="ptype">
           <option value="" disabled selected hidden></option>
-          <option value="">Type 1</option>
-          <option value="">Type 2</option>
-          <option value="">Type 3</option>
+          <option value="">Room Only</option>
+          <option value="">Half Board</option>
+          <option value="">Full Board</option>
         </select><br><br>
 
-        <label for="people">No of People:</label>
-        <select id="people" name="people">
-          <option value="" disabled selected hidden></option>
-          <option value="">1</option>
-          <option value="">2</option>
-          <option value="">3</option>
-        </select><br><br>
-
-        <label for="status">Status:</label>
-        <select id="status" name="status">
-          <option value="" disabled selected hidden></option>
-          <option value="">Available</option>
+        <select id="status" name="status" class="res-status">
+          <option value="" select="selected">Available</option>
           <option value="">Unavaialable</option>
         </select><br><br>
 
