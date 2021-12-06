@@ -863,6 +863,11 @@
   font-size:16px;
 }
 
+.select-date select{
+  display: block;
+  margin-top:10px;
+  width:150px;
+}
 /*room select section */
 
 .roomselect{

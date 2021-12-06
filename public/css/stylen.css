@@ -858,10 +858,18 @@
   color:#01661b;
 }
 .select-date label{
-  margin-bottom:10px;
+  margin-bottom:15px;
   padding:0;
   font-weight:bold;
   font-size:16px;
+}
+
+.select-date select{
+  display: block;
+  margin-top:10px;
+  width:150px;
+  height:35px;
+  padding-left:10px;
 }
 
 /*room select section */
