@@ -2291,18 +2291,20 @@
   width: 300px;
   padding-top: 2px;
   height: 30px;
-  padding-left: 4px;
+  padding-left: 15px;
   display: inline-block;
   border: 1px solid #E5E5E5;
   border-radius: 20px;
   background-color:#E5E5E5 ;
+  font-size: 16px;
 }
 
-.recep-reserv-form input[type=date], select{
+.recep-reserv-form select{
   width: 200px;
-  padding-top: 2px;
-  height: 30px;
-  padding-left: 4px;
+  padding: 5px;
+  height: 40px;
+  padding-left: 15px;
+  padding-right: 15px;
   display: inline-block;
   border: 1px solid #E5E5E5;
   border-radius: 20px;
@@ -2310,16 +2312,35 @@
 }
 
 .recep-reserv-form textarea{
+
     width: 76%;
     height: 170px;
-    padding: 7px;
+    padding: 15px;
     border-radius: 10px;
     border: 1px solid #E5E5E5;
     background-color:#E5E5E5 ;
-    font-size: 12px;
     outline: none;
+    font-size: 16px;
 }
 
+
+.recep-reserv-form button{
+  background-color: #01661b;
+  margin-bottom: 20px;
+  border: none;
+  border-radius: 25px;
+  color: white;
+  padding: 16px 32px;
+  text-decoration: none;
+  margin: 4px 2px;
+  cursor: pointer;
+  font-size:16px;
+  display: block;
+}
+
+.recep-reserv-form .res-status{
+  display:none;
+}
 /* Reservation Form - Content - KOT Details - Heading */
 
 .res-kot-detail-heading{

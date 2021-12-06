@@ -67,15 +67,9 @@
   <div class="sys-right-col">
     
     <div class="recep-resform-right">
-      
-      <!-- Reservation Heading -->
-
-    <div class="recep-resform-room">
-      <h3>Room No:</h3>
-    </div>
 
     <div class="recep-reserv-form">
-      
+
       <form action="recerve.php">
 
         <label for="cname">Customer Name:</label>
@@ -89,93 +83,24 @@
 
         <label for="ptype">Package Type:</label>
         <select id="ptype" name="ptype">
-          <option value="" disabled selected hidden></option>
-          <option value="">Type 1</option>
-          <option value="">Type 2</option>
-          <option value="">Type 3</option>
+          <option value="">Room Only</option>
+          <option value="">Bed & Breakfast</option>
+          <option value="">Half Board</option>
+          <option value="">Full Board</option>
         </select><br><br>
 
-        <label for="people">No of People:</label>
-        <select id="people" name="people">
-          <option value="" disabled selected hidden></option>
-          <option value="">1</option>
-          <option value="">2</option>
-          <option value="">3</option>
-        </select><br><br>
-
-        <label for="status">Status:</label>
-        <select id="status" name="status">
-          <option value="" disabled selected hidden></option>
-          <option value="">Available</option>
-          <option value="">Unavaialable</option>
+        <select id="status" name="status" class="res-status">
+          <option value="available" select="selected">Available</option>
+          <option value="unavailable">Unavaialable</option>
         </select><br><br>
 
         <label for="snotes">Special Notes:</label><br><br>
-        <textarea name="" id="" cols="30" rows="3"></textarea>
+        <textarea name="" id="" cols="30" rows="3"></textarea> <br><br>
 
-      </form>
+        <button>Place Reservation</button><br><br>
+       </form>
+      </div>
     </div>
-
-
-    <!-- Room KOT Details -->
-    <div class="res-kot-detail-heading">       
-      <h2>KOT Details</h2>
-      <a href="<?php echo URLROOT ?>/reservations/placekot"><button type="submit">Place KOT</button></a>
-    </div>
-
-    <!-- KOT Item Details -->
-             
-    <div class="res-kot-details">
-      <table>
-              
-        <tr>
-          <th style="width:10%;">KOT no</th>
-          <th style="width:15%;">Date</th>
-          <th style="width:15%;">Meal Type</th>
-          <th style="width:10%;">Quantity</th>
-          <th style="width:20%;">Status</th>
-          <th style="width:10%;"></th>
-          <th style="width:10%;"></th>
-              </tr>
-              
-              <tr>
-              <td></td>
-              <td></td>
-              <td></td>
-              <td></td>
-              <td></td>
-              <td><a href="<?php echo URLROOT ?>/reservations/updatekot"><i class="fa fa-pencil-square-o fa-2x" aria-hidden="true"></i></a></td>
-              <td><a href="#"><i class="fa fa-trash-o fa-2x" aria-hidden="true"></i></a></td>
-              </tr>
-              <tr>
-              <td></td>
-              <td></td>
-              <td></td>
-              <td></td>
-              <td></td>
-              <td><a href="<?php echo URLROOT ?>/reservations/updatekot"><i class="fa fa-pencil-square-o fa-2x" aria-hidden="true" ></i></a></td>
-              <td><a href="#"><i class="fa fa-trash-o fa-2x" aria-hidden="true"></i></a></td>
-              </tr>
-              <tr>
-              <td></td>
-              <td></td>
-              <td></td>
-              <td></td>
-              <td></td>
-              <td><a href="<?php echo URLROOT ?>/reservations/updatekot"><i class="fa fa-pencil-square-o fa-2x" aria-hidden="true"></i></a></td>
-              <td><a href="#"><i class="fa fa-trash-o fa-2x" aria-hidden="true"></i></a></td>
-              </tr>
-
-            </table><br><br>
-
-            <div class="res-kot-details-place-button"> 
-              <a href="#roomplaceorder"><button type="submit">Place the Reservation</button></a>
-            </div>
-            <br><br>
-                
-            </div>
-
-  </div>
 
   </div>
 
