@@ -103,7 +103,53 @@
     }
 
     public function selectdate(){
-      $this->view('pages/selectdate');
+
+      $data = [
+        'check-in' => '',
+        'check-out' => '',
+        'people' => '',
+        'checkinError' => '',
+        'dateError' => ''
+      ];
+      
+      if($_SERVER['REQUEST_METHOD'] == 'POST'){
+        $_POST = filter_input_array(INPUT_POST, FILTER_SANITIZE_STRING);
+
+        $data = [
+          'check-in' => trim($_POST['check-in']),
+          'check-out' => trim($_POST['check-out']),
+          'people' => trim($_POST['people']),
+          'checkinError' => '',
+          'dateError' => ''
+        ];
+        $currentDate = new DateTime();
+        $checkinDate = new DateTime($data['check-in']);
+        $checkoutDate =  new DateTime($data['check-out']);
+        
+
+        if($currentDate > $checkinDate){
+          $data['checkinError'] = 'Previous dates cant be selected';
+        }
+
+        if($checkinDate> $checkoutDate){
+          $data['dateError'] = 'Checkout must be greater than checkin';
+        }
+
+        if(empty($data['dateError']) && empty($data['checkinError'])){
+          $this->view('pages/roomselect', $data);
+        }
+      }
+      else{
+
+        $data = [
+          'check-in' => '',
+          'check-out' => '',
+          'people' => '',
+          'checkinError' => '',
+          'dateError' => ''
+        ];
+      }
+      $this->view('pages/selectdate', $data);
     }
 
     public function roomselect(){
