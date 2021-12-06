@@ -41,7 +41,7 @@
     </span>
     <div class="row">
       <div class="admin-dashboard-col">
-        <img src="<?php echo URLROOT;?>/public/img/sales-dashboard.png">
+        <img src="<?php echo URLROOT;?>/public/img/sales.png">
       </div>
       <div class="admin-dashboard-col">
         <div class="row">
