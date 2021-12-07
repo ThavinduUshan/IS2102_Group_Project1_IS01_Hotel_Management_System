@@ -159,4 +159,8 @@
     public function placereservation(){
       $this->view('pages/placereservation');
     }
+
+    public function roomselect2(){
+      $this->view('pages/roomselect2');
+    }
   }

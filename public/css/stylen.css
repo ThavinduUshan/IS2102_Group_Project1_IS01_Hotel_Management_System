@@ -879,7 +879,6 @@
   width:100%;
   background-color:#01661b;
   background-position: center;
-  background-size: cover;
   position:relative;
 }
 
@@ -3782,4 +3781,44 @@ color: #01661b;
 
 .res-dash-plus1 p{
 color: #01661b;
+}
+
+.rooms-section{
+  margin-left: auto;
+  margin-right: auto;
+  width:87%;
+  display: flex;
+  flex-wrap: wrap;
+  
+}
+
+.room-card{
+  margin:2em;
+  background-color: #E5E5E5;
+  padding:2em 2em;
+  border-radius: 10px;
+}
+
+.room-card h5{
+  margin-top: 5px;
+  margin-bottom:10px;
+  padding:5px;
+  border: 1px solid #01661b;
+  border-radius: 10px;
+  width:30%;
+  text-align: center;
+}
+
+.room-card input[type=submit]{
+  margin-top:1em;
+  background-color: #01661b;
+  color:white;
+  padding: 1em 2em;
+  border:none;
+  border-radius: 10px;
+}
+
+.room-card input[type=submit]:hover{
+  background-color: #06761F;
+  cursor: pointer;
 }
