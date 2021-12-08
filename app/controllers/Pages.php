@@ -103,64 +103,61 @@
     }
 
     public function selectdate(){
+        $this->view('pages/selectdate');
+    }
+      
+
+    public function roomselect(){
 
       $data = [
-        'check-in' => '',
-        'check-out' => '',
-        'people' => '',
-        'checkinError' => '',
-        'dateError' => ''
+        'checkin' => '',
+        'checkout' =>'',
+        'peoplecount' => '',
+        'results' => ''
       ];
-      
+
       if($_SERVER['REQUEST_METHOD'] == 'POST'){
         $_POST = filter_input_array(INPUT_POST, FILTER_SANITIZE_STRING);
 
         $data = [
-          'check-in' => trim($_POST['check-in']),
-          'check-out' => trim($_POST['check-out']),
-          'people' => trim($_POST['people']),
-          'checkinError' => '',
-          'dateError' => ''
+          'checkin' => trim($_POST['check-in']),
+          'checkout' =>trim($_POST['check-out']),
+          'peoplecount' => trim($_POST['people']),
+          'results' => ''
         ];
-        $currentDate = new DateTime();
-        $checkinDate = new DateTime($data['check-in']);
-        $checkoutDate =  new DateTime($data['check-out']);
-        
 
-        if($currentDate > $checkinDate){
-          $data['checkinError'] = 'Previous dates cant be selected';
-        }
+        if(!empty($data['checkin']) && !empty($data['checkout']) && !empty($data['peoplecount'])){
+          $results = $this->pageModel->selectavailablerooms($data);
 
-        if($checkinDate> $checkoutDate){
-          $data['dateError'] = 'Checkout must be greater than checkin';
-        }
+          $data = [
+            'checkin' => trim($_POST['check-in']),
+            'checkout' =>trim($_POST['check-out']),
+            'peoplecount' => trim($_POST['people']),
+            'results' => $results
+          ];
 
-        if(empty($data['dateError']) && empty($data['checkinError'])){
           $this->view('pages/roomselect', $data);
+
         }
+        else{
+          die('Something went Wrong');
+        } 
+
       }
       else{
-
         $data = [
-          'check-in' => '',
-          'check-out' => '',
-          'people' => '',
-          'checkinError' => '',
-          'dateError' => ''
+          'checkin' => '',
+          'checkout' => '',
+          'peoplecount' => '',
+          'results' => ''
         ];
-      }
-      $this->view('pages/selectdate', $data);
-    }
 
-    public function roomselect(){
-      $this->view('pages/roomselect');
+        $this->view('pages/roomselect', $data);
+      }
     }
 
     public function placereservation(){
       $this->view('pages/placereservation');
     }
 
-    public function roomselect2(){
-      $this->view('pages/roomselect2');
-    }
   }
