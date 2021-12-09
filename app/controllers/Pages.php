@@ -113,6 +113,7 @@
         'checkin' => '',
         'checkout' =>'',
         'peoplecount' => '',
+        'package' => '',
         'results' => ''
       ];
 
@@ -123,6 +124,7 @@
           'checkin' => trim($_POST['check-in']),
           'checkout' =>trim($_POST['check-out']),
           'peoplecount' => trim($_POST['people']),
+          'package' => trim($_POST['package']),
           'results' => ''
         ];
 
@@ -133,6 +135,7 @@
             'checkin' => trim($_POST['check-in']),
             'checkout' =>trim($_POST['check-out']),
             'peoplecount' => trim($_POST['people']),
+            'package' => trim($_POST['package']),
             'results' => $results
           ];
 

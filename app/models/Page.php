@@ -29,11 +29,12 @@
     }
 
     public function selectavailablerooms($data){
-      $this->db->query('SELECT `rooms`.* FROM `rooms` LEFT JOIN `reservations` ON `rooms`.`RoomNo` = `reservations`.`RoomNo` WHERE (`rooms`.`RoomCount` = :peoplecount) AND (((:checkin AND :checkout < `reservations`.`Checkin`) OR (:checkin AND :checkout > `reservations`.`Checkout`)) OR `rooms`.`Status` = 1)');
+      $this->db->query('SELECT `rooms`.*, packages.* FROM `rooms` INNER JOIN `packages` ON `packages`.`RoomNo` = `rooms`.`RoomNo` AND `packages`.`PackageId` = :package LEFT JOIN `reservations` ON `rooms`.`RoomNo` = `reservations`.`RoomNo` WHERE (`rooms`.`RoomCount` = :peoplecount) AND (((:checkin AND :checkout < `reservations`.`Checkin`) OR (:checkin AND :checkout > `reservations`.`Checkout`)) OR `rooms`.`Status` = 1)  GROUP BY `rooms`.`RoomNo`');
 
       $this->db->bind(':peoplecount', $data['peoplecount']);
       $this->db->bind(':checkin', $data['checkin']);
       $this->db->bind(':checkout', $data['checkout']);
+      $this->db->bind(':package', $data['package']);
 
       $results = $this->db->resultSet();
 
