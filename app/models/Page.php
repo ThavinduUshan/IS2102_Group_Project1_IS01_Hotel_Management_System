@@ -28,4 +28,16 @@
       
     }
 
+    public function selectavailablerooms($data){
+      $this->db->query('SELECT `rooms`.* FROM `rooms` LEFT JOIN `reservations` ON `rooms`.`RoomNo` = `reservations`.`RoomNo` WHERE (`rooms`.`RoomCount` = :peoplecount) AND (((:checkin AND :checkout < `reservations`.`Checkin`) OR (:checkin AND :checkout > `reservations`.`Checkout`)) OR `rooms`.`Status` = 1)');
+
+      $this->db->bind(':peoplecount', $data['peoplecount']);
+      $this->db->bind(':checkin', $data['checkin']);
+      $this->db->bind(':checkout', $data['checkout']);
+
+      $results = $this->db->resultSet();
+
+      return $results;
+    }
+
   }
