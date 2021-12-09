@@ -17,7 +17,7 @@
         <img src="<?php echo URLROOT ?>/public/img/logo-nav.jpg">
       </a>
     </nav>
-
+  <br><br>
   <div class="login-form">
     <h1>Login</h1>
     <h2>Welcome back!</h2>

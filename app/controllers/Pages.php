@@ -160,7 +160,33 @@
     }
 
     public function placereservation(){
-      $this->view('pages/placereservation');
+
+      $data = [
+        'roomno' => '',
+        'checkin' => '',
+        'checkout' => '',
+        'packageid' => ''
+      ];
+
+      if($_SERVER['REQUEST_METHOD'] == 'POST'){
+        $data = [
+          'roomno' => trim($_POST['roomno']),
+          'checkin' => trim($_POST['checkin']),
+          'checkout' => trim($_POST['checkout']),
+          'packageid' => trim($_POST['packageid'])
+        ];
+
+        $this->view('pages/placereservation', $data);
+      }else{
+        
+        $data = [
+          'roomno' => '',
+          'checkin' => '',
+          'checkout' => '',
+          'packageid' => ''
+        ];
+      }
+      $this->view('pages/placereservation', $data);
     }
 
   }

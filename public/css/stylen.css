@@ -1033,8 +1033,7 @@
   background-color: white;
   display: flex;
   justify-content: space-between;
-  align-items: center;
-  margin-bottom:80px;
+  margin-bottom:40px;
 }
 
 .sys-nav img{
@@ -1140,10 +1139,10 @@
 .sys-right-col {
     margin-left:40%;
     width: 57%;
-    margin-top: -600px;
+    margin-top: -665px;
     background:#ffff;
     position: fixed;
-    height: 550px;
+    height: 600px;
     border-radius: 0px 25px 25px 0px;
     overflow: hidden;
     
@@ -1154,10 +1153,10 @@
     float: left;
     margin-left:50px;
     width: 40%;
-    margin-top: -600px;
+    margin-top: -665px;
     background:#E5E5E5;
     position: fixed;
-    height: 550px;
+    height: 600px;
     border-radius: 25px 0px 0px 25px;
     overflow: hidden;
     
@@ -2287,6 +2286,10 @@
   width: 80%;
 }
 
+.recep-reserv-form h1{
+  color:#01661b;
+  margin-bottom:60px;
+}
 .recep-reserv-form label{
   width: 200px;
   display: inline-block;
@@ -2330,6 +2333,19 @@
     font-size: 16px;
 }
 
+.recep-reserv-form input[type=submit]{
+  background-color: #01661b;
+  margin-bottom: 20px;
+  border: none;
+  border-radius: 25px;
+  color: white;
+  padding: 16px 32px;
+  text-decoration: none;
+  margin: 4px 2px;
+  cursor: pointer;
+  font-size:16px;
+  display: block;
+}
 
 .recep-reserv-form button{
   background-color: #01661b;

@@ -29,7 +29,6 @@
           <img src="<?php echo URLROOT?>/public/img<?php echo $room->Image?>" alt="Room Image">
           <h2><?php echo $room->Price?></h2>
           <input type="hidden" name="packageid" value="<?php echo $room->PackageId?>">
-          <input type="hidden" name="package" value="<?php echo $room->PackageType?>">
           <input type="hidden" name="roomno" value="<?php echo $room->RoomNo?>">
           <input type="hidden" name="checkin" value="<?php echo $data['checkin'] ?>">
           <input type="hidden" name="checkout" value="<?php echo $data['checkout'] ?>">
