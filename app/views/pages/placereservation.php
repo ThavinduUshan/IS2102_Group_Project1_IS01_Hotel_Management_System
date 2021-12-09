@@ -36,8 +36,10 @@
     <div class="recep-resform-right">
 
     <div class="recep-reserv-form">
-      
+
       <form action="recerve.php">
+
+        <h1>Enter Your Info</h1>
 
         <label for="cname">Customer Name: *</label>
         <input type="text" id="cname" name="cname"><br><br>
@@ -48,34 +50,19 @@
         <label for="cnum">Customer Mobile: *</label>
         <input type="text" id="cnum" name="cnum"><br><br>
 
-        <label for="ptype">Package Type: *</label>
-        <select id="ptype" name="ptype">
-          <option value="" disabled selected hidden></option>
-          <option value="">Room Only</option>
-          <option value="">Half Board</option>
-          <option value="">Full Board</option>
-        </select><br><br>
-
         <select id="status" name="status" class="res-status">
-          <option value="" select="selected">Available</option>
-          <option value="">Unavaialable</option>
+          <option value="available" select="selected">Available</option>
+          <option value="unavailable">Unavaialable</option>
         </select><br><br>
 
         <label for="snotes">Special Notes:</label><br><br>
-        <textarea name="" id="" cols="30" rows="3"></textarea>
+        <textarea name="" id="" cols="30" rows="3"></textarea> <br><br>
 
-      </form>
+        <button type="submit">Place Reservation</button><br><br>
+       </form>
+      </div>
     </div>
-    <div class="cus-res-place-button"> 
-        <a href="<?php echo URLROOT ?>/pages/"><button type="submit">Place the Reservation</button></a>
-    </div>
-    <br><br>
-                
-            </div>
 
   </div>
-
-  </div>
-
 </body>
 </html>
