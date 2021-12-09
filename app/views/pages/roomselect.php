@@ -1,3 +1,6 @@
+<?php
+ print_r($data);
+?>
 <!DOCTYPE html>
 <html lang="en">
 <head>
@@ -18,41 +21,15 @@
       </a>
     </nav>
     <div class="rooms-section">
+      <?php foreach($data['results'] as $room):?>
       <div class="room-card">
-        <h2>Double Room </h2>
+        <h2><?php echo $room->Name?></h2>
         <h5>Available</h5>
-        <img src="<?php echo URLROOT?>/public/img/room1.png" alt="Room 1">
+        <img src="<?php echo URLROOT?>/public/img<?php echo $room->Image?>" alt="Room Image">
         <h2>2500/= LKR</h2>
         <input type="submit" value="Book Now">
       </div>
-      <div class="room-card">
-        <h2>Double Room </h2>
-        <h5>Available</h5>
-        <img src="<?php echo URLROOT?>/public/img/room1.png" alt="Room 1">
-        <h2>2500/= LKR</h2>
-        <input type="submit" value="Book Now">
-      </div>
-      <div class="room-card">
-        <h2>Double Room </h2>
-        <h5>Available</h5>
-        <img src="<?php echo URLROOT?>/public/img/room1.png" alt="Room 1">
-        <h2>2500/= LKR</h2>
-        <input type="submit" value="Book Now">
-      </div>
-      <div class="room-card">
-        <h2>Double Room </h2>
-        <h5>Available</h5>
-        <img src="<?php echo URLROOT?>/public/img/room1.png" alt="Room 1">
-        <h2>2500/= LKR</h2>
-        <input type="submit" value="Book Now">
-      </div>
-      <div class="room-card">
-        <h2>Double Room </h2>
-        <h5>Available</h5>
-        <img src="<?php echo URLROOT?>/public/img/room1.png" alt="Room 1">
-        <h2>2500/= LKR</h2>
-        <input type="submit" value="Book Now">
-      </div>
+      <?php endforeach ?>
     </div>
   </section>
 </body>

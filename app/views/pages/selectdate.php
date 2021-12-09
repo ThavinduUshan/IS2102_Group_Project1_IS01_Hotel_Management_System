@@ -30,7 +30,13 @@
         <option value="1">1</option>
         <option value="2">2</option>
         <option value="3">3</option>
-        <option value=">3">More than 3</option>
+      </select>
+      <label for="packagetype">Package: *</label>
+      <select name="package" id="packagetype">
+        <option value="1">Room Only</option>
+        <option value="2">Bed and Breakfast</option>
+        <option value="3">Half Board</option>
+        <option value="4">Full Board</option>
       </select>
       <button type="submit">Check availabity</button>
     </form>
