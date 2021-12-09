@@ -165,25 +165,71 @@
         'roomno' => '',
         'checkin' => '',
         'checkout' => '',
-        'packageid' => ''
+        'packageid' => '',
+        'peoplecount' => '',
       ];
 
       if($_SERVER['REQUEST_METHOD'] == 'POST'){
+        $_POST = filter_input_array(INPUT_POST, FILTER_SANITIZE_STRING);
+
         $data = [
           'roomno' => trim($_POST['roomno']),
           'checkin' => trim($_POST['checkin']),
           'checkout' => trim($_POST['checkout']),
-          'packageid' => trim($_POST['packageid'])
+          'packageid' => trim($_POST['packageid']),
+          'peoplecount' => trim($_POST['peoplecount']),
+          'cnameError' => '',
+          'cidError' => '',
+          'cnumError' => ''
         ];
 
+        if(isset($_POST['cname'])){
+          $data = [
+          'roomno' => trim($_POST['roomno']),
+          'checkin' => trim($_POST['checkin']),
+          'checkout' => trim($_POST['checkout']),
+          'packageid' => trim($_POST['packageid']),
+          'peoplecount' => trim($_POST['peoplecount']),
+          'cname' => trim($_POST['cname']),
+          'cid' => trim($_POST['cid']),
+          'cnum' => trim($_POST['cnum']),
+          'status' => trim($_POST['status']),
+          'snotes' => trim($_POST['snotes'])
+          ];
+
+          if(empty($data['cname'])){
+            $data['cnameError'] = 'Customer name cant be empty';
+          }
+          if(empty($data['cname'])){
+            $data['cidError'] = 'Customer Id cant be empty';
+          }
+          if(empty($data['cnum'])){
+            $data['cnumError'] = 'Customer Number cant be empty';
+          }
+
+          if(empty($data['cnameError']) && empty($data['cidError']) && empty($data['cnumError'])){
+            if($this->pageModel->addReservations($data)){
+              header('location: '. URLROOT . '/pages/index');
+            }
+            else{
+              die('Something Went Wrong');
+            } 
+          }
+        }
+
         $this->view('pages/placereservation', $data);
+
       }else{
-        
+
         $data = [
           'roomno' => '',
           'checkin' => '',
           'checkout' => '',
-          'packageid' => ''
+          'packageid' => '',
+          'peoplecount' => '',
+          'cnameError' => '',
+          'cidError' => '',
+          'cnumError' => ''
         ];
       }
       $this->view('pages/placereservation', $data);

@@ -41,4 +41,25 @@
       return $results;
     }
 
+    public function addReservations($data){
+      $this->db->query('INSERT INTO `reservations` (`CusName`, `CusId`, `CusMobile`, `PackageId`, `PeopleCount`, `Checkin`, `Checkout`,
+      `SpecialNotes`, `Status`, `RoomNo` ) VALUES (:cname, :cid, :cnum, :packageid, :peoplecount, :checkin, :checkout, :snotes, :status, :roomno)');
+
+      $this->db->bind(':cname', $data['cname']);
+      $this->db->bind(':cid', $data['cid']);
+      $this->db->bind(':cnum', $data['cnum']);
+      $this->db->bind(':packageid', $data['packageid']);
+      $this->db->bind(':peoplecount', $data['peoplecount']);
+      $this->db->bind(':checkin', $data['checkin']);
+      $this->db->bind(':checkout', $data['checkout']);
+      $this->db->bind(':snotes', $data['snotes']);
+      $this->db->bind(':status', $data['status']);
+      $this->db->bind(':roomno', $data['roomno']);
+
+      if($this->db->execute()){
+        return true;
+      }else{
+        return false;
+      }
+    }
   }
