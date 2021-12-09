@@ -1,3 +1,6 @@
+<?php
+  print_r($data);
+?>
 <!DOCTYPE html>
 <html lang="en">
 <head>
@@ -37,10 +40,14 @@
 
     <div class="recep-reserv-form">
 
-      <form action="recerve.php">
+      <form action="<?php echo URLROOT?>/pages/placereservation" method="post">
 
         <h1>Enter Your Info</h1>
-
+        <input type="hidden" name="roomno" value="<?php echo $data['roomno']?>">
+        <input type="hidden" name="checkin" value="<?php echo $data['checkin']?>">
+        <input type="hidden" name="checkout" value="<?php echo $data['checkout']?>">
+        <input type="hidden" name="packageid" value="<?php echo $data['packageid']?>">
+        <input type="hidden" name="peoplecount" value="<?php echo $data['peoplecount']?>">
         <label for="cname">Customer Name: *</label>
         <input type="text" id="cname" name="cname"><br><br>
 
@@ -51,12 +58,11 @@
         <input type="text" id="cnum" name="cnum"><br><br>
 
         <select id="status" name="status" class="res-status">
-          <option value="available" select="selected">Available</option>
-          <option value="unavailable">Unavaialable</option>
+          <option value="Unavailable" select="selected">Unavailable</option>
         </select><br><br>
 
         <label for="snotes">Special Notes:</label><br><br>
-        <textarea name="" id="" cols="30" rows="3"></textarea> <br><br>
+        <textarea name="snotes" id="" cols="30" rows="3"></textarea> <br><br>
 
         <button type="submit">Place Reservation</button><br><br>
        </form>

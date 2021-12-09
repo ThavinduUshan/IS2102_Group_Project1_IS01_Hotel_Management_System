@@ -32,6 +32,7 @@
           <input type="hidden" name="roomno" value="<?php echo $room->RoomNo?>">
           <input type="hidden" name="checkin" value="<?php echo $data['checkin'] ?>">
           <input type="hidden" name="checkout" value="<?php echo $data['checkout'] ?>">
+          <input type="hidden" name="peoplecount" value="<?php echo $data['peoplecount'] ?>">
           <input type="submit" value="Book Now">
         </form>
       </div>
