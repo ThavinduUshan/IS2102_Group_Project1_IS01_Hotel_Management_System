@@ -20,7 +20,7 @@
 
   <div class="select-date">
     <h1>Select the Dates</h1>
-    <form name="selectdate" method="post" action="<?php echo URLROOT; ?>/pages/selectdate">
+    <form name="selectdate" method="post" action="<?php echo URLROOT; ?>/pages/roomselect">
       <label for="check-in">Check In: *</label>
       <input type="date" name="check-in" id="checkin" placeholder="CheckIn Date" required>
       <label for="check-out">Check Out: *</label>
