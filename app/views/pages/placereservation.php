@@ -1,6 +1,3 @@
-<?php
-  print_r($data);
-?>
 <!DOCTYPE html>
 <html lang="en">
 <head>
@@ -58,7 +55,7 @@
         <input type="text" id="cnum" name="cnum"><br><br>
 
         <select id="status" name="status" class="res-status">
-          <option value="Unavailable" select="selected">Unavailable</option>
+          <option value="Booked" select="selected">Booked</option>
         </select><br><br>
 
         <label for="snotes">Special Notes:</label><br><br>

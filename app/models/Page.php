@@ -29,7 +29,7 @@
     }
 
     public function selectavailablerooms($data){
-      $this->db->query('SELECT `rooms`.*, packages.* FROM `rooms` INNER JOIN `packages` ON `packages`.`RoomNo` = `rooms`.`RoomNo` AND `packages`.`PackageId` = :package LEFT JOIN `reservations` ON `rooms`.`RoomNo` = `reservations`.`RoomNo` WHERE (`rooms`.`RoomCount` = :peoplecount) AND (((:checkin AND :checkout < `reservations`.`Checkin`) OR (:checkin AND :checkout > `reservations`.`Checkout`)) OR `rooms`.`Status` = 1)  GROUP BY `rooms`.`RoomNo`');
+      $this->db->query('SELECT `rooms`.*, packages.* FROM `rooms` INNER JOIN `packages` ON `packages`.`RoomNo` = `rooms`.`RoomNo` AND `packages`.`PackageId` = :package LEFT JOIN `reservations` ON `rooms`.`RoomNo` = `reservations`.`RoomNo` WHERE (`rooms`.`RoomCount` = :peoplecount) AND (((:checkin <`reservations`.`Checkin`) AND (:checkout < `reservations`.`Checkin`)) OR ((:checkin > `reservations`.`Checkout`) AND (:checkout > `reservations`.`Checkout`)) OR `rooms`.`Status` = "1")  GROUP BY `rooms`.`RoomNo`');
 
       $this->db->bind(':peoplecount', $data['peoplecount']);
       $this->db->bind(':checkin', $data['checkin']);
@@ -61,5 +61,16 @@
       }else{
         return false;
       }
+    }
+
+    public function updateroomavailability($data){
+      $this->db->query('UPDATE `rooms` SET `Status` = 0 WHERE `roomNo` = :roomno');
+      $this->db->bind(':roomno', $data['roomno']);
+      if($this->db->execute()){
+        return true;
+      }else{
+        return false;
+      }
+        
     }
   }
