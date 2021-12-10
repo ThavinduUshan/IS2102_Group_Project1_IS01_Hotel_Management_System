@@ -209,7 +209,12 @@
 
           if(empty($data['cnameError']) && empty($data['cidError']) && empty($data['cnumError'])){
             if($this->pageModel->addReservations($data)){
-              header('location: '. URLROOT . '/pages/index');
+              if($this->pageModel->updateroomavailability($data)){
+                header('location: '. URLROOT . '/pages/index');
+              }
+              else{
+              die('Something Went Wrong');
+              }
             }
             else{
               die('Something Went Wrong');
