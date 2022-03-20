@@ -34,4 +34,14 @@
 
       return $results;
     }
+
+    public function viewbarorderdetails(){
+
+      $this->db->query('SELECT barorders.BarOrderNo, barorders.TableNo, barorders.Status FROM barorders INNER JOIN barordersnacks ON barorders.BarOrderNo = barordersnacks.BarOrderNo ORDER BY BarOrderNo ASC');
+
+      $results = $this->db->resultSet();
+
+      return $results;
+    }
+
   }
