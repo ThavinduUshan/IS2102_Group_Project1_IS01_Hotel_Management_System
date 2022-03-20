@@ -64,7 +64,7 @@
           <th style="width: 20%;">Food Category</th>
           <th style="width: 15%;">Portion</th>
           <th style="width: 15%;">Price</th>
-          <th style="width: 15%;">Status</th>
+          <th style="width: 15%;" hidden>Status</th>
           <th style="width: 5%;"></th>
           <th style="width: 5%;"></th>
         </tr>
@@ -74,7 +74,7 @@
           <td style="width: 20%;"><?php echo $fooditem->category?></td>
           <td style="width: 15%;"><?php echo $fooditem->portion?></td>
           <td style="width: 15%;"><?php echo $fooditem->price?></td>
-          <td style="width: 15%;"><?php echo $fooditem->status?></td>
+          <td style="width: 15%;" hidden><?php echo $fooditem->status?></td>
           <td style="width: 5%;"><a href="<?php echo URLROOT ?>/kitchens/menuavailability"><i class="fa fa-pencil-square-o fa-2x" aria-hidden="true"></i></a></td>
           <td style="width: 5%;"><a href="#removefooditem"><i class="fa fa-trash-o fa-2x" aria-hidden="true"></i></a></td>
         </tr>
