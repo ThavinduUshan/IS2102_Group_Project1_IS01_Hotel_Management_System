@@ -83,28 +83,13 @@
 
     <div class="bar-dash-order">
       <table cellspacing="0" cellpadding="0">
+      <?php foreach($data['barorderdetails'] as $barorderdetails): ?>
         <tr>
-          <td class="col1" style="width: 40%;">Order No:</br>Table No:</td>
-          <td class="col2" style="width: 40%;">Status:</td>
+          <td class="col1" style="width: 40%;">Order No:<?php echo $barorderdetails->BarOrderNo; ?></br>Table No:<?php echo $barorderdetails->TableNo; ?></td>
+          <td class="col2" style="width: 40%;">Status:<?php echo $barorderdetails->Status; ?></td>
           <td class="col3" style="width: 10%;"><a href="<?php echo URLROOT ?>/bars/updateorder"><i class="fa fa-pencil-square-o fa-2x"></i></a></td>
         </tr>
-        <tr>
-          <td class="col1" style="width: 40%;">Order No:</br>Table No:</td>
-          <td class="col2" style="width: 40%;">Status:</td>
-          <td class="col3" style="width: 10%;"><a href="<?php echo URLROOT ?>/bars/updateorder"><i class="fa fa-pencil-square-o fa-2x"></i></a></td>
-        </tr>
-        <tr>
-          <td class="col1" style="width: 40%;">Order No:</br>Table No:</td>
-          <td class="col2" style="width: 40%;">Status:</td>
-          <td class="col3" style="width: 10%;"><a href="<?php echo URLROOT ?>/bars/updateorder"><i class="fa fa-pencil-square-o fa-2x"></i></a></td>
-        </tr>
-        <tr>
-          <td class="col1" style="width: 40%;">Order No:</br>Table No:</td>
-          <td class="col2" style="width: 40%;">Status:</td>
-          <td class="col3" style="width: 10%;"><a href="<?php echo URLROOT ?>/bars/updateorder"><i class="fa fa-pencil-square-o fa-2x"></i></a></td>
-        </tr>
-        
-
+        <?php endforeach; ?>  
       </table>
     </div>
 
