@@ -10,9 +10,30 @@
   <link rel="preconnect" href="https://fonts.googleapis.com">
   <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
   <link href="https://fonts.googleapis.com/css2?family=Open+Sans:wght@300;400;600;700;800&display=swap" rel="stylesheet">
-  <link rel="stylesheet" href="<?php echo URLROOT ?>/public/css/stylen.css">
+  <link rel="stylesheet" href="<?php echo URLROOT ?>/public/css/styled.css?ver=1.1">
   <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/@fortawesome/fontawesome-free@5.15.4/css/fontawesome.min.css" integrity="sha384-jLKHWM3JRmfMU0A5x5AkjWkw/EYfGUAGagvnfryNV3F9VqM98XiIH7VBGVoxVSc7" crossorigin="anonymous">
   <script src="https://use.fontawesome.com/a6a11daad8.js"></script>
+  <script type="text/javascript" src="https://ajax.googleapis.com/ajax/libs/jquery/3.5.1/jquery.min.js"></script>
+<script type="text/javascript">
+function add_row1()
+{
+ $rowno=$("#dynamic_table1 tr").length;
+ $rowno=$rowno+1;
+ $("#dynamic_table1 tr:last").after("<tr id='row"+$rowno+"'><td><select id='baritemName' name='baritemName[]'><?php foreach($data['baritems'] as $baritems): ?><option value='<?php echo $baritems->itemName; ?>'><?php echo $baritems->itemName; ?></option><?php endforeach; ?></select></td><td><select id='barportion' name='barportion[]'><option value='Pint'>Pint ~475ml</option><option value='Shot'>Shot ~50ml</option><option value='Fifth'>Fifth</option><option value='Liter'>Liter 1000ml</option><option value='Tower'>Tower 2000ml</option></select></td><td><input type='text' id='barquantity' name='barquantity[]'></td><td><input type='button' value='DELETE' onclick=delete_row('row"+$rowno+"')></td></tr>");
+}
+
+function add_row2()
+{
+ $rowno=$("#dynamic_table2 tr").length;
+ $rowno=$rowno+1;
+ $("#dynamic_table2 tr:last").after("<tr id='row"+$rowno+"'><td><select id='snackitemName' name='snackitemName[]'><?php foreach($data['snackitems'] as $snackitems): ?><option value='<?php echo $snackitems->itemName; ?>'><?php echo $snackitems->itemName; ?></option><?php endforeach; ?></select></td><td><select id='snackportion' name='snackportion[]'><option value='Small'>Small</option></select></td><td><input type='text' id='quantity' name='snackquantity[]'></td><td><input type='button' value='DELETE' onclick=delete_row('row"+$rowno+"')></td></tr>");
+}
+function delete_row(rowno)
+{
+ $('#'+rowno).remove();
+}
+
+</script>
   <title>Place Order</title>
 </head>
 <body>
@@ -73,118 +94,83 @@
   <div class="sys-wrapped-col">
 
     <!-- Add Bar item -->
-    <div>
-                  
-      <h3 class="bar-add">Table No :</h3>
-      <input type="text"  class = "bot-form-text" required>  
-      <br>
-      <form action="#" method="POST">
-        <select id="" class="add-item-form">
-          <option value=""> Select an Item </option>
-          <option value="">Arrack</option>
-          <option value="">Wiskey</option>
-          <option value="">Sprite</option>
-          <option value="">Coca Cola</option>
-        </select>
-        <input class="add-item-form" type="number" placeholder="Quantity">
-        <input class="add-item-form" type="text" name="" id="" placeholder="Portion">
-                  
-        </form><br>
-        <button type="submit" class="add-item">Add item</button>
-        </div>
+          <div class="kot-div">
 
-<!-- Bar Item Details -->
-              <div>
-              <h2 class="bar-item-details">Bar Item Details</h2>
-              <br>
-            
-            <table class="item-details-table">
-              <tr>
-              <th>Item no</th>
-              <th>Potion</th>
-              <th>Quantity</th>
-              <th>Status</th>
-              </tr>
-              <tr>
-              <td></td>
-              <td></td>
-              <td></td>
-              <td></td>
-              <td><a style="color: #01661b;" href="#"><i class="fa fa-pencil-square-o fa-lg" aria-hidden="true"></i></a></td>
-              <td><a style="color: #01661b;" href="#"><i class="fa fa-trash-o fa-lg" aria-hidden="true"></i></a></td>
-              </tr>
-              <tr>
-                <td></td>
-                <td></td>
-                <td></td>
-                <td></td>
-                <td><a style="color: #01661b;" href="#"><i class="fa fa-pencil-square-o fa-lg" aria-hidden="true"></i></a></td>
-                <td><a style="color: #01661b;" href="#"><i class="fa fa-trash-o fa-lg" aria-hidden="true"></i></a></td>
+            <div class="dynamic_form">
+              <form method="post" action="<?php echo URLROOT; ?>/bars/placeorder">
+
+              <label for="tableno">Table No:</label>
+              <input type="text" id="tableno" name="tableno"><br><br>
+
+                <h2 class="bar-item-details">Bar Item Details</h2><br>
+              
+
+              <input type="button" onclick="add_row1();" value="ADD ROW"><br><br>
+
+                <table id="dynamic_table1">
+                <tr id="row1">
+                  <td>
+                      <select id="baritemName" name="baritemName[]">
+                      <?php foreach($data['baritems'] as $baritems): ?>
+                      <option value="<?php echo $baritems->itemName; ?>"><?php echo $baritems->itemName; ?></option>
+                      <?php endforeach; ?>
+                      </select>
+                  </td>
+                  <td>
+                      <select id="barportion" name="barportion[]">
+                        <option value="Shot">Shot ~50ml</option>
+                        <option value="Pint">Pint ~475ml</option>
+                        <option value="Fifth">Fifth</option>
+                        <option value="Liter">Liter 1000ml</option>
+                        <option value="Tower">Tower 2000ml</option>
+                      </select>
+                  </td>
+                  <td>
+                      <input type="text" id="barquantity" name="barquantity[]" placeholder="Quantity">
+                  </td>
                 </tr>
-                <tr>
-              <td></td>
-              <td></td>
-              <td></td>
-              <td></td>
-              <td><a style="color: #01661b;" href="#"><i class="fa fa-pencil-square-o fa-lg" aria-hidden="true"></i></a></td>
-              <td><a style="color: #01661b;" href="#"><i class="fa fa-trash-o fa-lg" aria-hidden="true"></i></a></td>
-              </tr>
-            </table>
-            <br><br><br>
-                
+                </table>
+     
+              <h2 class="bar-bot-detail-heading">BOT Details</h2><br>
+
+              <input type="button" onclick="add_row2();" value="ADD ROW"><br><br>
+
+                <table id="dynamic_table2">
+                <tr id="row1">
+                  <td>
+                      <select id="snackitemName" name="snackitemName[]">
+                      <?php foreach($data['snackitems'] as $snackitems): ?>
+                      <option value="<?php echo $snackitems->itemName; ?>"><?php echo $snackitems->itemName; ?></option>
+                      <?php endforeach; ?>
+                      </select>
+                  </td>
+                  <td>
+                      <select id="snackportion" name="snackportion[]">
+                        <option value="Small">Small</option>
+                        <option value="Regular">Regular</option>
+                        <option value="Large">Large</option>
+                      </select>
+                  </td>
+                  <td>
+                      <input type="text" id="snackquantity" name="snackquantity[]" placeholder="Quantity">
+                  </td>
+                </tr>
+                </table>
+
+                <select id="status" name="status" hidden>
+                  <option value="pending" select=selected>pending</option>
+                  <option value="prepared">prepared</option>
+                  <option value="closed">closed</option>
+                </select>
+
+                <input type="submit" name="submit_row" value="SUBMIT">
+
+              </form>
             </div>
 
-            <!-- Room KOT Details -->
-            <div class="bar-bot-detail-heading">       
-              <h2>BOT Details</h2>
-              <a href="<?php echo URLROOT ?>/bars/placebot"><button type="submit">Place BOT</button></a>
             </div>
 
-            <!-- KOT Item Details -->
-             
-            <div class="bar-bot-details">
-            <table>
-              
-              <tr>
-              <th style="width:20%;">BOT No</th>
-              <th style="width:20%;">Time</th>
-              <th style="width:40%;">Status</th>
-              <th style="width:10%;"></th>
-              <th style="width:10%;"></th>
-              </tr>
-              
-              <tr>
-              <td></td>
-              <td></td>
-              <td></td>
-              <td><a href="#"><i class="fa fa-pencil-square-o fa-2x" aria-hidden="true"></i></a></td>
-              <td><a href="#"><i class="fa fa-trash-o fa-2x" aria-hidden="true"></i></a></td>
-              </tr>
-
-              <tr>
-              <td></td>
-              <td></td>
-              <td></td>
-              <td><a href="#"><i class="fa fa-pencil-square-o fa-2x" aria-hidden="true"></i></a></td>
-              <td><a href="#"><i class="fa fa-trash-o fa-2x" aria-hidden="true"></i></a></td>
-              </tr>
-
-              <tr>
-              <td></td>
-              <td></td>
-              <td></td>
-              <td><a href="#"><i class="fa fa-pencil-square-o fa-2x" aria-hidden="true"></i></a></td>
-              <td><a href="#"><i class="fa fa-trash-o fa-2x" aria-hidden="true"></i></a></td>
-              </tr>
-
-            </table><br><br>
-
-            <div class="bar-bot-details-place-button"> 
-              <a href="#roomplaceorder"><button type="submit">Place the Order</button></a>
-            </div>
-            <br><br>
-                
-            </div>
+          </div>
 
 
     </div>
