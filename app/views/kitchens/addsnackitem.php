@@ -104,15 +104,15 @@
 
         <label for="status">Availability</label><br>
         <select id="status" name="status">
-            <option value="Available" selected="selected">Available</option>
-            <option value="Unavailable">Unavailable</option>
+            <option value="1" selected="selected">Available</option>
+            <option value="0">Unavailable</option>
           </select><br>
         <label for="price">Price:</label><br>
         <input type="text" id="price" name="price" placeholder="Price">
         <span class="error">
             <p><?php echo $data['priceError'];?></p>
         </span>
-        <br>
+        <br><br>
         <input type="submit" name="submit" value="Add Item">
       </form>
     </div>

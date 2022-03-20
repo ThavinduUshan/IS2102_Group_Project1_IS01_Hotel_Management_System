@@ -91,13 +91,15 @@
                     <th>Status</th>
                     <th></th>
                   </tr>
+                  <?php foreach($data['snackitems'] as $snackitem): ?>
                   <tr>
-                    <td></td>
-                    <td></td>
-                    <td></td>
+                    <td><?php echo $snackitem->BarOrderNo?></td>
+                    <td><?php echo $snackitem->TableNo?></td>
+                    <td><?php echo $snackitem->Status?></td>
                     
                     <td><a href="<?php echo URLROOT?>/kitchens/updateorderstatus"><i class="fa fa-pencil-square-o" aria-hidden="true"></i></a></td>
                   </tr>
+                  <?php endforeach; ?>
               
                 </table> 
             
