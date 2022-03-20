@@ -9,12 +9,15 @@
     }
 
     public function headchefpub(){
-      $this->view('kitchens/headchefpub');
+      $snackitems = $this->kitchenModel->viewbarorderdetails();
+
+      $data = [
+        'snackitems' => $snackitems
+      ];
+
+      $this->view('kitchens/headchefpub', $data);
     }
 
-    public function headchefmenu(){
-      $this->view('kitchens/headchefmenu');
-    }
 
     public function menuavailability(){
       $this->view('kitchens/menuavailability');
