@@ -86,27 +86,13 @@
 
     <div class="rest-dash-order">
       <table cellspacing="0" cellpadding="0">
+      <?php foreach($data['restaurantorderdetails'] as $restaurantorderdetails): ?>
         <tr>
-          <td class="col1" style="width: 40%;">Order No:</br>Table No:</td>
-          <td class="col2" style="width: 40%;">Status:</td>
-          <td class="col3" style="width: 10%;"><a href="<?php echo URLROOT?>/restaurants/updatekot" <i class="fa fa-pencil-square-o fa-2x" aria-hidden="true"></i></a></td>
+          <td class="col1" style="width: 40%;">Order No:<?php echo $restaurantorderdetails->RestaurantOrderNo; ?></br>Table No:<?php echo $restaurantorderdetails->TableNo; ?></td>
+          <td class="col2" style="width: 40%;">Status:<?php echo $restaurantorderdetails->Status; ?></td>
+          <td class="col3" style="width: 10%;"><a href="<?php echo URLROOT.'/restaurants/updatekot?orderno='. $restaurantorderdetails->RestaurantOrderNo . '&tableno='.$restaurantorderdetails->TableNo ?>" > <i class="fa fa-pencil-square-o fa-2x" aria-hidden="true"></i></a></td>
         </tr>
-        <tr>
-          <td class="col1" style="width: 40%;">Order No:</br>Table No:</td>
-          <td class="col2" style="width: 40%;">Status:</td>
-          <td class="col3" style="width: 10%;"><a href="<?php echo URLROOT?>/restaurants/updatekot" <i class="fa fa-pencil-square-o fa-2x" aria-hidden="true"></i></a></td>
-        </tr>
-        <tr>
-          <td class="col1" style="width: 40%;">Order No:</br>Table No:</td>
-          <td class="col2" style="width: 40%;">Status:</td>
-          <td class="col3" style="width: 10%;"><a href="<?php echo URLROOT?>/restaurants/updatekot" <i class="fa fa-pencil-square-o fa-2x" aria-hidden="true"></i></a></td>
-        </tr>
-        <tr>
-          <td class="col1" style="width: 40%;">Order No:</br>Table No:</td>
-          <td class="col2" style="width: 40%;">Status:</td>
-          <td class="col3" style="width: 10%;"><a href="<?php echo URLROOT?>/restaurants/updatekot" <i class="fa fa-pencil-square-o fa-2x" aria-hidden="true"></i></a></td>
-        </tr>
-
+      <?php endforeach; ?>
       </table>
     </div>
 
