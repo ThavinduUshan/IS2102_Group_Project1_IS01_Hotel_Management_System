@@ -263,11 +263,24 @@
       $this->view('users/receptionist');
     }
     public function cashier(){
-      $this->view('users/cashier');
+      $restaurantorderdetails = $this->userModel->viewrestaurantorderdetails();
+      
+      $data = [
+        'restaurantorderdetails' => $restaurantorderdetails
+      ];
+
+      $this->view('users/cashier', $data);
     }
     public function headchef(){
-      $this->view('users/headchef');
+      $restaurantorders = $this->userModel->viewrestaurantorderdetails();
+
+      $data = [
+        'restaurantorders' => $restaurantorders
+      ];
+
+      $this->view('users/headchef', $data);
     }
+
     public function barman(){
       $this->view('users/barman');
     }

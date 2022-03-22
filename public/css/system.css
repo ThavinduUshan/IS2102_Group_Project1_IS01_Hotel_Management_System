@@ -133,9 +133,7 @@
     position: fixed;
     height: 550px;
     border-radius: 0px 25px 25px 0px;
-    overflow: hidden;
-    
-    
+    overflow: auto; 
   }
 
    .sys-left-col{
@@ -710,6 +708,11 @@
     /* Kitchen Templates */
 
 
+.right-kitchen-menu{
+  overflow: visible;
+}
+
+
 .Kitchen-button1{
   position: absolute;
   width: 145px;
@@ -869,6 +872,7 @@
   padding-bottom: 5px;
   border-collapse: separate;
   background-color: #E5E5E5;
+  text-align: center;
 }
 
 .Kitchen-edit{

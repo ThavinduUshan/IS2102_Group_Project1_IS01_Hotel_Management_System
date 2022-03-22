@@ -113,7 +113,7 @@
               <td></td>
               <td></td>
               <td><a href="#"><i class="fa fa-pencil-square-o fa-lg" aria-hidden="true"></i></a></td>
-              <td><a href="#"><i class="fa fa-trash-o fa-lg" aria-hidden="true"></i></a></td>
+              <td><a href="#" style ="color: #01661b;"><i class="fa fa-trash-o fa-lg" aria-hidden="true"></i></a></td>
               </tr>
               <tr>
                 <td></td>
@@ -121,7 +121,7 @@
                 <td></td>
                 <td></td>
                 <td><a href="#"><i class="fa fa-pencil-square-o fa-lg" aria-hidden="true"></i></a></td>
-              <td><a href="#"><i class="fa fa-trash-o fa-lg" aria-hidden="true"></i></a></td>
+              <td><a href="#" style ="color: #01661b;"><i class="fa fa-trash-o fa-lg" aria-hidden="true"></i></a></td>
                 </tr>
                 <tr>
               <td></td>
@@ -129,7 +129,7 @@
               <td></td>
               <td></td>
               <td><a href="#"><i class="fa fa-pencil-square-o fa-lg" aria-hidden="true"></i></a></td>
-              <td><a href="#"><i class="fa fa-trash-o fa-lg" aria-hidden="true"></i></a></td>
+              <td><a href="#" style ="color: #01661b;"><i class="fa fa-trash-o fa-lg" aria-hidden="true"></i></a></td>
               </tr>
             </table>
             <br><br><br>
@@ -160,21 +160,21 @@
               <td></td>
               <td></td>
               <td><a href="<?php echo URLROOT ?>/bars/updatebot"><i class="fa fa-pencil-square-o fa-2x" aria-hidden="true"></i></a></td>
-              <td><a href="#"><i class="fa fa-trash-o fa-2x" aria-hidden="true"></i></a></td>
+              <td><a href="#" style ="color: #01661b;"><i class="fa fa-trash-o fa-2x" aria-hidden="true"></i></a></td>
               </tr>
               <tr>
               <td></td>
               <td></td>
               <td></td>
               <td><a href="<?php echo URLROOT ?>/bars/updatebot"><i class="fa fa-pencil-square-o fa-2x" aria-hidden="true"></i></a></td>
-              <td><a href="#"><i class="fa fa-trash-o fa-2x" aria-hidden="true"></i></a></td>
+              <td><a href="#" style ="color: #01661b;"><i class="fa fa-trash-o fa-2x" aria-hidden="true"></i></a></td>
               </tr>
               <tr>
               <td></td>
               <td></td>
               <td></td>
               <td><a href="<?php echo URLROOT ?>/bars/updatebot"><i class="fa fa-pencil-square-o fa-2x" aria-hidden="true"></i></a></td>
-              <td><a href="#"><i class="fa fa-trash-o fa-2x" aria-hidden="true"></i></a></td>
+              <td><a href="#" style ="color: #01661b;"><i class="fa fa-trash-o fa-2x" aria-hidden="true"></i></a></td>
               </tr>
               
 

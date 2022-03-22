@@ -10,10 +10,10 @@
   <link rel="preconnect" href="https://fonts.googleapis.com">
   <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
   <link href="https://fonts.googleapis.com/css2?family=Open+Sans:wght@300;400;600;700;800&display=swap" rel="stylesheet">
-  <link rel="stylesheet" href="<?php echo URLROOT ?>/public/css/stylen.css">
+  <link rel="stylesheet" href="<?php echo URLROOT ?>/public/css/system.css">
   <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/@fortawesome/fontawesome-free@5.15.4/css/fontawesome.min.css" integrity="sha384-jLKHWM3JRmfMU0A5x5AkjWkw/EYfGUAGagvnfryNV3F9VqM98XiIH7VBGVoxVSc7" crossorigin="anonymous">
   <script src="https://use.fontawesome.com/a6a11daad8.js"></script>
-  <title>Restaurant Bill</title>
+  <title>Admin</title>
 </head>
 <body>
   <section class="system">
@@ -46,28 +46,7 @@
 
   <!-- System Block -->
 
-  <div class="sys-left-col">
-  <div class="rest-dash-plus1">
-      <a href="<?php echo URLROOT ?>/restaurants/placekot">
-        <i class="fa fa-plus-square fa-4x" aria-hidden="true"></i>
-      </a>
-      <p>Place Order</p>
-    </div>
-
-    <div class="rest-dash-plus2">
-      <a href="<?php echo URLROOT ?>/restaurants/managefooditems">
-        <i class="fa fa-book fa-4x" aria-hidden="true"></i>
-      </a>
-      <p>View Food Items</p>
-    </div>
-
-    <div class="rest-dash-plus3">
-      <a href="<?php echo URLROOT; ?>/restaurants/addfooditem">
-        <i class="fa fa-plus-square fa-4x" aria-hidden="true"></i>
-      </a>
-      <p>Add Food Items</p>
-    </div>
-  </div>
+  <div class="sys-left-col"></div>
   
 <!-- Right Block Bill -->
 
@@ -78,7 +57,7 @@
     <div class="rest-bill-date">
       <table>
         <tr>
-          <td>Order No:<?php echo $_GET['orderno']?></td>
+          <td>KOT No:</td>
           <td>Date:</td>
         </tr>
       </table>
@@ -89,8 +68,6 @@
     </div>
 
 <!-- Bill -->
-
-
 
     <div class="rest-bill-1">
       <table>
@@ -105,31 +82,49 @@
 
     <div class="rest-bill-2">
       <table>
-      <?php foreach($data['fooditemnames'] as $fooditemnames): ?>
         <tr>
-          <td style="width: 30%;"><?php echo $fooditemnames->itemName; ?></td>
-          <td style="width: 20%;"><?php echo $fooditemnames->PortionType; ?></td>
-          <td style="width: 30%;"><?php echo $fooditemnames->Quantity; ?></td>
-          <td style="width: 20%;"><?php echo $fooditemnames->price * $fooditemnames->Quantity; ?></td>
+          <td style="width: 30%;">Mixed Rice</td>
+          <td style="width: 20%;">Large</td>
+          <td style="width: 30%;">2</td>
+          <td style="width: 20%;">Rs.1200</td>
         </tr>
-        <?php endforeach; ?>
+
+        <tr>
+          <td style="width: 30%;">Mixed Rice</td>
+          <td style="width: 20%;">Large</td>
+          <td style="width: 30%;">2</td>
+          <td style="width: 20%;">Rs.1200</td>
+        </tr>
+
+        <tr>
+          <td style="width: 30%;">Mixed Rice</td>
+          <td style="width: 20%;">Large</td>
+          <td style="width: 30%;">2</td>
+          <td style="width: 20%;">Rs.1200</td>
+        </tr>
+
+        <tr>
+          <td style="width: 30%;">Mixed Rice</td>
+          <td style="width: 20%;">Large</td>
+          <td style="width: 30%;">2</td>
+          <td style="width: 20%;">Rs.1200</td>
+        </tr>
+
+        <tr>
+          <td style="width: 30%;">Mixed Rice</td>
+          <td style="width: 20%;">Large</td>
+          <td style="width: 30%;">2</td>
+          <td style="width: 20%;">Rs.1200</td>
+        </tr>
       </table>
     </div>
 
     <div class="rest-bill-3">
       <form action="bill.php">
-      <?php $total=0;?>
-      <?php foreach($data['fooditemnames'] as $fooditemnames): ?>
-        <?php $total +=$fooditemnames->price * $fooditemnames->Quantity; ?>
-      <?php endforeach; ?>
-        <label for="tprice">Total Price:</label>
-        <input type="text" id="tprice" name="tprice" value="Rs <?php echo $total;?>" readonly><br>
-        <label for="discount">Amount:</label>
-        <input type="text" id="amount" name="amount"></br>
         <label for="discount">Discount:</label>
         <input type="text" id="discount" name="discount"></br>
-        <label for="discount">Discounted Price:</label>
-        <input type="text" id="disprice" name="disprice"></br>
+        <label for="tprice">Total Price:</label>
+        <input type="text" id="tprice" name="tprice"><br>
         <label for="balance">Balance:</label>
         <input type="text" id="balance" name="balance"><br>
         <input type="submit" value="Issue Bill">

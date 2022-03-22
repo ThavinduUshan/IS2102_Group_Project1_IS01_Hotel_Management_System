@@ -66,4 +66,13 @@
       }
     }
 
+    public function viewrestaurantorderdetails(){
+
+      $this->db->query('SELECT * FROM restaurantorders ORDER BY RestaurantOrderNo DESC');
+
+      $results = $this->db->resultSet();
+
+      return $results;
+    }
+
   }
