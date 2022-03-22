@@ -62,10 +62,10 @@
     </div>
 
     <div class="rest-dash-plus3">
-      <a href="<?php echo URLROOT; ?>/users/cashier">
-        <i class="fa fa-home fa-4x" aria-hidden="true"></i>
+      <a href="<?php echo URLROOT; ?>/restaurants/addfooditem">
+        <i class="fa fa-plus-square fa-4x" aria-hidden="true"></i>
       </a>
-      <p>Dashboard</p>
+      <p>Add Food Items</p>
     </div>
   </div>
   
@@ -77,35 +77,33 @@
 
     <div class="rest-add-food-form">
       
-      <form action="<?php echo URLROOT ?>/restaurants/updatefooditem" name="add-food-item-form" method="post">
-        <label for="itemname">Item Name:</label><br>
-        <input type="text" id="itemname" name="itemName" placeholder="Enter the Name"><br>
+      <form action="<?php echo URLROOT ?>/restaurants/updatefooditem" method="post">
+        <label for="name">Name:</label><br>
+        <input type="text" id="name" name="name" value=""><br><br>
 
-        <label for="category">Food Category:</label><br>
-        <select id="category" name="category">
-          <option value="Starter">Starter</option>
+        <label for="fcategory">Food Category:</label><br>
+        <select id="facategory" name="fcategory">
+        <option value="<?php echo $data['fooditems']->category?>"></option>
+        <option value="Starter">Starter</option>
           <option value="Soup">Soup</option>
           <option value="Dish">Dish</option>
           <option value="Dessert">Dessert</option>
           <option value="Beverage">Beverage</option>
-        </select><br>
+        </select><br><br>
 
         <label for="portion">Portion:</label><br>
-        <select id="portion" name="portion">
-          <option value="Small">Small</option>
-          <option value="Regular">Regular</option>
-          <option value="Large">Large</option>
-        </select><br>
+        <select id="potion" name="portion">
+        <option value="<?php echo $data['fooditems']->portion?>"></option>
+        <option value="Small">Small</option>
+          <option value="Normal">Normal</option>
+          <option value="large">large</option>
+        </select><br><br>
 
-        <label for="status">Availability</label><br>
-        <select id="status" name="status">
-            <option value="Available" selected="selected">Available</option>
-            <option value="Unavailable">Unavailable</option>
-          </select><br>
         <label for="price">Price:</label><br>
-        <input type="text" id="price" name="price" placeholder="Price">
-        <br>
-        <input type="submit" name="submit" value="Update Item">
+        <input type="text" id="price" name="price" value="<?php echo $data['fooditems']->price?>"><br><br>
+      
+        <input type="submit" value="Update Item">
+      
       </form>
     </div>
 
