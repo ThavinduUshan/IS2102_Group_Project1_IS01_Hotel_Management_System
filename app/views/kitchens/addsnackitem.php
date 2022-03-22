@@ -104,8 +104,8 @@
 
         <label for="status">Availability</label><br>
         <select id="status" name="status">
-            <option value="1" selected="selected">Available</option>
-            <option value="0">Unavailable</option>
+            <option value="1" selected="selected">1</option>
+            <option value="0">0</option>
           </select><br>
         <label for="price">Price:</label><br>
         <input type="text" id="price" name="price" placeholder="Price">
