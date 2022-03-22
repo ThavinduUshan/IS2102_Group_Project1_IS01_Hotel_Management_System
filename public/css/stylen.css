@@ -1144,9 +1144,9 @@
     position: fixed;
     height: 600px;
     border-radius: 0px 25px 25px 0px;
-    overflow: hidden;
+    overflow: auto;
     
-    
+
   }
 
    .sys-left-col{
@@ -1304,6 +1304,14 @@
   color: #01661b;
 }
 
+.rest-dash-order button{
+  border: none;
+  text-align: center;
+  text-decoration: none;
+
+}
+
+
 /* Bill Heading Details */
 
 .rest-bill-date{
@@ -1395,7 +1403,7 @@
 
 .rest-bill-3 label{
   display: inline-block;
-  width: 90px;
+  width: 160px;
   color:#01661b ;
   font-weight: bold;
 }
@@ -1421,6 +1429,64 @@
 .rest-bill-3 input[type=submit]:hover{
   background-color: green;
 }
+
+/*Place KOT Dynamic Form*/
+
+.dynamic_form input[type=text] {
+  margin-right: 30px;
+  width:100px;
+  text-align: center;
+  border: 1px solid #06761F;
+  padding: 5px 8px;
+  box-shadow: none;
+  background-color: #E5E5E5;
+}
+
+.dynamic_form select {
+  margin-right: 30px;
+  width: 150px;
+  text-align: center;
+  border: 1px solid #06761F;
+  padding: 5px 8px;
+  box-shadow: none;
+  background-color: #E5E5E5;
+}
+
+.dynamic_form select:focus {
+  outline: none;
+}
+
+.dynamic_form input[type=submit]{
+  background-color: #01661b;
+  border: none;
+  border-radius: 25px;
+  color: white;
+  padding: 16px 32px;
+  text-decoration: none;
+  margin: 4px 2px;
+  cursor: pointer;
+}
+
+.dynamic_form input[type=submit]:hover{
+  background-color: green;
+}
+
+
+.dynamic_form input[type=button]{
+  background-color: #01661b;
+  border: none;
+  border-radius: 25px;
+  color: white;
+  padding: 16px 32px;
+  text-decoration: none;
+  margin: 4px 2px;
+  cursor: pointer;
+}
+
+.dynamic_form input[type=button]:hover{
+  background-color: green;
+}
+
 
 /* Restaurant-Manage Food Items */
 /* White Box */
@@ -1495,6 +1561,16 @@
 
 /* Add Food Item */
 /* Add Food Item-Heading */
+
+.item-add-form {
+    width: 55.5%;
+    background:#ffff;
+    margin-bottom: 10px;
+    position: fixed;
+    height: 540px;
+    border-radius: 0px 25px 25px 0px;
+    overflow: auto;
+  }
 
 .rest-add-food{
   background: transparent;
@@ -2251,7 +2327,7 @@
   position: fixed;
   height: 540px;
   border-radius: 0px 25px 25px 0px;
-  overflow: auto
+  overflow: auto;
 }
 
 /* Resrvation Form - Heading */
@@ -2407,7 +2483,7 @@
   position: fixed;
   height: 540px;
   border-radius: 0px 25px 25px 0px;
-  overflow: auto
+  overflow: auto;
 }
 
 .res-kot-details{
@@ -2584,34 +2660,6 @@
   margin-top: 40px;
   margin-left: 10%;
   width: 80%;
-}
-
-.kot-food-add-form input[type=text]{
-  width: 249px;
-  padding-top: 2px;
-  height: 30px;
-  padding-left: 10px;
-  display: inline-block;
-  border: 1px solid #E5E5E5;
-  border-radius: 20px;
-  background-color:#E5E5E5 ;
-  font-size:16px;
-}
-
-.kot-food-add-form input[type=submit]{
-    background-color: #01661b;
-    border: none;
-    border-radius: 25px;
-    color: white;
-    padding: 16px 32px;
-    text-decoration: none;
-    margin: 4px 2px;
-    cursor: pointer;
-    font-size:16px;
-}
-
-.kot-food-add-form input[type=submit]:hover{
-  background-color: green;
 }
 
 .kot-food-add-form label{
@@ -2997,6 +3045,10 @@
   padding-bottom: 5px;
   border-collapse: separate;
   background-color: #E5E5E5;
+}
+
+.item-details-table a {
+  color: #01661b;
 }
 
 
