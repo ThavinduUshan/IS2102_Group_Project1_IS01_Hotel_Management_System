@@ -37,6 +37,7 @@ function delete_row(rowno)
   <title>Place Order</title>
 </head>
 <body>
+  
   <section class="system">
     <nav class="sys-nav" id="sysnav">
       <a href="<?php echo URLROOT ?>/users/barman">
@@ -64,7 +65,7 @@ function delete_row(rowno)
       }
     }
   </script>
-
+  
   <!-- System Block -->
 
   <div class="sys-left-col">
@@ -111,6 +112,7 @@ function delete_row(rowno)
                 <tr id="row1">
                   <td>
                       <select id="baritemName" name="baritemName[]">
+                      <option select="selected" value="select an option"> -- select an option -- </option>
                       <?php foreach($data['baritems'] as $baritems): ?>
                       <option value="<?php echo $baritems->itemName; ?>"><?php echo $baritems->itemName; ?></option>
                       <?php endforeach; ?>
@@ -118,6 +120,7 @@ function delete_row(rowno)
                   </td>
                   <td>
                       <select id="barportion" name="barportion[]">
+                      <option select="selected" value="select an option"> -- select an option -- </option> 
                         <option value="Shot">Shot ~50ml</option>
                         <option value="Pint">Pint ~475ml</option>
                         <option value="Fifth">Fifth</option>
@@ -126,7 +129,7 @@ function delete_row(rowno)
                       </select>
                   </td>
                   <td>
-                      <input type="text" id="barquantity" name="barquantity[]" placeholder="Quantity">
+                      <input type="number" id="barquantity" name="barquantity[]" placeholder="Quantity">
                   </td>
                 </tr>
                 </table>
@@ -139,6 +142,7 @@ function delete_row(rowno)
                 <tr id="row1">
                   <td>
                       <select id="snackitemName" name="snackitemName[]">
+                      <option  select="selected" value="select an option"> -- select an option -- </option> 
                       <?php foreach($data['snackitems'] as $snackitems): ?>
                       <option value="<?php echo $snackitems->itemName; ?>"><?php echo $snackitems->itemName; ?></option>
                       <?php endforeach; ?>
@@ -146,19 +150,20 @@ function delete_row(rowno)
                   </td>
                   <td>
                       <select id="snackportion" name="snackportion[]">
+                      <option select="selected" value="select an option"> -- select an option -- </option> 
                         <option value="Small">Small</option>
                         <option value="Regular">Regular</option>
                         <option value="Large">Large</option>
                       </select>
                   </td>
                   <td>
-                      <input type="text" id="snackquantity" name="snackquantity[]" placeholder="Quantity">
+                      <input type="number" id="snackquantity" name="snackquantity[]" placeholder="Quantity">
                   </td>
                 </tr>
                 </table>
 
                 <select id="status" name="status" hidden>
-                  <option value="pending" select=selected>pending</option>
+                  <option value="pending" select="selected">pending</option>
                   <option value="prepared">prepared</option>
                   <option value="closed">closed</option>
                 </select>
