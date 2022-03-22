@@ -8,6 +8,7 @@
       $this->view('kitchens/headchefroom');
     }
 
+
     public function headchefpub(){
       $snackitems = $this->kitchenModel->viewbarorderdetails();
 
@@ -17,11 +18,72 @@
 
       $this->view('kitchens/headchefpub', $data);
     }
+    public function menuavailability($fooditemId){
 
+      $fooditems = $this->kitchenModel->findItemById($fooditemId);
+     
+      $data = [
+        
+        'fooditems' => $fooditems,
+        'itemName' => '',
+        'status' => '',
+       
 
-    public function menuavailability(){
-      $this->view('kitchens/menuavailability');
-    }
+      ];
+
+      if($_SERVER['REQUEST_METHOD'] == 'POST'){
+        $_POST = filter_input_array(INPUT_POST, FILTER_SANITIZE_STRING);
+
+        $data = [
+          'fooditemId'=>$fooditemId,
+          'fooditems' => $fooditems,
+          'itemName' => trim($_POST['itemName']),
+          'status' => trim($_POST['status']),
+         
+          
+        ];
+         
+          if($this->kitchenModel->updateAvailability($data)){
+            header('location: ' . URLROOT . '/kitchens/managefooditems');
+          }
+          else{
+            die('Something Went Wrong!');
+        }
+      
+      }
+          $this->view('kitchens/menuavailability', $data); 
+      }
+      
+      public function delete($fooditemId){
+
+        $fooditems = $this->kitchenModel->findItemById($fooditemId);
+ 
+       $data = [
+       'fooditems'=> $fooditems, 
+      'itemName' => '',
+      'category' => '',
+      'portion' => '',
+      'status' => '',
+      'price' => ''
+      
+       ];
+ 
+        if($_SERVER['REQUEST_METHOD'] == 'POST'){
+        $_POST = filter_input_array(INPUT_POST, FILTER_SANITIZE_STRING);
+ 
+         if($this->kitchenModel->deleteItem($fooditemId)){
+            header('location: ' . URLROOT . '/kitchens/managefooditems');
+          }
+         else{
+         die('Something Went Wrong!');
+   }
+     }
+     $this->view('kitchens/managefooditems', $data);
+   }
+
+    // public function menuavailability(){
+    //   $this->view('kitchens/menuavailability');
+    // }
 
     public function addsnackitem(){
 
@@ -93,11 +155,39 @@
       $this->view('kitchens/managefooditems', $data);
     }
 
-    public function updateorderstatus(){
-      $this->view('kitchens/updateorderstatus');
-    }
+     public function updateorderstatus(){
+
+
+       $this->view('kitchens/Restaurantorderstatus');
+   }
 
     public function settings(){
       $this->view('kitchens/settings');
+    }
+
+    public function Restaurantorderstatus(){
+      $orderno = $_GET['orderno'];
+
+      $orderitems = $this->kitchenModel->viewrestaurantorderdetails($orderno);
+
+      $data = [
+
+        'orderitems'=>$orderitems,
+        'orderno'=>$orderno
+        // 'itemName'=>'',
+        // 'PortionType'=>'',
+        // 'Quantity'=>''
+      ];
+      //  if($_SERVER['REQUEST_METHOD'] == 'POST'){
+      //   $_POST = filter_input_array(INPUT_POST, FILTER_SANITIZE_STRING);
+      //  }
+      
+
+      //var_dump($orderitems);
+      $this->view('kitchens/Restaurantorderstatus',$data);
+    }
+
+    public function Roomorderstatus(){
+      $this->view('kitchens/Roomorderstatus');
     }
   }
