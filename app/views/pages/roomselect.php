@@ -1,3 +1,8 @@
+<?php
+if(empty($data['checkin']) && empty ($data['checkout'])){
+  header('location: '. URLROOT . '/pages/selectdate');
+}
+?>
 <!DOCTYPE html>
 <html lang="en">
 <head>
@@ -16,7 +21,17 @@
       <a href="<?php echo URLROOT ?>/pages/">
         <img src="<?php echo URLROOT ?>/public/img/logo-nav.jpg">
       </a>
-    </nav>
+      <div class="nav-links" id="navLinks">
+          <ul>
+          <li><a style="color:green;" href="<?php echo URLROOT; ?>/pages">Home</a></li>
+          <li><a style="color:green;" href="<?php echo URLROOT; ?>/pages/about">About</a></li>
+          <li><a style="color:green;" href="<?php echo URLROOT; ?>/pages/facilities">Facilities</a></li>
+          <li><a style="color:green;" href="<?php echo URLROOT; ?>/pages/gallery">Gallery</a></li>
+          <li><a style="color:green;" href="<?php echo URLROOT; ?>/pages/contact">Contact</a></li>
+          <li><a style="color:green;" href="<?php echo URLROOT; ?>/pages/issues">Complains</a></li>
+          </ul>
+        </div>
+    </nav><br><br>
     <div class="rooms-section">
       <?php foreach($data['results'] as $room):?>
         <?php 
@@ -31,7 +46,7 @@
           <h5>Available</h5>
           <img src="<?php echo URLROOT?>/public/img<?php echo $room->Image?>" alt="Room Image">
           <h2><?php echo "Rs. " . $calculatedprice . ".00" ?></h2>
-          <input type="hidden" name="packageid" value="<?php echo $room->PackageId?>">
+          <input type="hidden" name="packagetypeid" value="<?php echo $room->PackageTypeId?>">
           <input type="hidden" name="roomno" value="<?php echo $room->RoomNo?>">
           <input type="hidden" name="checkin" value="<?php echo $data['checkin'] ?>">
           <input type="hidden" name="checkout" value="<?php echo $data['checkout'] ?>">
