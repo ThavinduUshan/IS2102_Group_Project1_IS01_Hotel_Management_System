@@ -13,12 +13,23 @@
   <title>Place Reservation</title>
 </head>
 <body>
-  <section class="system">
-    <nav class="sys-nav" id="sysnav">
-      <a href="<?php echo URLROOT ?>/users/receptionist">
+  <section class="roomselect">
+    <nav>
+      <a href="<?php echo URLROOT ?>/pages/">
           <img src="<?php echo URLROOT ?>/public/img/logo-nav.jpg">
       </a>
+      <div class="nav-links" id="navLinks">
+          <ul>
+          <li><a style="color:green;" href="<?php echo URLROOT; ?>/pages">Home</a></li>
+          <li><a style="color:green;" href="<?php echo URLROOT; ?>/pages/about">About</a></li>
+          <li><a style="color:green;" href="<?php echo URLROOT; ?>/pages/facilities">Facilities</a></li>
+          <li><a style="color:green;" href="<?php echo URLROOT; ?>/pages/gallery">Gallery</a></li>
+          <li><a style="color:green;" href="<?php echo URLROOT; ?>/pages/contact">Contact</a></li>
+          <li><a style="color:green;" href="<?php echo URLROOT; ?>/pages/issues">Complains</a></li>
+          </ul>
+        </div>
     </nav>
+    
 </section>
 
   <!-- System Block -->
@@ -43,7 +54,7 @@
         <input type="hidden" name="roomno" value="<?php echo $data['roomno']?>">
         <input type="hidden" name="checkin" value="<?php echo $data['checkin']?>">
         <input type="hidden" name="checkout" value="<?php echo $data['checkout']?>">
-        <input type="hidden" name="packageid" value="<?php echo $data['packageid']?>">
+        <input type="hidden" name="packagetypeid" value="<?php echo $data['packagetypeid']?>">
         <input type="hidden" name="peoplecount" value="<?php echo $data['peoplecount']?>">
         <label for="cname">Customer Name: *</label>
         <input type="text" id="cname" name="cname"><br><br>
