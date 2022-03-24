@@ -57,7 +57,7 @@
             <div>
             <h2 class="manage-items-heading">Bar Items</h2><br>
 
-            <h4 class ="item-list-name">Liquor / Beverages</h4>
+            <h4 class ="item-list-name">Liqor / Beverages</h4>
 
             <!-- Drinks Table -->
             <table class="bar-item-table">
@@ -73,7 +73,7 @@
                 <td><?php echo $baritem->category?></td>
                 <td><?php echo $baritem->volume?></td>
                 <td><?php echo $baritem->price?></td>
-              <th><a href="<?php echo URLROOT ?>/bars/updatebaritem"><i class="fa fa-pencil-square-o fa-lg" aria-hidden="true"></i></a></th>
+              <th><a href="<?php echo URLROOT .'/bars/updatebaritem?barItemId='. $baritem->barItemId?>"><i class="fa fa-pencil-square-o fa-lg" aria-hidden="true"></i></a></th>
               <th><a href="#"><i class="fa fa-trash-o fa-lg" aria-hidden="true"></i></a></th>
               </tr>
               <?php endforeach; ?>
@@ -97,7 +97,7 @@
                 <td><?php echo $snackitem->category?></td>
                 <td><?php echo $snackitem->portion?></td>
                 <td><?php echo $snackitem->price?></td>
-              <th><a href="<?php echo URLROOT ?>/bars/updatesnackitem"><i class="fa fa-pencil-square-o fa-lg" aria-hidden="true"></i></a></th>
+              <th><a href="<?php echo URLROOT .'/bars/updatesnackitem?fooditemId='. $snackitem->fooditemId ?>"><i class="fa fa-pencil-square-o fa-lg" aria-hidden="true"></i></a></th>
               <th><a href="#"><i class="fa fa-trash-o fa-lg" aria-hidden="true"></i></a></th>
               </tr>
             <?php endforeach ?>
