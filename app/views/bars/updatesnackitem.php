@@ -80,20 +80,16 @@
       
       <form action="" name="add-food-item-form" method="post">
         <label for="itemname">Item Name:</label><br>
-        <input type="text" id="itemname" name="itemName" placeholder="Enter the Name"><br>
+        <input type="text" id="itemname" name="itemName" placeholder="Enter the Name" value="<?php echo $data['snackitems']->itemName; ?>"><br>
 
         <label for="category">Food Category:</label><br>
         <select id="category" name="category">
-          <option value="Starter" disabled>Starter</option>
-          <option value="Soup" disabled>Soup</option>
-          <option value="Dish" disabled>Dish</option>
-          <option value="Dessert" disabled>Dessert</option>
-          <option value="Beverage" disabled>Beverage</option>
-          <option value="Bar Snack" select="selected">Bar Snack</option>
+          <option value="Bar Snack" select="selected"><?php echo $data['snackitems']->category; ?></option>
         </select><br>
 
         <label for="portion">Portion:</label><br>
         <select id="portion" name="portion">
+        <option value="<?php echo $data['snackitems']->portion; ?>"><?php echo $data['snackitems']->portion; ?></option>
           <option value="Small">Small</option>
           <option value="Regular">Regular</option>
           <option value="Large">Large</option>
@@ -105,7 +101,7 @@
             <option value="Unavailable">Unavailable</option>
           </select><br>
         <label for="price">Price:</label><br>
-        <input type="text" id="price" name="price" placeholder="Price"><br><br>
+        <input type="text" id="price" name="price" placeholder="Price" value="<?php echo $data['snackitems']->price; ?>"><br><br>
         <input type="submit" name="submit" value="Update Item">
       </form>
     </div>
