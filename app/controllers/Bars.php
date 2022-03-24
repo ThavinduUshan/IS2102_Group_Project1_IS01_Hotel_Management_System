@@ -237,15 +237,15 @@
             $time = date("H:i:sa");
     
             if(empty($tableno)){
-              $data['tablenoError2'] = 'not recognizing';
+              $data['tablenoError'] = 'Table number cant be empty';
             }
 
-            if(empty($baritemName) && empty($barportion) && empty($barquantity)){
-              $data['isbaritemfilled'] = 'no';
+            if($baritemName[0] == "select an option" || $barportion[0] == "select an option" || $barquantity[0] == 0){
+              $data['isbaritemfilled'] = 'all bar items must be filled';
             }
 
-            if(empty($snackitemName) && empty($snackportion) && empty($snackquantity)){
-              $data['issnackitemfilled'] = 'no';
+            if($snackitemName[0] == "select an option" || $snackportion[0] == "select an option" || $snackquantity[0] == 0){
+              $data['issnackitemfilled'] = 'all snack items must be filled';
             }
 
             if(empty($data['isbaritemfilled']) && empty($data['issnackitemfilled'])){
@@ -258,7 +258,7 @@
                     $barportioni = $barportion[$i];
                     $barquantityi = $barquantity[$i];
                     $temp1 = $this->barModel->selectbaritemid($baritemNamei, $barportioni);
-                    $barid = $temp1->baritemId;
+                    $barid = $temp1->barItemId;
                     $this->barModel->addbaroderitem($barid, $barportioni, $barquantityi, $barorderno);
                   }
                   for($i=0;$i<count($snackitemName);$i++){
@@ -274,10 +274,46 @@
                 }
               }
               else{
-                $data['tablenoError'] = 'Table Number is Empty';
+                die('Something went wrong');
               }
     
             }
+            else if(empty($data['isbaritemfilled'])){
+              if($this->barModel->addbarorder($tableno,$date,$time,$status)){
+                $barorders = $this->barModel->selectbarorderno($date, $time);
+                $barorderno = $barorders->BarOrderNo;
+                if($barorderno){
+                  for($i=0;$i<count($baritemName);$i++){
+                    $baritemNamei = $baritemName[$i];
+                    $barportioni = $barportion[$i];
+                    $barquantityi = $barquantity[$i];
+                    $temp1 = $this->barModel->selectbaritemid($baritemNamei, $barportioni);
+                    $barid = $temp1->barItemId;
+                    $this->barModel->addbaroderitem($barid, $barportioni, $barquantityi, $barorderno);
+                  }
+                }
+              }
+            }
+            else if(empty($data['issnackitemfilled'])){
+              if($this->barModel->addbarorder($tableno,$date,$time,$status)){
+                $barorders = $this->barModel->selectbarorderno($date, $time);
+                $barorderno = $barorders->BarOrderNo;
+                if($barorderno){
+                  for($i=0;$i<count($snackitemName);$i++){
+                    $snackitemNamei = $snackitemName[$i];
+                    $snackportioni = $snackportion[$i];
+                    $snackquantityi = $snackquantity[$i];
+                    $temp2 = $this->barModel->selectsnackitemid($snackitemNamei, $snackportioni);
+                    $snackid = $temp2->fooditemId;
+                    $this->barModel->addsnackoderitem($snackid, $snackportioni, $snackquantityi, $barorderno);
+                  }
+                }
+              }
+            }
+            else{
+              die('Something went wrong');
+            }
+            
           }
           else{
             $data = [
@@ -285,11 +321,13 @@
               'snackitems' => $snackitems,
               'baritemnames' => $baritemnames,
               'snackitemnames' => $snackitemnames,
+              'barquantity' => '',
+              'snackquantity' => '',
               'tablenoError' => '',
-              'tablenoError2' => ''
+              'isbaritemfilled' => '',
+              'issnackitemfilled' => ''
             ];
           }
-
 
         $this->view('bars/updateorder', $data);
       }
@@ -299,11 +337,131 @@
       }
 
       public function updatebaritem(){
-        $this->view('bars/updatebaritem');
+        $barItemId = $_GET['barItemId'];
+        $baritems = $this->barModel->viewbaritem($barItemId);
+
+        $data = [
+          'baritems' => $baritems,
+          'itemName' => '',
+          'category' => '',
+          'volume' => '',
+          'status' => '',
+          'price' => '',
+          'itemNameError'=>'',
+          'priceError' => ''
+        ];
+  
+        if($_SERVER['REQUEST_METHOD'] == 'POST'){
+          $_POST = filter_input_array(INPUT_POST, FILTER_SANITIZE_STRING);
+  
+          $data = [
+            'itemName' => trim($_POST['itemName']),
+            'category' => trim($_POST['category']),
+            'volume' => trim($_POST['volume']),
+            'status' => trim($_POST['status']),
+            'price' => trim($_POST['price']),
+            'itemNameError'=>'',
+            'priceError' => ''
+          ];
+  
+          //validating the inputs
+  
+          if(empty($data['itemName'])){
+            $data['itemNameError'] = 'Please Enter the Name';
+          }
+  
+          if(empty($data['price'])){
+            $data['priceError'] = 'Please Enter the Price';
+          }
+  
+          //making sure all the errors are empty
+          if(empty($data['itemNameError']) && empty($data['priceError'])){
+  
+            if($this->barModel->updatebaritem($data, $barItemId)){
+              header('location: ' . URLROOT . '/bars/managebaritems');
+            }else{
+              die('Something Went Wrong!');
+            }
+          }
+  
+        }else{
+          $data = [
+            'baritems' => $baritems,
+            'itemName' => '',
+            'category' => '',
+            'volume' => '',
+            'status' => '',
+            'price' => '',
+            'itemNameError'=>'',
+            'priceError' => ''
+          ];
+        }
+        
+        $this->view('bars/updatebaritem', $data);
       }
 
       public function updatesnackitem(){
-        $this->view('bars/updatesnackitem');
+        $fooditemId = $_GET['fooditemId'];
+        $snackitems = $this->barModel->viewsnackitem($fooditemId);
+
+        $data = [
+          'snackitems' => $snackitems,
+          'itemName' => '',
+          'category' => '',
+          'portion' => '',
+          'status' => '',
+          'price' => '',
+          'itemNameError'=>'',
+          'priceError' => ''
+        ];
+  
+        if($_SERVER['REQUEST_METHOD'] == 'POST'){
+          $_POST = filter_input_array(INPUT_POST, FILTER_SANITIZE_STRING);
+  
+          $data = [
+            'itemName' => trim($_POST['itemName']),
+            'category' => trim($_POST['category']),
+            'portion' => trim($_POST['portion']),
+            'status' => trim($_POST['status']),
+            'price' => trim($_POST['price']),
+            'itemNameError'=>'',
+            'priceError' => ''
+          ];
+  
+          //validating the inputs
+  
+          if(empty($data['itemName'])){
+            $data['itemNameError'] = 'Please Enter the Name';
+          }
+  
+          if(empty($data['price'])){
+            $data['priceError'] = 'Please Enter the Price';
+          }
+  
+          //making sure all the errors are empty
+          if(empty($data['itemNameError']) && empty($data['priceError'])){
+  
+            if($this->barModel->updatesnackitem($data, $fooditemId)){
+              header('location: ' . URLROOT . '/bars/managebaritems');
+            }else{
+              die('Something Went Wrong!');
+            }
+          }
+  
+        }else{
+          $data = [
+            'snackitems' => $snackitems,
+            'itemName' => '',
+            'category' => '',
+            'portion' => '',
+            'status' => '',
+            'price' => '',
+            'itemNameError'=>'',
+            'priceError' => ''
+          ];
+        }
+
+        $this->view('bars/updatesnackitem', $data);
       }
 
       public function settings(){
@@ -311,6 +469,15 @@
       }
 
       public function barbill(){
-        $this->view('bars/barbill');
+        $orderno = $_GET['orderno'];
+        $baritemnames= $this->barModel->selectbarorderitems($orderno);
+        $snackitemnames= $this->barModel->selectbarordersnackitems($orderno);
+
+        $data = [
+          'baritemnames' => $baritemnames,
+          'snackitemnames'=> $snackitemnames
+        ];
+
+        $this->view('bars/barbill', $data);
       }
     }
