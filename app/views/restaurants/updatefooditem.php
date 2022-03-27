@@ -77,13 +77,14 @@
 
     <div class="rest-add-food-form">
       
-      <form action="<?php echo URLROOT ?>/restaurants/updatefooditem" method="post">
+      <form action="" name="add-food-item-form" method="post">
+      <?php $data['fooditems']?>
         <label for="name">Name:</label><br>
-        <input type="text" id="name" name="name" value=""><br><br>
+        <input type="text" id="name" name="itemName" placeholder="Enter the Name" value="<?php echo $data['fooditems']->itemName; ?>"><br><br>
 
         <label for="fcategory">Food Category:</label><br>
-        <select id="facategory" name="fcategory">
-        <option value="<?php echo $data['fooditems']->category?>"></option>
+        <select id="fcategory" name="category">
+        <option value="<?php echo $data['fooditems']->category; ?>"><?php echo $data['fooditems']->category; ?></option>
         <option value="Starter">Starter</option>
           <option value="Soup">Soup</option>
           <option value="Dish">Dish</option>
@@ -93,16 +94,16 @@
 
         <label for="portion">Portion:</label><br>
         <select id="potion" name="portion">
-        <option value="<?php echo $data['fooditems']->portion?>"></option>
+        <option value="<?php echo $data['fooditems']->portion; ?>"><?php echo $data['fooditems']->portion; ?></option>
         <option value="Small">Small</option>
           <option value="Normal">Normal</option>
           <option value="large">large</option>
         </select><br><br>
 
         <label for="price">Price:</label><br>
-        <input type="text" id="price" name="price" value="<?php echo $data['fooditems']->price?>"><br><br>
+        <input type="text" id="price" name="price" placeholder="Price" value="<?php echo $data['fooditems']->price; ?>"><br><br>
       
-        <input type="submit" value="Update Item">
+        <input type="submit" name="submit" value="Update Item">
       
       </form>
     </div>
