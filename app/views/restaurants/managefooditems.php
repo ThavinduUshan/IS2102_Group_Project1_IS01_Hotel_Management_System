@@ -50,9 +50,10 @@
     <div class="rest-dash-button">
       <form action="<?php echo URLROOT ?>/users/cashier">
         <input type="submit" value="Go Back to Dashboard">
-      </form>
-        
+      </form>   
     </div>
+
+    <!-- Manage food items -->
     <div class="rest-man-head">
       <p>Food Item List</p>
     </div>
@@ -73,7 +74,7 @@
           <td style="width: 25%;"><?php echo $fooditem->category?></td>
           <td style="width: 20%;"><?php echo $fooditem->portion?></td>
           <td style="width: 20%;"><?php echo $fooditem->price?></td>
-          <td style="width: 5%;"><a href="<?php echo URLROOT ?>/restaurants/updatefooditem"><i class="fa fa-pencil-square-o fa-2x" aria-hidden="true"></i></a></td>
+          <td style="width: 5%;"><a href="<?php echo URLROOT .'/restaurants/updatefooditem?fooditemId='. $fooditem->fooditemId?>"><i class="fa fa-pencil-square-o fa-2x" aria-hidden="true"></i></a></td>
           <td style="width: 5%;"><a href="#removefooditem"><i class="fa fa-trash-o fa-2x" aria-hidden="true"></i></a></td>
         </tr>
         <?php endforeach; ?>
