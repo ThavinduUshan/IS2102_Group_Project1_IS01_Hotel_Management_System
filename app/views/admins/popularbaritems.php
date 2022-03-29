@@ -10,13 +10,13 @@
   <link rel="preconnect" href="https://fonts.googleapis.com">
   <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
   <link href="https://fonts.googleapis.com/css2?family=Open+Sans:wght@300;400;600;700;800&display=swap" rel="stylesheet">
-  <link rel="stylesheet" href="<?php echo URLROOT ?>/public/css/stylen.css">
+  <link rel="stylesheet" href="<?php echo URLROOT ?>/public/css/style.css">
   <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/@fortawesome/fontawesome-free@5.15.4/css/fontawesome.min.css" integrity="sha384-jLKHWM3JRmfMU0A5x5AkjWkw/EYfGUAGagvnfryNV3F9VqM98XiIH7VBGVoxVSc7" crossorigin="anonymous">
   <script src="https://use.fontawesome.com/a6a11daad8.js"></script>
-  <title>Manage Users</title>
+  <title>Popular Bar Items</title>
 </head>
 <body>
-  <section class="system-single">
+  <section class="system">
     <nav class="sys-nav" id="sysnav">
       <a href="<?php echo URLROOT ?>/users/admin">
           <img src="<?php echo URLROOT ?>/public/img/logo-nav.jpg">
@@ -31,7 +31,6 @@
       </div>
       <a href="javascript:void(0);" style="width:15px;" class="icon" onclick="dropdown()">&#9776;</a>
     </nav>
-   
   <script>
     function dropdown() {
       var x = document.getElementById("sysnav");
@@ -42,37 +41,28 @@
       }
     }
   </script>
-
   <!-- System Block -->
-    <br><br>
-  <div class="single-color-dashborad">
+
+  <div class="report-dashboard">
     <div class="admin-dash-button">
-      <a href="<?php echo URLROOT ?>/users/register">Add Users</a>
-      <a href="<?php echo URLROOT ?>/users/admin">Go Back to Dashboard</a>
-        
-    </div><br>
+      <form action="<?php echo URLROOT ?>/users/admin">
+        <button onclick="window.print()">Download PDF</button>
+      </form> 
+    </div>
     <div class="rest-man-head">
-      <p>Users List</p>
+      <p>Bar Items</p>
     </div>
 
     <div class="rest-man-food">
       <table>
         <tr>
-          <th style="width: 15%;">First Name</th>
-          <th style="width: 25%;">Email</th>
-          <th style="width: 20%;">Mobile</th>
-          <th style="width: 15;">Username</th>
-          <th style="width: 10%;">UserTypeID</th>
-
+          <th style="width: 50%;">Bar Item</th>
+          <th style="width: 50%;">No of Times Ordered</th>
         </tr>
-
-        <?php foreach($data['users'] as $user): ?>
+        <?php foreach($data['results'] as $result) : ?>
         <tr>
-          <td style="width: 15%;"><?php echo $user->FirstName?></td>
-          <td style="width: 25%;"><?php echo $user->Email?></td>
-          <td style="width: 20%;"><?php echo $user->Mobile?></td>
-          <td style="width: 15%;"><?php echo $user->UserName?></td>
-          <td style="width: 10%;"><?php echo $user->UserTypeID?></td>
+          <td style="width: 50%;"><?php echo $result->itemName?></td>
+          <td style="width: 50%;"><?php echo $result->NoOfCounts?></td>
         </tr>
         <?php endforeach; ?>
       </table>
