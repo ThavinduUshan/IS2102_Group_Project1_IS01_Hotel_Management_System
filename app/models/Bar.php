@@ -63,12 +63,13 @@
     }
 
     public function addbarorder($tableno,$date,$time,$status){
-      $this->db->query('INSERT INTO `barorders` (`TableNo`, `Date`, `Time`, `Status`) VALUES (:tableno, :date, :time, :status)');
+      $this->db->query('INSERT INTO `barorders` (`TableNo`, `Date`, `Time`, `Status`, `PlacedBy`) VALUES (:tableno, :date, :time, :status, :placedby)');
   
       $this->db->bind(':tableno',$tableno);
       $this->db->bind(':date', $date);
       $this->db->bind(':time', $time);
       $this->db->bind(':status', $status);
+      $this->db->bind(':placedby', $_SESSION['UserName']);
   
       if($this->db->execute()){
         return true;
@@ -183,6 +184,156 @@
        return false;
      }
 
+    }
+
+    public function issuebarbill($data, $orderno){
+      $this->db->query('INSERT INTO `barbills` (`BarOrderNo`, `TotalPrice`, `Amount`, `Discount`, `DiscountedPrice`, `Balance`, `Date`, `Time`) VALUES (:orderno, :tprice, :amount, :discount, :disprice, :balance, :date, :time)');
+  
+      $this->db->bind(':discount',$data['discount']);
+      $this->db->bind(':disprice', $data['disprice']);
+      $this->db->bind(':amount', $data['amount']);
+      $this->db->bind(':balance', $data['balance']);
+      $this->db->bind(':tprice',$data['tprice']);
+      $this->db->bind(':date', $data['date']);
+      $this->db->bind(':time', $data['time']);
+      $this->db->bind(':orderno', $orderno);
+  
+      if($this->db->execute()){
+        return true;
+      }else{
+        return false;
+      }
+    }
+
+    public function updatebarorderstatus($data,$orderno){
+      $this->db->query('UPDATE barorders SET `Status` = :status WHERE `BarOrderNo` = :orderno');
+
+      $this->db->bind(':status',$data['status']);
+      $this->db->bind(':orderno', $orderno);
+
+      if($this->db->execute()){
+        return true;
+      }else{
+        return false;
+      }
+    }
+
+    public function getOrderItemDetials($itemno){
+      $this->db->query('SELECT barorderitems.*, baritems.* FROM barorderitems INNER JOIN baritems ON barorderitems.`barItemId` = baritems.`barItemId` WHERE `BarOrderItemNo` = :barorderitemno');
+
+      $this->db->bind(':barorderitemno', $itemno);
+
+      $result = $this->db->single();
+
+      return $result;
+    }
+
+    public function updateOrderItem($data){
+      $this->db->query('UPDATE barorderitems SET `Volume` = :volume, `Quantity` = :quantity WHERE `BarOrderItemNo` = :barorderitemno');
+
+      $this->db->bind(':volume', $data['volume']);
+      $this->db->bind(':quantity', $data['quantity']);
+      $this->db->bind(':barorderitemno', $data['barorderitemno']);
+
+      if($this->db->execute()){
+        return true;
+      }else{
+        return false;
+      }
+
+    }
+
+    public function getOrderSnackDetials($barordersnackno){
+      $this->db->query('SELECT barordersnacks.*, fooditems.* FROM barordersnacks INNER JOIN fooditems ON barordersnacks.`fooditemid` = fooditems.`fooditemId` WHERE `BarOrderSnackNo` = :barordersnackno');
+
+      $this->db->bind(':barordersnackno', $barordersnackno);
+
+      $result = $this->db->single();
+
+      return $result;
+    }
+
+    public function updateOrderSnack($data){
+      $this->db->query('UPDATE barordersnacks SET `PortionType` = :ptype, `Quantity` = :quantity WHERE `BarOrderSnackNo` = :barordersnackno');
+
+      $this->db->bind(':ptype', $data['ptype']);
+      $this->db->bind(':quantity', $data['quantity']);
+      $this->db->bind(':barordersnackno', $data['barordersnackno']);
+
+      if($this->db->execute()){
+        return true;
+      }else{
+        return false;
+      }
+
+    }
+
+    public function cancelBarOrder($orderno){
+      $this->db->query('UPDATE barorders SET `Status`="Cancelled" WHERE `BarOrderNo` = :orderno');
+
+      $this->db->bind(':orderno', $orderno);
+
+      if($this->db->execute()){
+        return true;
+      }else{
+        return false;
+      }
+    }
+
+    public function deleteorderbarItem($data){
+      $this->db->query('DELETE FROM barorderitems WHERE BarOrderItemNo=:BarOrderItemNo');
+  
+      $this->db->bind(':BarOrderItemNo',$data['itemid']);
+  
+      if($this->db->execute()){
+        return true;
+      }else{
+        return false;
+      }
+    }
+
+    public function deleteordersnackItem($data){
+      $this->db->query('DELETE FROM barordersnacks WHERE BarOrderSnackNo=:BarOrderSnackNo');
+  
+      $this->db->bind(':BarOrderSnackNo',$data['itemid']);
+  
+      if($this->db->execute()){
+        return true;
+      }else{
+        return false;
+      }
+    }
+
+    public function selectbilldetails(){
+      $this->db->query('SELECT * FROM barbills ORDER BY BarBillNo ASC');
+
+      $results = $this->db->resultSet();
+
+      return $results;
+    }
+
+    public function deletebarItem($data){
+      $this->db->query('DELETE FROM baritems WHERE BarItemId=:itemid');
+  
+      $this->db->bind(':itemid',$data['itemid']);
+  
+      if($this->db->execute()){
+        return true;
+      }else{
+        return false;
+      }
+    }
+
+    public function deletesnackItem($data){
+      $this->db->query('DELETE FROM fooditems WHERE fooditemId=:itemid');
+  
+      $this->db->bind(':itemid',$data['itemid']);
+  
+      if($this->db->execute()){
+        return true;
+      }else{
+        return false;
+      }
     }
   
 
