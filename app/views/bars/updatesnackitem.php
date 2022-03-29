@@ -1,4 +1,4 @@
-<?php if (!isset($_SESSION['UserID'])){ 
+<?php if (!isset($_SESSION['UserID'])|| $_SESSION["UserTypeID"] != 4){ 
       header('location: ' . URLROOT .  '/users/login');
 }?>
 <!DOCTYPE html>
@@ -13,7 +13,7 @@
   <link rel="stylesheet" href="<?php echo URLROOT ?>/public/css/stylen.css">
   <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/@fortawesome/fontawesome-free@5.15.4/css/fontawesome.min.css" integrity="sha384-jLKHWM3JRmfMU0A5x5AkjWkw/EYfGUAGagvnfryNV3F9VqM98XiIH7VBGVoxVSc7" crossorigin="anonymous">
   <script src="https://use.fontawesome.com/a6a11daad8.js"></script>
-  <title>Update Snack Item</title>
+  <title>Update Order Item</title>
 </head>
 <body>
   <section class="system">
@@ -26,7 +26,6 @@
           <i class="fa fa-user-circle-o fa-2x"></i>
         </button>
         <div class="dropdown-content">
-          <a href="<?php echo URLROOT ?>/bars/settings">Settings</a>
           <a href="<?php echo URLROOT; ?>/users/logout">Logout</a>
         </div>
       </div>
@@ -47,7 +46,7 @@
   <!-- System Block -->
 
   <div class="sys-left-col">
-    <div class="bar-dash-plus1">
+  <div class="bar-dash-plus1">
       <a href="<?php echo URLROOT ?>/bars/placeorder">
         <i class="fa fa-plus-square fa-4x" aria-hidden="true"></i>
       </a>
@@ -67,50 +66,41 @@
       </a>
       <p>Dashboard</p>
     </div>
-
   </div>
   
+
   <div class="sys-right-col">
-    
-    <div class="rest-add-food">
-      <p>Item Details:</p>
+  <div class="recep-bill-right"><br>
+ 
+
+    <div class="recep-bill-heading">
+      <h1 style="color:#01661b">Update Order Item</h1>
     </div>
 
-    <div class="rest-add-food-form">
+
+    <div class="recep-bill-form">
       
-      <form action="" name="add-food-item-form" method="post">
-        <label for="itemname">Item Name:</label><br>
-        <input type="text" id="itemname" name="itemName" placeholder="Enter the Name"><br>
+      <form action="" method="post">
+        <div class="bill-form-left">
+          <label for="fooditem">Food Item</label><br>
+          <input type="text" id="foodiem" name="fooditem" value="<?php echo $data['orderitem']->itemName?>" disabled><br><br>
+        </div>
 
-        <label for="category">Food Category:</label><br>
-        <select id="category" name="category">
-          <option value="Starter" disabled>Starter</option>
-          <option value="Soup" disabled>Soup</option>
-          <option value="Dish" disabled>Dish</option>
-          <option value="Dessert" disabled>Dessert</option>
-          <option value="Beverage" disabled>Beverage</option>
-          <option value="Bar Snack" select="selected">Bar Snack</option>
-        </select><br>
+        <label for="portion">Portion Type:</label><br>
+          <select name="ptype" id="ptype">
+            <option value="<?php echo $data['orderitem']->PortionType?>" select = "selected" ><?php echo $data['orderitem']->PortionType?></option>
+            <option value="Small">Small</option>
+            <option value="Regular">Regular</option>
+            <option value="Large">Large</option>
+          </select><br><br>
 
-        <label for="portion">Portion:</label><br>
-        <select id="portion" name="portion">
-          <option value="Small">Small</option>
-          <option value="Regular">Regular</option>
-          <option value="Large">Large</option>
-        </select><br>
+          <label for="quantity" class="recep-bill-form-l1">Quantity</label><br>
+          <input type="number" id="quantity" name="quantity" value="<?php echo $data['orderitem']->Quantity?>"><br><br>
 
-        <label for="status">Availability</label><br>
-        <select id="status" name="status">
-            <option value="Available" selected="selected">Available</option>
-            <option value="Unavailable">Unavailable</option>
-          </select><br>
-        <label for="price">Price:</label><br>
-        <input type="text" id="price" name="price" placeholder="Price"><br><br>
-        <input type="submit" name="submit" value="Update Item">
+        <input type="submit" name="submit" value="Update Order Item"><br><br>
       </form>
     </div>
-
   </div>
-
+  </div>
 </body>
 </html>

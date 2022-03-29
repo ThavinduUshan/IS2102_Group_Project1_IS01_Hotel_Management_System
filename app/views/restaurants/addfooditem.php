@@ -1,4 +1,4 @@
-<?php if (!isset($_SESSION['UserID'])){ 
+<?php if (!isset($_SESSION['UserID']) || $_SESSION["UserTypeID"] != 3){ 
       header('location: ' . URLROOT .  '/users/login');
 }?>
 <!DOCTYPE html>
@@ -10,7 +10,7 @@
   <link rel="preconnect" href="https://fonts.googleapis.com">
   <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
   <link href="https://fonts.googleapis.com/css2?family=Open+Sans:wght@300;400;600;700;800&display=swap" rel="stylesheet">
-  <link rel="stylesheet" href="<?php echo URLROOT ?>/public/css/stylen.css">
+  <link rel="stylesheet" href="<?php echo URLROOT ?>/public/css/stylen.css?ver=1.1">
   <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/@fortawesome/fontawesome-free@5.15.4/css/fontawesome.min.css" integrity="sha384-jLKHWM3JRmfMU0A5x5AkjWkw/EYfGUAGagvnfryNV3F9VqM98XiIH7VBGVoxVSc7" crossorigin="anonymous">
   <script src="https://use.fontawesome.com/a6a11daad8.js"></script>
   <title>Add Food Item</title>
@@ -26,7 +26,6 @@
           <i class="fa fa-user-circle-o fa-2x"></i>
         </button>
         <div class="dropdown-content">
-          <a href="<?php echo URLROOT ?>/restaurants/settings">Settings</a>
           <a href="<?php echo URLROOT; ?>/users/logout">Logout</a>
         </div>
       </div>
@@ -62,7 +61,7 @@
     </div>
 
     <div class="rest-dash-plus3">
-      <a href="<?php echo URLROOT; ?>/users/cashier">
+      <a href="<?php echo URLROOT; ?>/restaurants/completedorders">
         <i class="fa fa-home fa-4x" aria-hidden="true"></i>
       </a>
       <p>Dashboard</p>
@@ -70,6 +69,7 @@
   </div>
   
   <div class="sys-right-col">
+    <div class="item-add-form">
     
     <div class="rest-add-food">
       <p>Item Details:</p>
@@ -102,8 +102,8 @@
 
         <label for="status">Availability</label><br>
         <select id="status" name="status">
-            <option value="Available" selected="selected">Available</option>
-            <option value="Unavailable">Unavailable</option>
+            <option value="1" selected="selected">Available</option>
+            <option value="0">Unavailable</option>
           </select><br>
         <label for="price">Price:</label><br>
         <input type="text" id="price" name="price" placeholder="Price">
@@ -114,8 +114,8 @@
         <input type="submit" name="submit" value="Add Item">
       </form>
     </div>
-
   </div>
-
+</div>
 </body>
 </html>
+

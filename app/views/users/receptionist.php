@@ -1,4 +1,4 @@
-<?php if (!isset($_SESSION['UserID'])){ 
+<?php if (!isset($_SESSION['UserID'])|| $_SESSION["UserTypeID"] != 2){ 
       header('location: ' . URLROOT .  '/users/login');
 }?>
 <!DOCTYPE html>
@@ -27,7 +27,6 @@
           <i class="fa fa-user-circle-o fa-2x"></i>
         </button>
         <div class="dropdown-content">
-          <a href="<?php echo URLROOT ?>/reservations/settings">Settings</a>
           <a href="<?php echo URLROOT; ?>/users/logout">Logout</a>
         </div>
       </div>
@@ -44,7 +43,6 @@
       }
     }
   </script>
-
   <!-- System Block -->
   <!-- Left Block -->
   <div class="sys-left-col">
@@ -62,6 +60,12 @@
       </a>
       <p>Place Reservation</p>
     </div>
+    <div class="reservation-dash-plus1">
+      <a href="<?php echo URLROOT ?>/reservations/completedreservations">
+        <i class="fa fa-list-alt fa-4x" aria-hidden="true"></i>
+      </a>
+      <p>Completed<br> Reservations</p>
+    </div>
   </div>
   
   <!-- Right Block -->
@@ -69,44 +73,84 @@
   <div class="sys-right-col">
     
     <div class="recep-dash-search">
-      <form action="/action_page.php">
-        <input type="text" placeholder="Search Order" name="search">
+      <form action="<?php echo URLROOT ?>/users/receptionist" method="post">
+        <input type="text" placeholder="Search Reservation" name="search">
         <button type="submit"><i class="fa fa-search fa-2x" aria-hidden="true"></i></button>
       </form>
+      <?php if(isset($_GET['status'])){?>
+        <?php if($_GET['status'] == "resplaced"){?>
+        <h3 class="success-stat"><?php echo "Reservation Placed!"?></h3>
+        <?php
+        }
+        ?>
+        <?php if($_GET['status'] == "updated"){?>
+        <h3 class="success-stat"><?php echo "Reservation Updated!"?></h3>
+        <?php
+        }
+        ?>
+        <?php if($_GET['status'] == "completed"){?>
+        <h3 class="success-stat"><?php echo "Reservation Completed!"?></h3>
+        <?php
+        }
+        ?>
+        <?php if($_GET['status'] == "orderitemupdated"){?>
+        <h3 class="success-stat"><?php echo "Order item Updated!"?></h3>
+        <?php
+        }
+        ?>
+        <?php if($_GET['status'] == "rescanceled"){?>
+        <h3 class="error"><?php echo "Reservation Cancelled"?></h3>
+        <?php
+        }
+        ?>
+        <?php if($_GET['status'] == "orderitemdeleted"){?>
+        <h3 class="error"><?php echo "Order Item Deleted"?></h3>
+        <?php
+        }
+        ?>
+        <?php if($_GET['status'] == "orderdeleted"){?>
+          <h3 class="error">Reservation Deleted!</h3>
+        <?php
+        }
+        ?>
+        <?php if($_GET['status'] == "orderdeleted"){?>
+          <h3 class="error">Reservation Deleted!</h3>
+        <?php
+        }
+        ?>
+        <?php
+        }
+        ?>
+      <?php if(!empty($data['searchError'])){?>
+      <h3 class="error"><?php echo $data['searchError']?></h3>
+      <?php
+      }
+      ?>
     </div>
 
+    
+        
     <!-- Order Details -->
 
     <div class="recep-dash-order">
       <table cellspacing="0" cellpadding="0">
+      <?php
+      if(!empty($data['reservations'])){?>
+        <?php foreach($data['reservations'] as $res): ?>
         <tr>
-          <td style="width: 40%;">Reservation No:</br>Customer name:</td>
-          <td style="width: 40%;">Status:<br>Room No:</td>
-          <td style="width: 10%;"><a href="<?php echo URLROOT ?>/reservations/updatereservation"><i class="fa fa-pencil-square-o fa-2x" aria-hidden="true"></i></a></td>
+          <td style="width: 40%;"><b>Reservation No</b>:<?php echo "  " . $res->ResNo?></br>Customer name: <?php echo "  " .$res->CusName?></td>
+          <td style="width: 40%;">Status:<?php echo "  " .$res->Status?><br>Room No:<?php echo "  " .$res->RoomNo?></td>
+          <td style="width: 10%;"><a href="<?php echo URLROOT ?>/reservations/updatereservation?resno=<?php echo $res->ResNo?>&roomno=<?php echo $res->RoomNo?>"><i class="fa fa-pencil-square-o fa-2x" aria-hidden="true"></i></a></td>
         </tr>
-        <tr>
-          <td style="width: 40%;">Reservation No:</br>Customer name:</td>
-          <td style="width: 40%;">Status:<br>Room No:</td>
-          <td style="width: 10%;"><a href="<?php echo URLROOT ?>/reservations/updatereservation"><i class="fa fa-pencil-square-o fa-2x" aria-hidden="true"></i></a></td>
-        </tr>
-        <tr>
-          <td style="width: 40%;">Reservation No:</br>Customer name:</td>
-          <td style="width: 40%;">Status:<br>Room No:</td>
-          <td style="width: 10%;"><a href="<?php echo URLROOT ?>/reservations/updatereservation"><i class="fa fa-pencil-square-o fa-2x" aria-hidden="true"></i></a></td>
-        </tr>
-        <tr>
-          <td style="width: 40%;">Reservation No:</br>Customer name:</td>
-          <td style="width: 40%;">Status:<br>Room No:</td>
-          <td style="width: 10%;"><a href="<?php echo URLROOT ?>/reservations/updatereservation"><i class="fa fa-pencil-square-o fa-2x" aria-hidden="true"></i></a></td>
-        </tr>
-        <tr>
-          <td style="width: 40%;">Reservation No:</br>Customer name:</td>
-          <td style="width: 40%;">Status:<br>Room No:</td>
-          <td style="width: 10%;"><a href="<?php echo URLROOT ?>/reservations/updatereservation"><i class="fa fa-pencil-square-o fa-2x" aria-hidden="true"></i></a></td>
-        </tr>
-
-
+      <?php endforeach; ?>
       </table>
+      <?php
+      }else
+      {?>
+        <h3 class="error"><?php echo $data['resultsEmpty']?></h3>
+      <?php
+      }
+      ?>
     </div>
 
   </div>

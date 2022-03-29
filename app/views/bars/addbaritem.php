@@ -1,4 +1,4 @@
-<?php if (!isset($_SESSION['UserID'])){ 
+<?php if (!isset($_SESSION['UserID']) || $_SESSION["UserTypeID"] != 4){ 
       header('location: ' . URLROOT .  '/users/login');
 }?>
 <!DOCTYPE html>
@@ -26,7 +26,6 @@
           <i class="fa fa-user-circle-o fa-2x"></i>
         </button>
         <div class="dropdown-content">
-          <a href="<?php echo URLROOT ?>/bars/settings">Settings</a>
           <a href="<?php echo URLROOT; ?>/users/logout">Logout</a>
         </div>
       </div>
@@ -107,8 +106,8 @@
 
         <label for="status">Availability</label><br>
         <select id="status" name="status">
-            <option value="Available" selected="selected">Available</option>
-            <option value="Unavailable">Unavailable</option>
+            <option value="1" selected="selected">Available</option>
+            <option value="0">Unavailable</option>
           </select><br>
 
         <label for="price">Price:</label><br>

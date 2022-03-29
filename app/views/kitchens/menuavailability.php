@@ -1,3 +1,6 @@
+<?php if (!isset($_SESSION['UserID'])|| $_SESSION["UserTypeID"] != 5){ 
+      header('location: ' . URLROOT .  '/users/login');
+}?>
 <!DOCTYPE html>
 <html lang="en">
 <head>
@@ -23,7 +26,6 @@
           <i class="fa fa-user-circle-o fa-2x"></i>
         </button>
         <div class="dropdown-content">
-          <a href="<?php echo URLROOT?>/kitchens/settings">Settings</a>
           <a href="<?php echo URLROOT; ?>/users/logout">Logout</a>
         </div>
       </div>
@@ -66,19 +68,23 @@
     </div>
   </div>
   <div class="sys-right-col">
-    <form action="update.php" method="POST">
+  <form action= "<?php echo URLROOT; ?> /kitchens/menuavailability/<?php echo $data ['fooditems']->fooditemId ?>" method="POST">
       <h1 class="Kitchen-orderlist2">Mark Availability :</h1><br><br>
 
       <div class="input-group">
         <label class="Kitchen-text">Food Item Name</label><br><br>
-        <input type="text"  class = "Kitchen-text3" placeholder="Item Name Will Appear" > 
+        <input type="text"  class = "Kitchen-text3" name="itemName" value="<?php echo $data ['fooditems']->itemName?>" readonly>
+        <!-- <input type="text"  class = "Kitchen-text3" placeholder="Item Name Will Appear" >  -->
       </div>
       <div class="input-group"><br>
 
       <label class="Kitchen-text">Status</label><br><br>
-      <select id="item"  class="Kitchen-text2" >
-      <option value="Available">Available</option>
-      <option value="Unavailable ">Unavailable </option>
+      <select id="item"  class="Kitchen-text2" name="status" value="<?php echo $data ['fooditems']->status?>">
+  
+      <!-- <select id="item"  class="Kitchen-text2" > -->
+      <option value="" selected disabled hidden><?php if ($data ['fooditems']->status==1) echo "Available"; else echo "Unavailable"?></option>
+      <option value="1" >Available</option>
+      <option value="0 ">Unavailable </option>
       </select><br><br>
 
       <button type="submit" class="Kitchen-button5" name='update'>Change Status</button>

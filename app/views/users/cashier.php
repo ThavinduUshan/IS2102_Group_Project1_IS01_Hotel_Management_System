@@ -1,4 +1,4 @@
-<?php if (!isset($_SESSION['UserID'])){ 
+<?php if (!isset($_SESSION['UserID'])|| $_SESSION["UserTypeID"] != 3){ 
       header('location: ' . URLROOT .  '/users/login');
 }?>
 <!DOCTYPE html>
@@ -19,7 +19,7 @@
 <body>
   <section class="system">
     <nav class="sys-nav" id="sysnav">
-      <a href="<?php echo APPROOT ?>/views/users/login.php">
+      <a href="<?php echo APPROOT ?>/users/cashier">
           <img src="<?php echo URLROOT ?>/public/img/logo-nav.jpg">
       </a>
       <div class="dropdown">
@@ -27,7 +27,6 @@
           <i class="fa fa-user-circle-o fa-2x"></i>
         </button>
         <div class="dropdown-content">
-          <a href="<?php echo URLROOT ?>/restaurants/settings">Settings</a>
           <a href="<?php echo URLROOT; ?>/users/logout">Logout</a>
         </div>
       </div>
@@ -62,11 +61,11 @@
       <p>View Food Items</p>
     </div>
 
-    <div class="rest-dash-plus3">
-      <a href="<?php echo URLROOT; ?>/restaurants/addfooditem">
-        <i class="fa fa-plus-square fa-4x" aria-hidden="true"></i>
+    <div class="bar-dash-plus3">
+      <a href="<?php echo URLROOT; ?>/restaurants/completedorders">
+        <i class="fa fa-list-alt fa-4x" aria-hidden="true"></i>
       </a>
-      <p>Add Food Items</p>
+      <p>Completed Orders</p>
     </div>
 
   </div>
@@ -76,37 +75,38 @@
   <div class="sys-right-col">
     
     <div class="rest-dash-search">
-      <form action="/action_page.php">
+      <form action="<?php echo URLROOT ?>/users/cashier" method="post">
         <input type="text" placeholder="Search Order" name="search">
         <button type="submit"><i class="fa fa-search fa-2x" aria-hidden="true"></i></button>
       </form>
+      <?php if(!empty($data['searchError'])){?>
+      <h3 class="error"><?php echo $data['searchError']?></h3>
+      <?php
+      }
+      ?>
     </div>
 
     <!-- Order Details -->
 
     <div class="rest-dash-order">
       <table cellspacing="0" cellpadding="0">
-        <tr>
-          <td class="col1" style="width: 40%;">Order No:</br>Table No:</td>
-          <td class="col2" style="width: 40%;">Status:</td>
-          <td class="col3" style="width: 10%;"><a href="<?php echo URLROOT?>/restaurants/updatekot" <i class="fa fa-pencil-square-o fa-2x" aria-hidden="true"></i></a></td>
-        </tr>
-        <tr>
-          <td class="col1" style="width: 40%;">Order No:</br>Table No:</td>
-          <td class="col2" style="width: 40%;">Status:</td>
-          <td class="col3" style="width: 10%;"><a href="<?php echo URLROOT?>/restaurants/updatekot" <i class="fa fa-pencil-square-o fa-2x" aria-hidden="true"></i></a></td>
-        </tr>
-        <tr>
-          <td class="col1" style="width: 40%;">Order No:</br>Table No:</td>
-          <td class="col2" style="width: 40%;">Status:</td>
-          <td class="col3" style="width: 10%;"><a href="<?php echo URLROOT?>/restaurants/updatekot" <i class="fa fa-pencil-square-o fa-2x" aria-hidden="true"></i></a></td>
-        </tr>
-        <tr>
-          <td class="col1" style="width: 40%;">Order No:</br>Table No:</td>
-          <td class="col2" style="width: 40%;">Status:</td>
-          <td class="col3" style="width: 10%;"><a href="<?php echo URLROOT?>/restaurants/updatekot" <i class="fa fa-pencil-square-o fa-2x" aria-hidden="true"></i></a></td>
-        </tr>
-
+      <?php
+      if(!empty($data['restaurantorderdetails'])){?>
+        <?php foreach($data['restaurantorderdetails'] as $restaurantorderdetails): ?>
+          <tr>
+            <td class="col1" style="width: 40%;">Order No:<?php echo $restaurantorderdetails->RestaurantOrderNo; ?></br>Table No:<?php echo $restaurantorderdetails->TableNo; ?></td>
+            <td class="col2" style="width: 40%;">Status:<?php echo $restaurantorderdetails->Status; ?></td>
+            <td class="col3" style="width: 10%;"><a href="<?php echo URLROOT.'/restaurants/updatekot?orderno='. $restaurantorderdetails->RestaurantOrderNo . '&tableno='.$restaurantorderdetails->TableNo ?>" > <i class="fa fa-pencil-square-o fa-2x" aria-hidden="true"></i></a></td>
+          </tr>
+      <?php endforeach; ?>
+      </table>
+      <?php
+      }else
+      {?>
+        <h3 class="error"><?php echo $data['resultsEmpty']?></h3>
+      <?php
+      }
+      ?>
       </table>
     </div>
 
@@ -114,3 +114,4 @@
 
 </body>
 </html>
+ 

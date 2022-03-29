@@ -13,8 +13,7 @@
   <link rel="stylesheet" href="<?php echo URLROOT ?>/public/css/stylen.css">
   <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/@fortawesome/fontawesome-free@5.15.4/css/fontawesome.min.css" integrity="sha384-jLKHWM3JRmfMU0A5x5AkjWkw/EYfGUAGagvnfryNV3F9VqM98XiIH7VBGVoxVSc7" crossorigin="anonymous">
   <script src="https://use.fontawesome.com/a6a11daad8.js"></script>
-  
-  <title>Pub</title>
+  <title>Order details</title>
 </head>
 <body>
   <section class="system">
@@ -27,6 +26,7 @@
           <i class="fa fa-user-circle-o fa-2x"></i>
         </button>
         <div class="dropdown-content">
+          <a href="<?php echo URLROOT?>/kitchens/settings">Settings</a>
           <a href="<?php echo URLROOT; ?>/users/logout">Logout</a>
         </div>
       </div>
@@ -45,6 +45,7 @@
   </script>
 
   <!-- System Block -->
+
   <div class="sys-left-col">
   <div class="bar-dash-plus1">
       <a href="<?php echo URLROOT ?>/users/headchef">
@@ -67,37 +68,36 @@
       <p>Add Snack Item</p>
     </div>
   </div>
+  </div>
   <div class="sys-right-col">
-        <div class="myDIV">
-          <a href="<?php echo URLROOT ?>/users/headchef"><button class="Kitchen-button1">Restaurant</button></a>
-          <a href="<?php echo URLROOT ?>/kitchens/headchefroom"><button class="Kitchen-button2">Room</button></a>
-          <a href="<?php echo URLROOT ?>/kitchens/headchefpub"><button class="Kitchen-button3">Pub</button></a>
-        </div>
-                <h5 class="Kitchen-orderlist">ORDER LIST :</h5>
-                
-                
-
-                 
-                 <table class="Kitchen-table">
-                  <tr>
-                    <th>Order No</th>
-                    <th>Table No</th>
-                    <th>Status</th>
-                    <th></th>
-                  </tr>
-                  <?php foreach($data['snackitems'] as $snackitem): ?>
-                  <tr>
-                    <td><?php echo $snackitem->BarOrderNo?></td>
-                    <td><?php echo $snackitem->TableNo?></td>
-                    <td><?php echo $snackitem->Status?></td>
-                    
-                    <td><a href="<?php echo URLROOT.'/kitchens/Puborderstatus?barorderno='. $snackitem->BarOrderNo ?>"><i class="fa fa-pencil-square-o" aria-hidden="true"></i></a></td> 
-                  </tr>
-                  <?php endforeach; ?>
-              
-                </table> 
-                <br><br>
-
+    <h5 class="Kitchen-orderlist2">Order No :<?php echo $_GET['orderno']?></h5>
+      
+    <table class="Kitchen-table">
+      <tr>
+          <th>Food Item</th>
+          <th>Portion</th>
+          <th>Quantity</th>
+          </tr>
+          <?php foreach($data['orderitems'] as $orderitem): ?>
+      <tr>
+          <td><?php echo $orderitem->itemName?></td>
+          <td><?php echo $orderitem->PortionType?></td>
+          <td><?php echo $orderitem->Quantity?></td>
+      </tr>
+      <?php endforeach; ?>
+      
+  </table><br><br>
+  <form action="<?php echo URLROOT ?>/kitchens/Restaurantorderstatus?orderno=<?php echo $_GET['orderno']?>" method="post">
+  <label class="Kitchen-text">Status</label><br><br>
+      <select id="Status" name="Status"  class="Kitchen-text2" hidden>
+      <option value="" selected disabled hidden><?php echo $orderitem->Status?></option>
+        <option value="Pending">Pending</option>
+        <option value="prepared">Prepared</option>
+        
+      </select><br>
+      
+ <input type="submit" value="Prepared" class ="Kitchen-button5" >
+  </form>
   </div>
 
 </body>

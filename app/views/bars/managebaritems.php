@@ -1,4 +1,4 @@
-<?php if (!isset($_SESSION['UserID'])){ 
+<?php if (!isset($_SESSION['UserID'])|| $_SESSION["UserTypeID"] != 4){ 
       header('location: ' . URLROOT .  '/users/login');
 }?>
 <!DOCTYPE html>
@@ -16,7 +16,7 @@
   <title>Manage Bar Item</title>
 </head>
 <body>
-  <section class="system">
+  <section class="system-single">
     <nav class="sys-nav" id="sysnav">
       <a href="<?php echo URLROOT ?>/users/barman">
           <img src="<?php echo URLROOT ?>/public/img/logo-nav.jpg">
@@ -26,13 +26,12 @@
           <i class="fa fa-user-circle-o fa-2x"></i>
         </button>
         <div class="dropdown-content">
-          <a href="<?php echo URLROOT ?>/bars/settings">Settings</a>
           <a href="<?php echo URLROOT; ?>/users/logout">Logout</a>
         </div>
       </div>
       <a href="javascript:void(0);" style="width:15px;" class="icon" onclick="dropdown()">&#9776;</a>
     </nav>
-  </section>
+  
   <script>
     function dropdown() {
       var x = document.getElementById("sysnav");
@@ -45,69 +44,69 @@
   </script>
 
   <!-- System Block -->
-
-  <div class="sys-center-col"></div>
-  <div class="sys-center-col-wrapped">
-    <div class="bar-dash-button">
+  <br>
+  <div class="single-color-dashborad">
+    <div class="admin-dash-button">
         <form action="<?php echo URLROOT ?>/users/barman">
-          <input type="submit" value="Go Back to Dashboard">
+          <a href="<?php echo URLROOT ?>/bars/addbaritem">Add Bar Item</a>
+          <a href="<?php echo URLROOT ?>/users/barman">Go Back to Dashboard</a>
         </form>
     </div>
-    <!-- Manage Bar Items-->
-            <div>
-            <h2 class="manage-items-heading">Bar Items</h2><br>
-
-            <h4 class ="item-list-name">Liquor / Beverages</h4>
-
-            <!-- Drinks Table -->
-            <table class="bar-item-table">
-              <tr>
-              <th>Item</th>
-              <th>Category</th>
-              <th>Volume</th>
-              <th>Price</th>
-              </tr>
-              <?php foreach($data['baritems'] as $baritem): ?>
-              <tr>
-                <td><?php echo $baritem->itemName?></td>
-                <td><?php echo $baritem->category?></td>
-                <td><?php echo $baritem->volume?></td>
-                <td><?php echo $baritem->price?></td>
-              <th><a href="<?php echo URLROOT ?>/bars/updatebaritem"><i class="fa fa-pencil-square-o fa-lg" aria-hidden="true"></i></a></th>
-              <th><a href="#"><i class="fa fa-trash-o fa-lg" aria-hidden="true"></i></a></th>
-              </tr>
-              <?php endforeach; ?>
-            </table><br><br><br>
-            </div>
-
-            <div>
-            <h4 class ="item-list-name">Snacks</h4>
-
-            <!-- Snack Table -->
-            <table class="bar-item-table">
-              <tr>
-              <th>Item</th>
-              <th>Category</th>
-              <th>Portion</th>
-              <th>Price</th>
-              </tr>
-              <?php foreach($data['snackitems'] as $snackitem): ?>
-              <tr>
-                <td><?php echo $snackitem->itemName?></td>
-                <td><?php echo $snackitem->category?></td>
-                <td><?php echo $snackitem->portion?></td>
-                <td><?php echo $snackitem->price?></td>
-              <th><a href="<?php echo URLROOT ?>/bars/updatesnackitem"><i class="fa fa-pencil-square-o fa-lg" aria-hidden="true"></i></a></th>
-              <th><a href="#"><i class="fa fa-trash-o fa-lg" aria-hidden="true"></i></a></th>
-              </tr>
-            <?php endforeach ?>
-            </table><br><br><br><br>
-            </div>
-
-            
+    <div class="rest-man-head">
+      <p>Bar Item List</p>
     </div>
-</div>
 
+    <div class="rest-man-food">
+      <table>
+        <tr>
+          <th style="width: 25%;">Bar Item</th>
+          <th style="width: 25%;">Category</th>
+          <th style="width: 20%;">Volume</th>
+          <th style="width: 20%;">Price</th>
+          <th style="width: 5%;"></th>
+          <th style="width: 5%;"></th>
+        </tr>
+        <?php foreach($data['baritems'] as $baritem): ?>
+        <tr>
+          <td style="width: 25%;"><?php echo $baritem->itemName?></td>
+          <td style="width: 25%;"><?php echo $baritem->category?></td>
+          <td style="width: 20%;"><?php echo $baritem->volume?></td>
+          <td style="width: 20%;"><?php echo $baritem->price?></td>
+          <td><a href="<?php echo URLROOT .'/bars/updatebaritem?barItemId='. $baritem->barItemId?>"><i class="fa fa-pencil-square-o fa-2x" aria-hidden="true"></i></a></td>
+          <td><form action="<?php echo URLROOT .'/bars/deleteitem?itemid='. $baritem->barItemId ?>"method="POST"><button type="submit"><i class="fa fa-trash-o fa-2x" aria-hidden="true"></i></button></form></td>
+        </tr>
+        <?php endforeach; ?>
+      </table>
+      <br><br><br>
+    </div>
+    <div class="rest-man-head">
+      <p>Snack Item List</p>
+    </div>
+
+    <div class="rest-man-food">
+      <table>
+        <tr>
+          <th style="width: 25%;">Food Item</th>
+          <th style="width: 25%;">Food Category</th>
+          <th style="width: 20%;">Portion</th>
+          <th style="width: 20%;">Price</th>
+          <th style="width: 5%;"></th>
+          <th style="width: 5%;"></th>
+        </tr>
+        <?php foreach($data['snackitems'] as $snackitem): ?>
+        <tr>
+          <td style="width: 25%;"><?php echo $snackitem->itemName?></td>
+          <td style="width: 25%;"><?php echo $snackitem->category?></td>
+          <td style="width: 20%;"><?php echo $snackitem->portion?></td>
+          <td style="width: 20%;"><?php echo $snackitem->price?></td>
+          <td style="width: 5%;"><a href="<?php echo URLROOT .'/restaurants/updatesnackitem?itemName='. $snackitem->itemName . '&portion='.$snackitem->portion ?>"><i class="fa fa-pencil-square-o fa-2x" aria-hidden="true"></i></a></td>
+          <td><form action="<?php echo URLROOT .'/bars/deletesnack?itemid='. $snackitem->fooditemId ?>"method="POST"><button type="submit"><i class="fa fa-trash-o fa-2x" aria-hidden="true"></i></button></form></td>
+        </tr>
+        <?php endforeach; ?>
+      </table>
+      <br><br><br>
+    </div>
+    </section>
 
 </body>
 </html>

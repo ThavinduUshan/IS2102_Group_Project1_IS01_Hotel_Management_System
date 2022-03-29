@@ -1,4 +1,4 @@
-<?php if (!isset($_SESSION['UserID'])){ 
+<?php if (!isset($_SESSION['UserID'])|| $_SESSION["UserTypeID"] != 4){ 
       header('location: ' . URLROOT .  '/users/login');
 }?>
 <!DOCTYPE html>
@@ -13,12 +13,12 @@
   <link rel="stylesheet" href="<?php echo URLROOT ?>/public/css/stylen.css">
   <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/@fortawesome/fontawesome-free@5.15.4/css/fontawesome.min.css" integrity="sha384-jLKHWM3JRmfMU0A5x5AkjWkw/EYfGUAGagvnfryNV3F9VqM98XiIH7VBGVoxVSc7" crossorigin="anonymous">
   <script src="https://use.fontawesome.com/a6a11daad8.js"></script>
-  <title>Order details</title>
+  <title>Update Order Item</title>
 </head>
 <body>
   <section class="system">
     <nav class="sys-nav" id="sysnav">
-      <a href="<?php echo URLROOT ?>/users/headchef">
+      <a href="<?php echo URLROOT ?>/users/barman">
           <img src="<?php echo URLROOT ?>/public/img/logo-nav.jpg">
       </a>
       <div class="dropdown">
@@ -26,7 +26,7 @@
           <i class="fa fa-user-circle-o fa-2x"></i>
         </button>
         <div class="dropdown-content">
-          <a href="<?php echo URLROOT?>/kitchens/settings">Settings</a>
+          <a href="<?php echo URLROOT ?>/reservations/settings">Settings</a>
           <a href="<?php echo URLROOT; ?>/users/logout">Logout</a>
         </div>
       </div>
@@ -48,50 +48,62 @@
 
   <div class="sys-left-col">
   <div class="bar-dash-plus1">
-      <a href="<?php echo URLROOT ?>/users/headchef">
-        <i class="fa fa-home fa-4x" aria-hidden="true"></i>
+      <a href="<?php echo URLROOT ?>/bars/placeorder">
+        <i class="fa fa-plus-square fa-4x" aria-hidden="true"></i>
       </a>
-      <p>Dashborad</p>
+      <p>Place Order</p>
     </div>
 
     <div class="bar-dash-plus2">
-      <a href="<?php echo URLROOT ?>/kitchens/managefooditems">
+      <a href="<?php echo URLROOT ?>/bars/managebaritems">
         <i class="fa fa-book fa-4x" aria-hidden="true"></i>
       </a>
-      <p>View food Items</p>
+      <p>View Bar Items</p>
     </div>
 
     <div class="bar-dash-plus3">
-      <a href="<?php echo URLROOT ?>/kitchens/addsnackitem">
-        <i class="fa fa-plus-square fa-4x" aria-hidden="true"></i>
+      <a href="<?php echo URLROOT ?>/users/barman">
+        <i class="fa fa-home fa-4x" aria-hidden="true"></i>
       </a>
-      <p>Add Snack Item</p>
+      <p>Dashbaord</p>
+    </div>
+  </div>
+  
+
+  <div class="sys-right-col">
+  <div class="recep-bill-right"><br>
+ 
+
+    <div class="recep-bill-heading">
+      <h1 style="color:#01661b">Update Order Item</h1>
+    </div>
+
+
+    <div class="recep-bill-form">
+      
+      <form action="" method="post">
+        <div class="bill-form-left">
+          <label for="fooditem">Bar Item</label><br>
+          <input type="text" id="foodiem" name="fooditem" value="<?php echo $data['orderitem']->itemName?>" disabled><br><br>
+        </div>
+
+        <label for="portion">Volume:</label><br>
+          <select name="volume" id="volume">
+            <option value="<?php echo $data['orderitem']->Volume?>" select = "selected" ><?php echo $data['orderitem']->Volume?></option>
+            <option value="Shot">Shot ~50ml</option>
+            <option value="Pint">Pint ~475ml</option>
+            <option value="Fifth">Fifth</option>
+            <option value="Liter">Liter 1000ml</option>
+            <option value="Tower">Tower 2000ml</option>
+          </select><br><br>
+
+          <label for="quantity" class="recep-bill-form-l1">Quantity</label><br>
+          <input type="number" id="quantity" name="quantity" value="<?php echo $data['orderitem']->Quantity?>"><br><br>
+
+        <input type="submit" name="submit" value="Update Order Item"><br><br>
+      </form>
     </div>
   </div>
   </div>
-  <div class="sys-right-col">
-    <h5 class="Kitchen-orderlist2">Order No :</h5>
-      
-    <table class="Kitchen-table">
-      <tr>
-          <th>Food Item</th>
-          <th>Portion</th>
-          <th>Quantity</th>
-          </tr>
-      <tr>
-          <td>Fried Rice</td>
-          <td>Large</td>
-          <td>1</td>
-      </tr>
-
-  </table><br><br>
-  <label class="Kitchen-text">Status</label><br><br>
-      <select id="item"  class="Kitchen-text2" >
-      <option value="Pending">Pending</option>
-      <option value="Finished ">Finished</option>
-      </select><br>
-  <input type="submit" value="Change Status" class ="Kitchen-button5" >
-  </div>
-
 </body>
 </html>

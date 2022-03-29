@@ -1,3 +1,6 @@
+<?php if (!isset($_SESSION['UserID']) || $_SESSION["UserTypeID"] != 4){ 
+      header('location: ' . URLROOT .  '/users/login');
+}?>
 <!DOCTYPE html>
 <html lang="en">
 <head>
@@ -16,7 +19,7 @@
 <body>
   <section class="system">
     <nav class="sys-nav" id="sysnav">
-      <a href="<?php echo APPROOT ?>/views/users/login.php">
+      <a href="<?php echo URLROOT ?>/users/barman">
           <img src="<?php echo URLROOT ?>/public/img/logo-nav.jpg">
       </a>
       <div class="dropdown">
@@ -24,7 +27,6 @@
           <i class="fa fa-user-circle-o fa-2x"></i>
         </button>
         <div class="dropdown-content">
-          <a href="<?php echo URLROOT ?>/bars/settings">Settings</a>
           <a href="<?php echo URLROOT; ?>/users/logout">Logout</a>
         </div>
       </div>
@@ -41,7 +43,6 @@
       }
     }
   </script>
-
   <!-- System Block -->
   <!-- Left Block -->
   <div class="sys-left-col">
@@ -59,11 +60,11 @@
       <p>View Bar Items</p>
     </div>
 
-    <div class="bar-dash-plus3">
-      <a href="<?php echo URLROOT ?>/bars/addbaritem">
-        <i class="fa fa-plus-square fa-4x" aria-hidden="true"></i>
+    <div class="bar-dash-plus5">
+      <a href="<?php echo URLROOT ?>/bars/completedorders">
+        <i class="fa fa-list-alt fa-4x" aria-hidden="true"></i>
       </a>
-      <p>Add Bar Items</p>
+      <p>Completed Orders</p>
     </div>
 
   </div>
@@ -73,39 +74,42 @@
   <div class="sys-right-col">
     
     <div class="bar-dash-search">
-      <form action="/action_page.php">
+      <form action="<?php echo URLROOT ?>/users/barman" method="post">
         <input type="text" placeholder="Search Order" name="search">
         <button type="submit"><i class="fa fa-search fa-2x" aria-hidden="true"></i></button>
       </form>
+      <?php if(!empty($data['searchError'])){?>
+      <h3 class="error"><?php echo $data['searchError']?></h3>
+      <?php
+      }
+      ?>
     </div>
 
+    
     <!-- Order Details -->
 
     <div class="bar-dash-order">
+    
       <table cellspacing="0" cellpadding="0">
-        <tr>
-          <td class="col1" style="width: 40%;">Order No:</br>Table No:</td>
-          <td class="col2" style="width: 40%;">Status:</td>
-          <td class="col3" style="width: 10%;"><a href="<?php echo URLROOT ?>/bars/updateorder"><i class="fa fa-pencil-square-o fa-2x"></i></a></td>
+      <?php
+      if(!empty($data['barorderdetails'])){?>
+        <?php foreach($data['barorderdetails'] as $barorderdetails): ?>
+          <tr>
+          <td class="col1" style="width: 40%;">Order No:<?php echo $barorderdetails->BarOrderNo; ?></br>Table No:<?php echo $barorderdetails->TableNo; ?></td>
+          <td class="col2" style="width: 40%;">Status:<?php echo $barorderdetails->Status; ?></td>
+          <td class="col3" style="width: 10%;"><a href="<?php echo URLROOT.'/bars/updateorder?orderno='. $barorderdetails->BarOrderNo . '&tableno='.$barorderdetails->TableNo; ?>"><i class="fa fa-pencil-square-o fa-2x"></i></a></td>
         </tr>
-        <tr>
-          <td class="col1" style="width: 40%;">Order No:</br>Table No:</td>
-          <td class="col2" style="width: 40%;">Status:</td>
-          <td class="col3" style="width: 10%;"><a href="<?php echo URLROOT ?>/bars/updateorder"><i class="fa fa-pencil-square-o fa-2x"></i></a></td>
-        </tr>
-        <tr>
-          <td class="col1" style="width: 40%;">Order No:</br>Table No:</td>
-          <td class="col2" style="width: 40%;">Status:</td>
-          <td class="col3" style="width: 10%;"><a href="<?php echo URLROOT ?>/bars/updateorder"><i class="fa fa-pencil-square-o fa-2x"></i></a></td>
-        </tr>
-        <tr>
-          <td class="col1" style="width: 40%;">Order No:</br>Table No:</td>
-          <td class="col2" style="width: 40%;">Status:</td>
-          <td class="col3" style="width: 10%;"><a href="<?php echo URLROOT ?>/bars/updateorder"><i class="fa fa-pencil-square-o fa-2x"></i></a></td>
-        </tr>
-        
-
+      <?php endforeach; ?>
       </table>
+      <?php
+      }else
+      {?>
+        <h3 class="error"><?php echo $data['resultsEmpty']?></h3>
+      <?php
+      }
+      ?>
+      </table>
+      <br><br>
     </div>
 
   </div>

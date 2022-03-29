@@ -1,4 +1,4 @@
-<?php if (!isset($_SESSION['UserID'])){ 
+<?php if (!isset($_SESSION['UserID'])|| $_SESSION["UserTypeID"] != 3){ 
       header('location: ' . URLROOT .  '/users/login');
 }?>
 <!DOCTYPE html>
@@ -16,7 +16,7 @@
   <title>Manage Food Items</title>
 </head>
 <body>
-  <section class="system">
+  <section class="system-single">
     <nav class="sys-nav" id="sysnav">
       <a href="<?php echo URLROOT ?>/users/cashier">
           <img src="<?php echo URLROOT ?>/public/img/logo-nav.jpg">
@@ -26,13 +26,12 @@
           <i class="fa fa-user-circle-o fa-2x"></i>
         </button>
         <div class="dropdown-content">
-          <a href="<?php echo URLROOT ?>/restaurants/settings">Settings</a>
           <a href="<?php echo URLROOT; ?>/users/logout">Logout</a>
         </div>
       </div>
       <a href="javascript:void(0);" style="width:15px;" class="icon" onclick="dropdown()">&#9776;</a>
     </nav>
-  </section>
+
   <script>
     function dropdown() {
       var x = document.getElementById("sysnav");
@@ -45,11 +44,12 @@
   </script>
 
   <!-- System Block -->
-
-  <div class="sys-col1">
-    <div class="rest-dash-button">
+  <br>
+  <div class="single-color-dashborad">
+    <div class="admin-dash-button">
       <form action="<?php echo URLROOT ?>/users/cashier">
-        <input type="submit" value="Go Back to Dashboard">
+      <a href="<?php echo URLROOT ?>/restaurants/addfooditem">Add Food Item</a>
+          <a href="<?php echo URLROOT ?>/users/cashier">Go Back to Dashboard</a>
       </form>
         
     </div>
@@ -73,13 +73,13 @@
           <td style="width: 25%;"><?php echo $fooditem->category?></td>
           <td style="width: 20%;"><?php echo $fooditem->portion?></td>
           <td style="width: 20%;"><?php echo $fooditem->price?></td>
-          <td style="width: 5%;"><a href="<?php echo URLROOT ?>/restaurants/updatefooditem"><i class="fa fa-pencil-square-o fa-2x" aria-hidden="true"></i></a></td>
-          <td style="width: 5%;"><a href="#removefooditem"><i class="fa fa-trash-o fa-2x" aria-hidden="true"></i></a></td>
+          <td style="width: 5%;"><a href="<?php echo URLROOT .'/restaurants/updatefooditem?itemid='. $fooditem->fooditemId ?>"><i class="fa fa-pencil-square-o fa-2x" aria-hidden="true"></i></a></td>
+          <td style="width: 5%;"><form action="<?php echo URLROOT .'/restaurants/delete?itemid='. $fooditem->fooditemId ?>"method="POST"><button type="submit"><i class="fa fa-trash-o fa-2x" aria-hidden="true"></i></button></form></td>
         </tr>
         <?php endforeach; ?>
       </table>
     </div>
   </div>
-
+  </section>
 </body>
 </html>

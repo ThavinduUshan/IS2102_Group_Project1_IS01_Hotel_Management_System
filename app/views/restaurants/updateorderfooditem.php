@@ -1,4 +1,4 @@
-<?php if (!isset($_SESSION['UserID'])|| $_SESSION["UserTypeID"] != 6){ 
+<?php if (!isset($_SESSION['UserID']) || $_SESSION["UserTypeID"] != 3){ 
       header('location: ' . URLROOT .  '/users/login');
 }?>
 <!DOCTYPE html>
@@ -13,12 +13,12 @@
   <link rel="stylesheet" href="<?php echo URLROOT ?>/public/css/stylen.css">
   <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/@fortawesome/fontawesome-free@5.15.4/css/fontawesome.min.css" integrity="sha384-jLKHWM3JRmfMU0A5x5AkjWkw/EYfGUAGagvnfryNV3F9VqM98XiIH7VBGVoxVSc7" crossorigin="anonymous">
   <script src="https://use.fontawesome.com/a6a11daad8.js"></script>
-  <title>Update Issue</title>
+  <title>Update Order Item</title>
 </head>
 <body>
   <section class="system">
     <nav class="sys-nav" id="sysnav">
-      <a href="<?php echo URLROOT ?>/users/moderator">
+      <a href="<?php echo URLROOT ?>/users/cashier">
           <img src="<?php echo URLROOT ?>/public/img/logo-nav.jpg">
       </a>
       <div class="dropdown">
@@ -26,7 +26,6 @@
           <i class="fa fa-user-circle-o fa-2x"></i>
         </button>
         <div class="dropdown-content">
-          <a href="<?php echo URLROOT ?>/moderators/settings">Settings</a>
           <a href="<?php echo URLROOT; ?>/users/logout">Logout</a>
         </div>
       </div>
@@ -47,57 +46,61 @@
   <!-- System Block -->
 
   <div class="sys-left-col">
-  <div class="admin-dash-plus1">
-      <a href="<?php echo URLROOT ?>/users/moderator">
+  <div class="rest-dash-plus1">
+      <a href="<?php echo URLROOT ?>/restaurants/placekot">
+        <i class="fa fa-plus-square fa-4x" aria-hidden="true"></i>
+      </a>
+      <p>Place Order</p>
+    </div>
+
+    <div class="rest-dash-plus2">
+      <a href="<?php echo URLROOT ?>/restaurants/managefooditems">
+        <i class="fa fa-book fa-4x" aria-hidden="true"></i>
+      </a>
+      <p>View Food Items</p>
+    </div>
+
+    <div class="rest-dash-plus3">
+      <a href="<?php echo URLROOT; ?>/users/cashier">
         <i class="fa fa-home fa-4x" aria-hidden="true"></i>
       </a>
       <p>Dashboard</p>
     </div>
   </div>
   
+
   <div class="sys-right-col">
-    
-    <div class="bar-issues-right">
-      
-    <div class="bar-issues-form">
-      
-      <form action="<?php echo URLROOT ?>/moderators/updateissue" method="post">
+  <div class="recep-bill-right"><br>
+ 
 
-        <input type="hidden" name="id" value="<?php echo $data['issue']->issuesId?>">
-        <label for="name">Name:</label>
-        <input type="text" id="name" name="name" value="<?php echo $data['issue']->cusName?>" disabled><br><br>
-
-        <label for="email">Email:</label>
-        <input type="text" id="email" name="email" value="<?php echo $data['issue']->cusEmail?>" disabled><br><br>
-
-        <label for="subject">Subject:</label>
-        <input type="text" id="subject" name="subject" value="<?php echo $data['issue']->subject?>" disabled><br><br>
-
-        <label for="ctype">Compalin Type:</label>
-        <input type="text" id="ctype" name="ctype" value="<?php echo $data['issue']->ComplainType?>" disabled><br><br>
-
-        <label for="description">Description:</label><br><br>
-        <textarea name="description" id="" cols="30" rows="3" disabled><?php echo $data['issue']->description?></textarea><br><br>
-
-        <label for="status">Status:</label>
-        <select id="status" name="status">
-          <option value="Pending"><?php echo $data['issue']->status?></option>
-          <option value="Solved">Solved</option>
-        </select><br><br>
-
-        <div class="bar-issues-button"> 
-          <button type="submit" name="submit">Mark as solved</button>
-        </div>
-        <br><br>
-                
-        </div>
-
-      </form>
+    <div class="recep-bill-heading">
+      <h1 style="color:#01661b">Update Order Item</h1>
     </div>
 
-  </div>
 
-  </div>
+    <div class="recep-bill-form">
+      
+      <form action="" method="post">
+        <div class="bill-form-left">
+          <label for="fooditem">Food Item</label><br>
+          <input type="text" id="foodiem" name="fooditem" value="<?php echo $data['orderitem']->itemName?>" disabled><br><br>
+        </div>
 
+        <label for="portion">Portion Type:</label><br>
+          <select name="ptype" id="ptype">
+            <option value="<?php echo $data['orderitem']->PortionType?>" select = "selected" ><?php echo $data['orderitem']->PortionType?></option>
+            <option value="Small">Small</option>
+            <option value="Regular">Regular</option>
+            <option value="Large">Large</option>
+          </select><br><br>
+
+          <label for="quantity" class="recep-bill-form-l1">Quantity</label><br>
+          <input type="number" id="quantity" name="quantity" value="<?php echo $data['orderitem']->Quantity?>"><br><br>
+
+        <input type="submit" name="submit" value="Update Order Item"><br><br>
+      </form>
+    </div>
+  </div>
+  </div>
 </body>
 </html>

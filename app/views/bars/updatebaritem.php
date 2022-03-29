@@ -1,4 +1,4 @@
-<?php if (!isset($_SESSION['UserID'])){ 
+<?php if (!isset($_SESSION['UserID'])|| $_SESSION["UserTypeID"] != 4){ 
       header('location: ' . URLROOT .  '/users/login');
 }?>
 <!DOCTYPE html>
@@ -26,7 +26,6 @@
           <i class="fa fa-user-circle-o fa-2x"></i>
         </button>
         <div class="dropdown-content">
-          <a href="<?php echo URLROOT ?>/bars/settings">Settings</a>
           <a href="<?php echo URLROOT; ?>/users/logout">Logout</a>
         </div>
       </div>
@@ -78,12 +77,14 @@
 
     <div class="rest-add-food-form">
       
-      <form action="<?php echo URLROOT ?>/bars/addbaritem" name="add-food-item-form" method="post">
+      <form action="" name="add-food-item-form" method="post">
+      <?php $data['baritems']?>
         <label for="itemname">Item Name:</label><br>
-        <input type="text" id="itemname" name="itemName" placeholder="Enter the Name"><br>
+        <input type="text" id="itemname" name="itemName" placeholder="Enter the Name" value="<?php echo $data['baritems']->itemName; ?>"><br>
 
         <label for="category">Category:</label><br>
         <select id="category" name="category">
+          <option value="<?php echo $data['baritems']->category; ?>"><?php echo $data['baritems']->category; ?></option>
           <option value="Arrack">Arrack</option>
           <option value="Whisky">Whisky</option>
           <option value="Brandy">Brandy</option>
@@ -95,6 +96,7 @@
 
         <label for="volume">Volume:</label><br>
         <select id="volume" name="volume">
+          <option value="<?php echo $data['baritems']->volume; ?>"><?php echo $data['baritems']->volume; ?></option>
           <option value="Shot">Shot ~50ml</option>
           <option value="Pint">Pint ~475ml</option>
           <option value="Fifth">Fifth 750ml</option>
@@ -104,12 +106,12 @@
 
         <label for="status">Availability</label><br>
         <select id="status" name="status">
-            <option value="Available" selected="selected">Available</option>
-            <option value="Unavailable">Unavailable</option>
+            <option value="1" selected="selected">Available</option>
+            <option value="0">Unavailable</option>
           </select><br>
 
         <label for="price">Price:</label><br>
-        <input type="text" id="price" name="price" placeholder="Price"><br><br>
+        <input type="text" id="price" name="price" placeholder="Price" value="<?php echo $data['baritems']->price; ?>"><br><br>
         <input type="submit" name="submit" value="Update Item">
       </form>
     </div>

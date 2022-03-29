@@ -1,4 +1,4 @@
-<?php if (!isset($_SESSION['UserID'])){ 
+<?php if (!isset($_SESSION['UserID'])|| $_SESSION["UserTypeID"] != 5){ 
       header('location: ' . URLROOT .  '/users/login');
 }?>
 <!DOCTYPE html>
@@ -26,13 +26,12 @@
           <i class="fa fa-user-circle-o fa-2x"></i>
         </button>
         <div class="dropdown-content">
-          <a href="<?php echo URLROOT?>/kitchens/settings">Settings</a>
           <a href="<?php echo URLROOT; ?>/users/logout">Logout</a>
         </div>
       </div>
       <a href="javascript:void(0);" style="width:15px;" class="icon" onclick="dropdown()">&#9776;</a>
     </nav>
-  </section>
+    </section>
   <script>
     function dropdown() {
       var x = document.getElementById("sysnav");
@@ -45,7 +44,6 @@
   </script>
 
   <!-- System Block -->
-
   <div class="sys-left-col">
 
   <div class="bar-dash-plus1">
@@ -104,20 +102,19 @@
 
         <label for="status">Availability</label><br>
         <select id="status" name="status">
-            <option value="Available" selected="selected">Available</option>
-            <option value="Unavailable">Unavailable</option>
+            <option value="1" selected="selected">1</option>
+            <option value="0">0</option>
           </select><br>
         <label for="price">Price:</label><br>
         <input type="text" id="price" name="price" placeholder="Price">
         <span class="error">
             <p><?php echo $data['priceError'];?></p>
         </span>
-        <br>
         <input type="submit" name="submit" value="Add Item">
       </form>
     </div>
 
   </div>
-
+  
 </body>
 </html>

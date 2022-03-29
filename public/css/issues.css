@@ -220,12 +220,9 @@
     height:40px;
     border-radius:25px;
     border: none;
+    padding-left:20px;
 }
 
-.rest-dash-search input[type="text"]::placeholder{   
-    padding:20px;
-    font-size:15px;  
-}
           
 .rest-dash-search{
     width: 100%;

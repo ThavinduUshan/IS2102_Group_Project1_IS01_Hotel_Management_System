@@ -1,4 +1,4 @@
-<?php if (!isset($_SESSION['UserID'])|| $_SESSION["UserTypeID"] != 5){ 
+<?php if (!isset($_SESSION['UserID'])|| $_SESSION["UserTypeID"] != 4){ 
       header('location: ' . URLROOT .  '/users/login');
 }?>
 <!DOCTYPE html>
@@ -13,13 +13,12 @@
   <link rel="stylesheet" href="<?php echo URLROOT ?>/public/css/stylen.css">
   <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/@fortawesome/fontawesome-free@5.15.4/css/fontawesome.min.css" integrity="sha384-jLKHWM3JRmfMU0A5x5AkjWkw/EYfGUAGagvnfryNV3F9VqM98XiIH7VBGVoxVSc7" crossorigin="anonymous">
   <script src="https://use.fontawesome.com/a6a11daad8.js"></script>
-  
-  <title>Pub</title>
+  <title>Update Order Item</title>
 </head>
 <body>
   <section class="system">
     <nav class="sys-nav" id="sysnav">
-      <a href="<?php echo URLROOT ?>/users/headchef">
+      <a href="<?php echo URLROOT ?>/users/barman">
           <img src="<?php echo URLROOT ?>/public/img/logo-nav.jpg">
       </a>
       <div class="dropdown">
@@ -45,60 +44,63 @@
   </script>
 
   <!-- System Block -->
+
   <div class="sys-left-col">
   <div class="bar-dash-plus1">
-      <a href="<?php echo URLROOT ?>/users/headchef">
-        <i class="fa fa-home fa-4x" aria-hidden="true"></i>
+      <a href="<?php echo URLROOT ?>/bars/placeorder">
+        <i class="fa fa-plus-square fa-4x" aria-hidden="true"></i>
       </a>
-      <p>Dashborad</p>
+      <p>Place Order</p>
     </div>
 
     <div class="bar-dash-plus2">
-      <a href="<?php echo URLROOT ?>/kitchens/managefooditems">
+      <a href="<?php echo URLROOT ?>/bars/managebaritems">
         <i class="fa fa-book fa-4x" aria-hidden="true"></i>
       </a>
-      <p>View food Items</p>
+      <p>View Bar Items</p>
     </div>
 
     <div class="bar-dash-plus3">
-      <a href="<?php echo URLROOT ?>/kitchens/addsnackitem">
-        <i class="fa fa-plus-square fa-4x" aria-hidden="true"></i>
+      <a href="<?php echo URLROOT ?>/users/barman">
+        <i class="fa fa-home fa-4x" aria-hidden="true"></i>
       </a>
-      <p>Add Snack Item</p>
+      <p>Dashbaord</p>
     </div>
   </div>
+  
+
   <div class="sys-right-col">
-        <div class="myDIV">
-          <a href="<?php echo URLROOT ?>/users/headchef"><button class="Kitchen-button1">Restaurant</button></a>
-          <a href="<?php echo URLROOT ?>/kitchens/headchefroom"><button class="Kitchen-button2">Room</button></a>
-          <a href="<?php echo URLROOT ?>/kitchens/headchefpub"><button class="Kitchen-button3">Pub</button></a>
+  <div class="recep-bill-right"><br>
+ 
+
+    <div class="recep-bill-heading">
+      <h1 style="color:#01661b">Update Order Item</h1>
+    </div>
+
+
+    <div class="recep-bill-form">
+      
+      <form action="" method="post">
+        <div class="bill-form-left">
+          <label for="fooditem">Food Item</label><br>
+          <input type="text" id="foodiem" name="fooditem" value="<?php echo $data['orderitem']->itemName?>" disabled><br><br>
         </div>
-                <h5 class="Kitchen-orderlist">ORDER LIST :</h5>
-                
-                
 
-                 
-                 <table class="Kitchen-table">
-                  <tr>
-                    <th>Order No</th>
-                    <th>Table No</th>
-                    <th>Status</th>
-                    <th></th>
-                  </tr>
-                  <?php foreach($data['snackitems'] as $snackitem): ?>
-                  <tr>
-                    <td><?php echo $snackitem->BarOrderNo?></td>
-                    <td><?php echo $snackitem->TableNo?></td>
-                    <td><?php echo $snackitem->Status?></td>
-                    
-                    <td><a href="<?php echo URLROOT.'/kitchens/Puborderstatus?barorderno='. $snackitem->BarOrderNo ?>"><i class="fa fa-pencil-square-o" aria-hidden="true"></i></a></td> 
-                  </tr>
-                  <?php endforeach; ?>
-              
-                </table> 
-                <br><br>
+        <label for="portion">Portion Type:</label><br>
+          <select name="ptype" id="ptype">
+            <option value="<?php echo $data['orderitem']->PortionType?>" select = "selected" ><?php echo $data['orderitem']->PortionType?></option>
+            <option value="Small">Small</option>
+            <option value="Regular">Regular</option>
+            <option value="Large">Large</option>
+          </select><br><br>
 
+          <label for="quantity" class="recep-bill-form-l1">Quantity</label><br>
+          <input type="number" id="quantity" name="quantity" value="<?php echo $data['orderitem']->Quantity?>"><br><br>
+
+        <input type="submit" name="submit" value="Update Order Item"><br><br>
+      </form>
+    </div>
   </div>
-
+  </div>
 </body>
 </html>

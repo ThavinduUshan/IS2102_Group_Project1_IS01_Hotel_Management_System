@@ -1,4 +1,4 @@
-<?php if (!isset($_SESSION['UserID'])|| $_SESSION["UserTypeID"] != 5){ 
+<?php if (!isset($_SESSION['UserID'])|| $_SESSION["UserTypeID"] != 4){ 
       header('location: ' . URLROOT .  '/users/login');
 }?>
 <!DOCTYPE html>
@@ -18,7 +18,7 @@
 <body>
   <section class="system-single">
     <nav class="sys-nav" id="sysnav">
-      <a href="<?php echo URLROOT ?>/users/headchef">
+      <a href="<?php echo URLROOT ?>/users/barman">
           <img src="<?php echo URLROOT ?>/public/img/logo-nav.jpg">
       </a>
       <div class="dropdown">
@@ -31,7 +31,7 @@
       </div>
       <a href="javascript:void(0);" style="width:15px;" class="icon" onclick="dropdown()">&#9776;</a>
     </nav>
-
+ 
   <script>
     function dropdown() {
       var x = document.getElementById("sysnav");
@@ -46,40 +46,40 @@
   <!-- System Block -->
   <br>
   <div class="single-color-dashborad">
-  <div class="rest-dash-button">
-      <form action="<?php echo URLROOT ?>/users/headchef">
+    <div class="rest-dash-button">
+      <form action="<?php echo URLROOT ?>/users/barman">
         <input type="submit" value="Go Back to Dashboard">
       </form>
-        
     </div>
     <div class="rest-man-head">
-      <p>Food Item List</p>
+      <p>Completed Orders</p>
     </div>
 
     <div class="rest-man-food">
       <table>
         <tr>
-          <th style="width: 20%;">Food Item</th>
-          <th style="width: 20%;">Food Category</th>
-          <th style="width: 15%;">Portion</th>
-          <th style="width: 15%;">Price</th>
-          <!-- <th style="width: 15%;" hidden>Status</th> -->
-          <th style="width: 15%;">Status</th>
-          <th style="width: 5%;"></th>
-          <th style="width: 5%;"></th>
+            <th>BarBillNo</th>
+            <th>BarOrderNo</th>
+            <th>Total Price</th>
+            <th>Discount</th>
+            <th>Discounted Price</th>
+            <th>Amount</th>
+            <th>Balance</th>
+            <th>Date</th>
+            <th>Time</th>
         </tr>
-        <?php foreach($data['fooditems'] as $fooditem): ?>
+        <?php foreach($data['completedorders'] as $completedorders): ?>
         <tr>
-          <td style="width: 20%;"><?php echo $fooditem->itemName?></td>
-          <td style="width: 20%;"><?php echo $fooditem->category?></td>
-          <td style="width: 15%;"><?php echo $fooditem->portion?></td>
-          <td style="width: 15%;"><?php echo $fooditem->price?></td>
-          <td style="width: 15%;"><?php if ($fooditem->status==1) echo "Available";else echo "Unavailable" ?></td>
-          
-          <td style="width: 5%;"><a href="<?php echo URLROOT . "/kitchens/menuavailability/" . $fooditem->fooditemId ?>"><i class="fa fa-pencil-square-o fa-2x" aria-hidden="true"></i></a></td>
-          <td style="width: 5%;"><form action="<?php echo URLROOT .  "/kitchens/delete/" . $fooditem->fooditemId ?>" method="POST" ><button type="submit" class="Kitchen-button7"><i class="fa fa-trash-o fa-2x" aria-hidden="true" ></i></button>
-          <!-- <td style="width: 5%;"><a href="<?php echo URLROOT ?>/kitchens/menuavailability"><i class="fa fa-pencil-square-o fa-2x" aria-hidden="true"></i></a></td>
-          <td style="width: 5%;"><a href="#removefooditem"><i class="fa fa-trash-o fa-2x" aria-hidden="true"></i></a></td> -->
+            <td><?php echo $completedorders->BarBillNo?></td>
+            <td><?php echo $completedorders->BarOrderNo?></td>
+            <td><?php echo $completedorders->TotalPrice?></td>
+            <td><?php echo $completedorders->Discount?></td>
+            <td><?php echo $completedorders->DiscountedPrice?></td>
+            <td><?php echo $completedorders->Amount?></td>
+            <td><?php echo $completedorders->Balance?></td>
+            <td><?php echo $completedorders->Date?></td>
+            <td><?php echo $completedorders->Time?></td>
+            <td><a href="<?php echo URLROOT .'/bars/viewbarbill?billno='. $completedorders->BarBillNo ?>"><i class="fa fa-pencil-square-o fa-lg" aria-hidden="true"></i></a></td>
         </tr>
         <?php endforeach; ?>
       </table>

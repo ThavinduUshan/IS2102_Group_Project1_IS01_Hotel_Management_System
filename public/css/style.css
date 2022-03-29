@@ -1021,9 +1021,10 @@
 .system{
   min-height:100vh;
   width:100%;
+  padding-bottom: 80px;
   background-color:#01661b;
   background-position: center;
-  background-size: cover;
+  background-size:auto;
   position:relative;
 }
 
@@ -1178,11 +1179,16 @@
     position: relative;
     border-radius: 25px;
     box-shadow: 0px 0px 11px 7px rgba(0,0,0,0.07);
-    
+    overflow:visible;
   }
 
 .admin-button-set{
-    margin-left:35%;
+    margin-left:45%;
+}
+.adminh1{
+  text-align: center;
+  font-size:40px;
+  font-weight:bold;
 }
 
 .admin-button-set a{
@@ -1192,7 +1198,7 @@
 }
 
 .admin-button{
-  width:15%;
+  width:16%;
   margin-right:10px;
   border:none;
   display: inline-block;
@@ -1209,10 +1215,9 @@
 /*---Admin Dashboard---*/
 
 .admin-dashboard-col{
-  margin-top:50px;
-  flex-basis: 46%;
+  margin:50px 50px;
+  flex-basis: 40%;
   background:#fff;
-  margin-bottom: 10px;
   box-sizing:border-box;
 }
 
@@ -1252,6 +1257,20 @@
   background-color: green;
 }
 
+.admin-dash-button button{
+  background-color: #01661b;
+  border: none;
+  border-radius: 25px;
+  color: white;
+  padding: 16px 32px;
+  text-decoration: none;
+  margin: 4px 2px;
+  cursor: pointer;
+}
+
+.admin-dash-button button:hover{
+  background-color: green;
+}
   /* Place Order - Receptionist Dashboard*/
 
   .rest-dash-plus1{
@@ -1540,7 +1559,7 @@
 .rest-man-food td {
   border: 1px solid #01661b;
   background:#E5E5E5;
-  font-size: 11px;
+  font-size: 13px;
   color:black ;
   padding-left: 2px;
   padding-top: 4px;
@@ -3505,4 +3524,184 @@
 
 .bar-add-item-form input[type=submit]:hover{
   background-color: green;
+}
+
+
+/*change package section */
+
+.change-package{
+  width:20%;
+  margin:auto;
+  padding:40px 60px;
+  background:white;
+  color:black;
+  position: relative;
+  border-radius: 25px;
+  box-shadow: 0px 0px 11px 7px rgba(0,0,0,0.07);
+}
+
+.change-package button{
+  width:100%;
+  margin-top:30px;
+  border:none;
+  display: inline-block;
+  text-decoration:none;
+  color:#fff;
+  padding:12px 34px;
+  font-size:18px;
+  background:green;
+  position:relative;
+  cursor:pointer;
+  border-radius: 20px;
+}
+
+.change-package h1{
+  margin-bottom:30px;
+  padding: 20px;
+  text-align:center;
+  font-size:30px; 
+  font-weight:bold;
+  color:#01661b;
+}
+.change-package label{
+  margin-top:15px;
+  margin-bottom:10px;
+  padding:0;
+  font-weight:bold;
+  font-size:16px;
+}
+
+.change-package select{
+  display: block;
+  margin-top:15px;
+  margin-bottom: 10px;
+  width:150px;
+}
+
+.change-package input[type="text"] {
+  margin-top:15px;
+  padding: 10px;
+  display:block;
+}
+
+.rooms-section{
+  margin-left: auto;
+  margin-right: auto;
+  display: flex;
+  flex-wrap: wrap;
+  
+}
+
+.report-card{
+  width:22%;
+  margin:2em;
+  background-color: #fff;
+  padding:2em 2em;
+  border-radius: 10px;
+  box-shadow: 0px 0px 11px 7px rgba(0,0,0,0.07);
+}
+.report-card h2{
+  margin-top: 10px;
+}
+
+.report-card img{
+  width:100%;
+}
+
+.report-card h5{
+  margin-top: 5px;
+  margin-bottom:10px;
+  padding:5px;
+  border: 1px solid #01661b;
+  border-radius: 10px;
+  width:30%;
+  text-align: center;
+}
+
+.report-card input[type=submit]{
+  margin-top:2em;
+  background-color: #01661b;
+  color:white;
+  padding: 1em 2em;
+  border:none;
+  border-radius: 10px;
+}
+
+.report-card input[type=submit]:hover{
+  background-color: #06761F;
+  cursor: pointer;
+}
+
+.report-dashboard{
+  width:80%;
+  margin:auto;
+  padding:60px;
+  background:white;
+  color:black;
+  position: relative;
+  height:700px;
+  border-radius: 25px;
+  box-shadow: 0px 0px 11px 7px rgba(0,0,0,0.07);
+  overflow:visible;
+}
+
+
+/*grphs*/
+.pie-charts{
+  margin-left: auto;
+  margin-right: auto;
+  display: flex;
+  flex-wrap: wrap;
+
+}
+
+.pie-chart-resbar{
+  width:35%;
+  margin-left:100px;
+}
+
+.doughnut-chart{
+  margin-left:20%;
+  width:60%;
+}
+
+
+.bar-chart{
+  margin-left:15%;
+  width:70%;
+}
+
+
+.reportmgt-dash-button{
+  margin-top: 4%;
+  width: 300px;
+  margin-left: 1200px;
+}
+
+.reportmgt-dash-button a{
+    background-color: #fff;
+    border: none;
+    border-radius: 25px;
+    color: #01661b;
+    padding: 16px 32px;
+    text-decoration: none;
+    margin: 4px 10px;
+    cursor: pointer;
+    font-size: 13px;
+    font-weight: 400;
+}
+
+.reportmgt-dash-button input[type=submit]{
+    background-color: #fff;
+    border: none;
+    border-radius: 25px;
+    color: #01661b;
+    padding: 16px 32px;
+    text-decoration: none;
+    margin: 4px 2px;
+    cursor: pointer;
+}
+
+.reportmgt-dash-button input[type=submit]:hover{
+  background-color: #eee;
 }

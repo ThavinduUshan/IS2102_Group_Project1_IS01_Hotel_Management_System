@@ -16,13 +16,36 @@
   <title>Register</title>
 </head>
 <body>
+  <script>
+    function dropdown() {
+      var x = document.getElementById("sysnav");
+      if (x.className === "sys-nav") {
+        x.className += " responsive";
+      } else {
+        x.className = "sys-nav";
+      }
+    }
+  </script>
   <section class="register">
-      <nav>
-        <a href="<?php echo URLROOT ?>/users/admin">
-          <img src="<?php echo URLROOT;?>/public/img/logo-nav.jpg">
-        </a>
-      </nav>
-    </div>
+  <nav class="sys-nav" id="sysnav">
+      <a href="<?php echo URLROOT ?>/users/admin">
+          <img src="<?php echo URLROOT ?>/public/img/logo-nav.jpg">
+      </a>
+      <div class="dropdown">
+        <button class="dropbtn"> 
+          <i class="fa fa-user-circle-o fa-2x"></i>
+        </button>
+        <div class="dropdown-content">
+          <a href="<?php echo URLROOT ?>/admins/settings">Settings</a>
+          <a href="<?php echo URLROOT; ?>/users/logout">Logout</a>
+        </div>
+      </div>
+      <a href="javascript:void(0);" style="width:15px;" class="icon" onclick="dropdown()">&#9776;</a>
+    </nav>
+    <div class="reportmgt-dash-button">
+      <a href="<?php echo URLROOT ?>/users/admin">Go Back to Dashboard</a>
+        
+    </div><br><br>
   <div class="register-form">
     
     <h1>Registration</h1>
@@ -30,14 +53,14 @@
       <h3>User Infromation<hr></h3>
       <div class="row">
         <div class="register-col">
-          <label>First Name: </label>
+          <label>First Name *: </label>
           <input type="text" placeholder="First Name" id="fname" name="fname">
           <span class="error">
             <p><?php echo $data['fnameError'];?></p>
           </span>
         </div>
         <div class="register-col">
-          <label>Last Name: </label>
+          <label>Last Name *: </label>
           <input type="text" placeholder="Last Name" id="lname" name="lname">
           <span class="error">
             <p><?php echo $data['lnameError'];?></p>
@@ -46,14 +69,14 @@
       </div>
       <div class="row">
         <div class="register-col">
-          <label>Email: </label>
+          <label>Email *: </label>
           <input type="email" placeholder="Email" id="email" name="email">
           <span class="error">
             <p><?php echo $data['emailError'];?></p>
           </span>
         </div>
         <div class="register-col">
-          <label>NIC: </label>
+          <label>NIC *: </label>
           <input type="text" placeholder="NIC Number" id="nic" name="nic">
           <span class="error">
             <p><?php echo $data['nicError'];?></p>
@@ -62,14 +85,14 @@
       </div>
       <div class="row">
         <div class="register-col">
-          <label>Mobile Number: </label>
+          <label>Mobile Number *: </label>
           <input type="text" placeholder="Mobile Number" id="mobilenum" name="mobilenum">
           <span class="error">
             <p><?php echo $data['mobilenumError'];?></p>
           </span>
         </div>
         <div class="register-col">
-          <label>Fixed Line: </label>
+          <label>Fixed Line *: </label>
           <input type="text" placeholder="Fixed-Line Number" id="fixednum" name="fixednum">
           <span class="error">
             <p><?php echo $data['fixednumError'];?></p>
@@ -78,14 +101,14 @@
       </div>
       <div class="row">
         <div class="register-col">
-          <label>Date of Birth: </label>
+          <label>Date of Birth *: </label>
           <input type="date" placeholder="Date of Birth" id="dob" name="dob">
           <span class="error">
             <p><?php echo $data['dobError'];?></p>
           </span>
         </div>
         <div class="register-col">
-          <label for="gender">Gender :</label>
+          <label for="gender">Gender *:</label>
           <select id="drop" name="gender" >
             <option value="Female" selected="selected">Female</option>
             <option value="Male">Male</option>
@@ -95,33 +118,34 @@
       <h3>Account Infromation<hr></h3>
       <div class="row">
         <div class="register-col">
-          <label>User Name: </label>
+          <label>User Name *: </label>
           <input type="text" placeholder="User Name" id="uname" name="uname">
           <span class="error">
             <p><?php echo $data['unameError'];?></p>
           </span>
         </div>
         <div class="register-col">
-          <label for="utypeid">User Type: :</label>
+          <label for="utypeid">User Type *:</label>
           <select id="drop" name="utypeid" >
             <option value="Admin" selected="selected">Admin</option>
             <option value="Receptionist">Receptionist</option>
             <option value="Cashier">Cashier</option>
             <option value="Barman">Barman</option>
             <option value="HeadChef">Head Chef</option>
+            <option value="Moderator">Moderator</option>
           </select>
         </div>
       </div>
       <div class="row">
         <div class="register-col">
-          <label>Password: </label>
+          <label>Password *: </label>
           <input type="password" placeholder="Password" id="psw" name="psw">
           <span class="error">
             <p><?php echo $data['pswError'];?></p>
           </span>
         </div>
         <div class="register-col">
-          <label>Re-Enter Password: </label>
+          <label>Re-Enter Password *: </label>
           <input type="password" placeholder="Re-Enter Password" id="repsw" name="repsw">
           <span class="error">
             <p><?php echo $data['repswError'];?></p>

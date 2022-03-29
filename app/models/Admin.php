@@ -341,4 +341,378 @@
       }
 
     }
+
+    public function generateRestaurantReport($data){
+      if($data['reporttype'] == '1'){
+        if($data['sort'] == '0'){
+          if($data['orderby'] == '0'){
+            $this->db->query('SELECT DISTINCT restaurantorderitems.`fooditemId`, fooditems.`itemName`, COUNT(restaurantorderitems.`fooditemId`) AS NoOfCounts FROM restaurantorderitems INNER JOIN fooditems ON fooditems.`fooditemId` = restaurantorderitems.`fooditemId` GROUP BY restaurantorderitems.`fooditemId` ORDER BY NoOfCounts');
+
+            $results = $this->db->resultSet();
+
+            return $results;
+
+          }else if($data['orderby'] == '1'){
+            $this->db->query('SELECT DISTINCT restaurantorderitems.`fooditemId`, fooditems.`itemName`, COUNT(restaurantorderitems.`fooditemId`) AS NoOfCounts FROM restaurantorderitems INNER JOIN fooditems ON fooditems.`fooditemId` = restaurantorderitems.`fooditemId` GROUP BY restaurantorderitems.`fooditemId` ORDER BY NoOfCounts DESC');
+
+            $results = $this->db->resultSet();
+
+            return $results;
+          }else{
+            return 0;
+          }
+        }
+        if($data['sort'] == '1'){
+          if($data['orderby'] == '0'){
+            $this->db->query('SELECT DISTINCT restaurantorderitems.`fooditemId`, fooditems.`itemName`, COUNT(restaurantorderitems.`fooditemId`) AS NoOfCounts FROM restaurantorderitems INNER JOIN fooditems ON fooditems.`fooditemId` = restaurantorderitems.`fooditemId` INNER JOIN restaurantorders ON restaurantorders.`RestaurantOrderNo` = restaurantorderitems.`RestaurantOrderNo` WHERE YEAR(restaurantorders.`Date`) = :years GROUP BY restaurantorderitems.`fooditemId` ORDER BY NoOfCounts');
+
+            $this->db->bind(':years', $data['year']);
+
+            $result = $this->db->resultSet();
+
+            return $result;
+
+          }else if($data['orderby'] == '1'){
+            $this->db->query('SELECT DISTINCT restaurantorderitems.`fooditemId`, fooditems.`itemName`, COUNT(restaurantorderitems.`fooditemId`) AS NoOfCounts FROM restaurantorderitems INNER JOIN fooditems ON fooditems.`fooditemId` = restaurantorderitems.`fooditemId` INNER JOIN restaurantorders ON restaurantorders.`RestaurantOrderNo` = restaurantorderitems.`RestaurantOrderNo` WHERE YEAR(restaurantorders.`Date`) = :years GROUP BY restaurantorderitems.`fooditemId` ORDER BY NoOfCounts DESC');
+
+            $this->db->bind(':years', $data['year']);
+
+            $result = $this->db->resultSet();
+
+            return $result;
+
+          }else{
+            return 0;
+          }
+        }
+        if($data['sort'] == '2'){
+          if($data['orderby'] == '0'){
+            $this->db->query('SELECT DISTINCT restaurantorderitems.`fooditemId`,fooditems.`itemName`, COUNT(restaurantorderitems.`fooditemId`) AS NoOfCounts FROM restaurantorderitems INNER JOIN fooditems ON fooditems.`fooditemId` = restaurantorderitems.`fooditemId` INNER JOIN restaurantorders ON restaurantorders.`RestaurantOrderNo` = restaurantorderitems.`RestaurantOrderNo` WHERE YEAR(restaurantorders.`Date`) = :years AND MONTH(restaurantorders.`Date`) = :months GROUP BY restaurantorderitems.`fooditemId` ORDER BY NoOfCounts');
+
+            $this->db->bind(':years', $data['year']);
+            $this->db->bind(':months', $data['month']);
+
+            $result = $this->db->resultSet();
+
+            return $result;
+
+          }else if($data['orderby'] == '1'){
+            $this->db->query('SELECT DISTINCT restaurantorderitems.`fooditemId`, fooditems.`itemName`,COUNT(restaurantorderitems.`fooditemId`) AS NoOfCounts FROM restaurantorderitems INNER JOIN fooditems ON fooditems.`fooditemId` = restaurantorderitems.`fooditemId` INNER JOIN restaurantorders ON restaurantorders.`RestaurantOrderNo` = restaurantorderitems.`RestaurantOrderNo` WHERE YEAR(restaurantorders.`Date`) = :years AND MONTH(restaurantorders.`Date`) = :months GROUP BY restaurantorderitems.`fooditemId` ORDER BY NoOfCounts DESC');
+
+            $this->db->bind(':years', $data['year']);
+            $this->db->bind(':months', $data['month']);
+
+            $result = $this->db->resultSet();
+
+            return $result;
+
+          }else{
+            return 0;
+          }
+        }
+        if($data['sort'] == '3'){
+          if($data['orderby'] == '0'){
+            $this->db->query('SELECT DISTINCT restaurantorderitems.`fooditemId`,fooditems.`itemName`, COUNT(restaurantorderitems.`fooditemId`) AS NoOfCounts FROM restaurantorderitems INNER JOIN fooditems ON fooditems.`fooditemId` = restaurantorderitems.`fooditemId` INNER JOIN restaurantorders ON restaurantorders.`RestaurantOrderNo` = restaurantorderitems.`RestaurantOrderNo` WHERE restaurantorders.`Date` = :date GROUP BY restaurantorderitems.`fooditemId` ORDER BY NoOfCounts');
+
+            $this->db->bind(':date', $data['day']);
+
+            $result = $this->db->resultSet();
+
+            return $result;
+
+          }else if($data['orderby'] == '1'){
+            $this->db->query('SELECT DISTINCT restaurantorderitems.`fooditemId`,fooditems.`itemName`, COUNT(restaurantorderitems.`fooditemId`) AS NoOfCounts FROM restaurantorderitems INNER JOIN fooditems ON fooditems.`fooditemId` = restaurantorderitems.`fooditemId` INNER JOIN restaurantorders ON restaurantorders.`RestaurantOrderNo` = restaurantorderitems.`RestaurantOrderNo` WHERE restaurantorders.`Date` = :date GROUP BY restaurantorderitems.`fooditemId` ORDER BY NoOfCounts DESC');
+
+            $this->db->bind(':date', $data['day']);
+
+            $result = $this->db->resultSet();
+
+            return $result;
+            
+          }else{
+            return 0;
+          }
+        }
+      }
+    }
+
+    public function generateBarReport($data){
+      if($data['reporttype'] == '1'){
+        if($data['sort'] == '0'){
+          if($data['orderby'] == '0'){
+            $this->db->query('SELECT DISTINCT barorderitems.`barItemId`, baritems.`itemName`, COUNT(barorderitems.`barItemId`) AS NoOfCounts FROM barorderitems INNER JOIN baritems ON baritems.`barItemId` = barorderitems.`barItemId` GROUP BY barorderitems.`barItemId` ORDER BY NoOfCounts');
+
+            $results = $this->db->resultSet();
+
+            return $results;
+
+          }else if($data['orderby'] == '1'){
+            $this->db->query('SELECT DISTINCT barorderitems.`barItemId`, baritems.`itemName`, COUNT(barorderitems.`barItemId`) AS NoOfCounts FROM barorderitems INNER JOIN baritems ON baritems.`barItemId` = barorderitems.`barItemId` GROUP BY barorderitems.`barItemId` ORDER BY NoOfCounts DESC');
+
+            $results = $this->db->resultSet();
+
+            return $results;
+          }else{
+            return 0;
+          }
+        }
+        if($data['sort'] == '1'){
+          if($data['orderby'] == '0'){
+            $this->db->query('SELECT DISTINCT barorderitems.`barItemId`, baritems.`itemName`, COUNT(barorderitems.`barItemId`) AS NoOfCounts FROM barorderitems INNER JOIN baritems ON baritems.`barItemId` = barorderitems.`barItemId` INNER JOIN barorders ON barorders.`BarOrderNo` = barorderitems.`BarOrderNo` WHERE YEAR(barorders.`Date`) = :years GROUP BY barorderitems.`barItemId` ORDER BY NoOfCounts');
+
+            $this->db->bind(':years', $data['year']);
+
+            $result = $this->db->resultSet();
+
+            return $result;
+
+          }else if($data['orderby'] == '1'){
+            $this->db->query('SELECT DISTINCT barorderitems.`barItemId`, baritems.`itemName`, COUNT(barorderitems.`barItemId`) AS NoOfCounts FROM barorderitems INNER JOIN baritems ON baritems.`barItemId` = barorderitems.`barItemId` INNER JOIN barorders ON barorders.`BarOrderNo` = barorderitems.`BarOrderNo` WHERE YEAR(barorders.`Date`) = :years GROUP BY barorderitems.`barItemId` ORDER BY NoOfCounts DESC');
+
+            $this->db->bind(':years', $data['year']);
+
+            $result = $this->db->resultSet();
+
+            return $result;
+
+          }else{
+            return 0;
+          }
+        }
+        if($data['sort'] == '2'){
+          if($data['orderby'] == '0'){
+            $this->db->query('SELECT DISTINCT barorderitems.`barItemId`,baritems.`itemName`,  COUNT(barorderitems.`barItemId`) AS NoOfCounts FROM barorderitems INNER JOIN baritems ON baritems.`barItemId` = barorderitems.`barItemId` INNER JOIN barorders ON barorders.`BarOrderNo` = barorderitems.`BarOrderNo` WHERE YEAR(barorders.`Date`) = :years AND MONTH(barorders.`Date`) = :months GROUP BY barorderitems.`barItemId` ORDER BY NoOfCounts');
+
+            $this->db->bind(':years', $data['year']);
+            $this->db->bind(':months', $data['month']);
+
+            $result = $this->db->resultSet();
+
+            return $result;
+
+          }else if($data['orderby'] == '1'){
+            $this->db->query('SELECT DISTINCT barorderitems.`barItemId`,baritems.`itemName`, COUNT(barorderitems.`barItemId`) AS NoOfCounts FROM barorderitems INNER JOIN baritems ON baritems.`barItemId` = barorderitems.`barItemId` INNER JOIN barorders ON barorders.`BarOrderNo` = barorderitems.`BarOrderNo` WHERE YEAR(barorders.`Date`) = :years AND MONTH(barorders.`Date`) = :months GROUP BY barorderitems.`barItemId` ORDER BY NoOfCounts DESC');
+
+            $this->db->bind(':years', $data['year']);
+            $this->db->bind(':months', $data['month']);
+
+            $result = $this->db->resultSet();
+
+            return $result;
+
+          }else{
+            return 0;
+          }
+        }
+        if($data['sort'] == '3'){
+          if($data['orderby'] == '0'){
+            $this->db->query('SELECT DISTINCT barorderitems.`barItemId`,baritems.`itemName`, COUNT(barorderitems.`barItemId`) AS NoOfCounts FROM barorderitems INNER JOIN baritems ON baritems.`barItemId` = barorderitems.`barItemId` INNER JOIN barorders ON barorders.`BarOrderNo` = barorderitems.`BarOrderNo` WHERE barorders.`Date` = :date GROUP BY barorderitems.`barItemId` ORDER BY NoOfCounts');
+
+            $this->db->bind(':date', $data['day']);
+
+            $result = $this->db->resultSet();
+
+            return $result;
+
+          }else if($data['orderby'] == '1'){
+            $this->db->query('SELECT DISTINCT barorderitems.`barItemId`,baritems.`itemName`, COUNT(barorderitems.`barItemId`) AS NoOfCounts FROM barorderitems INNER JOIN baritems ON baritems.`barItemId` = barorderitems.`barItemId` INNER JOIN barorders ON barorders.`BarOrderNo` = barorderitems.`BarOrderNo` WHERE barorders.`Date` = :date GROUP BY barorderitems.`barItemId` ORDER BY NoOfCounts DESC');
+
+            $this->db->bind(':date', $data['day']);
+
+            $result = $this->db->resultSet();
+
+            return $result;
+            
+          }else{
+            return 0;
+          }
+        }
+      }
+
+      if($data['reporttype'] == '2'){
+        if($data['sort'] == '0'){
+          if($data['orderby'] == '0'){
+            $this->db->query('SELECT DISTINCT barordersnacks.`fooditemId`, fooditems.`itemName`, COUNT(barordersnacks.`fooditemId`) AS NoOfCounts FROM barordersnacks INNER JOIN fooditems ON fooditems.`fooditemId` = barordersnacks.`fooditemId` GROUP BY barordersnacks.`fooditemId` ORDER BY NoOfCounts');
+
+            $results = $this->db->resultSet();
+
+            return $results;
+
+          }else if($data['orderby'] == '1'){
+            $this->db->query('SELECT DISTINCT barordersnacks.`fooditemId`, fooditems.`itemName`, COUNT(barordersnacks.`fooditemId`) AS NoOfCounts FROM barordersnacks INNER JOIN fooditems ON fooditems.`fooditemId` = barordersnacks.`fooditemId` GROUP BY barordersnacks.`fooditemId` ORDER BY NoOfCounts DESC');
+
+            $results = $this->db->resultSet();
+
+            return $results;
+          }else{
+            return 0;
+          }
+        }
+        if($data['sort'] == '1'){
+          if($data['orderby'] == '0'){
+            $this->db->query('SELECT DISTINCT barordersnacks.`fooditemId`, fooditems.`itemName`, COUNT(barordersnacks.`fooditemId`) AS NoOfCounts FROM barordersnacks INNER JOIN fooditems ON fooditems.`fooditemId` = barordersnacks.`fooditemId` INNER JOIN barorders ON barorders.`BarOrderNo` = barordersnacks.`BarOrderNo` WHERE YEAR(barorders.`Date`) = :years GROUP BY barordersnacks.`fooditemId` ORDER BY NoOfCounts');
+
+            $this->db->bind(':years', $data['year']);
+
+            $result = $this->db->resultSet();
+
+            return $result;
+
+          }else if($data['orderby'] == '1'){
+            $this->db->query('SELECT DISTINCT barordersnacks.`fooditemId`, fooditems.`itemName`, COUNT(barordersnacks.`fooditemId`) AS NoOfCounts FROM barordersnacks INNER JOIN fooditems ON fooditems.`fooditemId` = barordersnacks.`fooditemId` INNER JOIN barorders ON barorders.`BarOrderNo` = barordersnacks.`BarOrderNo` WHERE YEAR(barorders.`Date`) = :years GROUP BY barordersnacks.`fooditemId` ORDER BY NoOfCounts DESC');
+
+            $this->db->bind(':years', $data['year']);
+
+            $result = $this->db->resultSet();
+
+            return $result;
+
+          }else{
+            return 0;
+          }
+        }
+        if($data['sort'] == '2'){
+          if($data['orderby'] == '0'){
+            $this->db->query('SELECT DISTINCT barordersnacks.`fooditemId`,fooditems.`itemName`, COUNT(barordersnacks.`fooditemId`) AS NoOfCounts FROM barordersnacks INNER JOIN fooditems ON fooditems.`fooditemId` = barordersnacks.`fooditemId` INNER JOIN barorders ON barorders.`BarOrderNo` = barordersnacks.`BarOrderNo` WHERE YEAR(barorders.`Date`) = :years AND MONTH(barorders.`Date`) = :months GROUP BY barordersnacks.`fooditemId` ORDER BY NoOfCounts');
+
+            $this->db->bind(':years', $data['year']);
+            $this->db->bind(':months', $data['month']);
+
+            $result = $this->db->resultSet();
+
+            return $result;
+
+          }else if($data['orderby'] == '1'){
+            $this->db->query('SELECT DISTINCT barordersnacks.`fooditemId`,fooditems.`itemName`, COUNT(barordersnacks.`fooditemId`) AS NoOfCounts FROM barordersnacks INNER JOIN fooditems ON fooditems.`fooditemId` = barordersnacks.`fooditemId` INNER JOIN barorders ON barorders.`BarOrderNo` = barordersnacks.`BarOrderNo` WHERE YEAR(barorders.`Date`) = :years AND MONTH(barorders.`Date`) = :months GROUP BY barordersnacks.`fooditemId` ORDER BY NoOfCounts DESC');
+
+            $this->db->bind(':years', $data['year']);
+            $this->db->bind(':months', $data['month']);
+
+            $result = $this->db->resultSet();
+
+            return $result;
+
+          }else{
+            return 0;
+          }
+        }
+        if($data['sort'] == '3'){
+          if($data['orderby'] == '0'){
+            $this->db->query('SELECT DISTINCT barordersnacks.`fooditemId`,fooditems.`itemName`, COUNT(barordersnacks.`fooditemId`) AS NoOfCounts FROM barordersnacks INNER JOIN fooditems ON fooditems.`fooditemId` = barordersnacks.`fooditemId` INNER JOIN barorders ON barorders.`BarOrderNo` = barordersnacks.`BarOrderNo` WHERE barorders.`Date` = :date GROUP BY barordersnacks.`fooditemId` ORDER BY NoOfCounts');
+
+            $this->db->bind(':date', $data['day']);
+
+            $result = $this->db->resultSet();
+
+            return $result;
+
+          }else if($data['orderby'] == '1'){
+            $this->db->query('SELECT DISTINCT barordersnacks.`fooditemId`,fooditems.`itemName`, COUNT(barordersnacks.`fooditemId`) AS NoOfCounts FROM barordersnacks INNER JOIN fooditems ON fooditems.`fooditemId` = barordersnacks.`fooditemId` INNER JOIN barorders ON barorders.`BarOrderNo` = barordersnacks.`BarOrderNo` WHERE barorders.`Date` = :date GROUP BY barordersnacks.`fooditemId` ORDER BY NoOfCounts DESC');
+
+            $this->db->bind(':date', $data['day']);
+
+            $result = $this->db->resultSet();
+
+            return $result;
+            
+          }else{
+            return 0;
+          }
+        }
+      }
+    }
+
+    public function generateComplainReport($data){
+      if($data['reporttype'] == '1'){
+        if($data['sort'] == '0'){
+          if($data['orderby'] == '0'){
+            $this->db->query('SELECT DISTINCT `ComplainType`,  COUNT(`ComplainType`) AS NoOfCounts FROM issues  GROUP BY ComplainType ORDER BY NoOfCounts');
+
+            $results = $this->db->resultSet();
+
+            return $results;
+
+          }else if($data['orderby'] == '1'){
+            $this->db->query('SELECT DISTINCT `ComplainType`,  COUNT(`ComplainType`) AS NoOfCounts FROM issues  GROUP BY ComplainType ORDER BY NoOfCounts DESC');
+
+            $results = $this->db->resultSet();
+
+            return $results;
+          }else{
+            return 0;
+          }
+        }
+        if($data['sort'] == '1'){
+          if($data['orderby'] == '0'){
+            $this->db->query('SELECT DISTINCT `ComplainType`, COUNT(`ComplainType`) AS NoOfCounts FROM issues WHERE YEAR(`Date`) = :years GROUP BY ComplainType ORDER BY NoOfCounts');
+
+            $this->db->bind(':years', $data['year']);
+
+            $result = $this->db->resultSet();
+
+            return $result;
+
+          }else if($data['orderby'] == '1'){
+            $this->db->query('SELECT DISTINCT `ComplainType`, COUNT(`ComplainType`) AS NoOfCounts FROM issues WHERE YEAR(`Date`) = :years GROUP BY ComplainType ORDER BY NoOfCounts DESC');
+
+            $this->db->bind(':years', $data['year']);
+
+            $result = $this->db->resultSet();
+
+            return $result;
+
+          }else{
+            return 0;
+          }
+        }
+        if($data['sort'] == '2'){
+          if($data['orderby'] == '0'){
+            $this->db->query('SELECT DISTINCT `ComplainType`, COUNT(`ComplainType`) AS NoOfCounts FROM issues WHERE YEAR(`Date`) = :years AND MONTH(`Date`) = :months GROUP BY `ComplainType` ORDER BY NoOfCounts');
+
+            $this->db->bind(':years', $data['year']);
+            $this->db->bind(':months', $data['month']);
+
+            $result = $this->db->resultSet();
+
+            return $result;
+
+          }else if($data['orderby'] == '1'){
+            $this->db->query('SELECT DISTINCT `ComplainType`, COUNT(`ComplainType`) AS NoOfCounts FROM issues WHERE YEAR(`Date`) = :years AND MONTH(`Date`) = :months GROUP BY `ComplainType` ORDER BY NoOfCounts DESC');
+
+            $this->db->bind(':years', $data['year']);
+            $this->db->bind(':months', $data['month']);
+
+            $result = $this->db->resultSet();
+
+            return $result;
+
+          }else{
+            return 0;
+          }
+        }
+        if($data['sort'] == '3'){
+          if($data['orderby'] == '0'){
+            $this->db->query('SELECT DISTINCT `ComplainType`, COUNT(`ComplainType`) AS NoOfCounts FROM issues WHERE `Date` = :date GROUP BY `ComplainType` ORDER BY NoOfCounts');
+
+            $this->db->bind(':date', $data['day']);
+
+            $result = $this->db->resultSet();
+
+            return $result;
+
+          }else if($data['orderby'] == '1'){
+            $this->db->query('SELECT DISTINCT `ComplainType`, COUNT(`ComplainType`) AS NoOfCounts FROM issues WHERE `Date` = :date GROUP BY `ComplainType` ORDER BY NoOfCounts DESC');
+
+            $this->db->bind(':date', $data['day']);
+
+            $result = $this->db->resultSet();
+
+            return $result;
+            
+          }else{
+            return 0;
+          }
+        }
+      }
+    }
   }

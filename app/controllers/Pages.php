@@ -25,6 +25,10 @@
       $this->view('pages/gallery');
     }
 
+    public function placekot(){
+      $this->view('pages/placekot');
+    }
+
     public function issues(){
 
       $data = [
@@ -36,6 +40,7 @@
         'cusNameError' => '',
         'cusEmailError' => '',
         'subjectError' => '',
+        'ctypeError' => '',
         'descriptionError' => ''
 
       ];
@@ -48,13 +53,18 @@
           'cusEmail' => trim($_POST['cusEmail']),
           'subject' => trim($_POST['subject']),
           'description' => trim($_POST['description']),
+          'ctype' => trim($_POST['ctype']),
           'status' => trim($_POST['status']),
           'cusNameError' => '',
           'cusEmailError' => '',
+          'ctypeError' => '',
           'subjectError' => '',
           'descriptionError' => ''
   
         ];
+
+        $date = date("Y/m/d");
+        $time = date("H:i:sa");
 
         //validating the inputs
 
@@ -70,6 +80,10 @@
           $data['subjectError'] = 'Please Enter a Subject';
         }
 
+        if(empty($data['ctype'])){
+          $data['ctypeError'] = 'Please Select Complain Type';
+        }
+
         if(empty($data['description'])){
           $data['descriptionError'] = 'Please Enter a Description';
         }
@@ -78,7 +92,7 @@
 
         if(empty($data['cusNameError']) && empty($data['cusEmailError']) && empty($data['subjectError']) && empty($data['descriptionError'])){
           
-          if($this->pageModel->addIssues($data)){
+          if($this->pageModel->addIssues($data,$date,$time)){
             header('location: ' . URLROOT . '/pages/issues');
           }else{
             die('Something Went Wrong!');
@@ -94,6 +108,7 @@
           'cusNameError' => '',
           'cusEmailError' => '',
           'subjectError' => '',
+          'ctypeError' => '',
           'descriptionError' => ''
   
         ];
@@ -129,15 +144,35 @@
         ];
 
         if(!empty($data['checkin']) && !empty($data['checkout']) && !empty($data['peoplecount'])){
-          $results = $this->pageModel->selectavailablerooms($data);
+          $possiblerooms = $this->pageModel->selectavailablerooms($data);
+          $bookedrooms= $this->pageModel->selectbookedrooms($data);
+
+          $size = count((array)$bookedrooms);
+
+          if(!empty($bookedrooms)){
+            for($i=0;$i<$size;$i++){
+              foreach($possiblerooms as $subk => $subarr){
+                if($bookedrooms[$i]->RoomNo == $subarr->RoomNo){
+                  unset($possiblerooms[$subk]);
+                }
+              }
+            }
+
+            
+          }
 
           $data = [
             'checkin' => trim($_POST['check-in']),
             'checkout' =>trim($_POST['check-out']),
             'peoplecount' => trim($_POST['people']),
             'package' => trim($_POST['package']),
-            'results' => $results
+            'results' => $possiblerooms,
+            'results2' => $bookedrooms
           ];
+
+          if(empty($data['results'])){
+            header('location: '. URLROOT . '/pages/noreservationsfound');
+          }
 
           $this->view('pages/roomselect', $data);
 
@@ -165,7 +200,7 @@
         'roomno' => '',
         'checkin' => '',
         'checkout' => '',
-        'packageid' => '',
+        'packagetypeid' => '',
         'peoplecount' => '',
       ];
 
@@ -176,11 +211,12 @@
           'roomno' => trim($_POST['roomno']),
           'checkin' => trim($_POST['checkin']),
           'checkout' => trim($_POST['checkout']),
-          'packageid' => trim($_POST['packageid']),
+          'packagetypeid' => trim($_POST['packagetypeid']),
           'peoplecount' => trim($_POST['peoplecount']),
           'cnameError' => '',
           'cidError' => '',
-          'cnumError' => ''
+          'cnumError' => '',
+          'packageid' => ''
         ];
 
         if(isset($_POST['cname'])){
@@ -188,13 +224,14 @@
           'roomno' => trim($_POST['roomno']),
           'checkin' => trim($_POST['checkin']),
           'checkout' => trim($_POST['checkout']),
-          'packageid' => trim($_POST['packageid']),
+          'packagetypeid' => trim($_POST['packagetypeid']),
           'peoplecount' => trim($_POST['peoplecount']),
           'cname' => trim($_POST['cname']),
           'cid' => trim($_POST['cid']),
           'cnum' => trim($_POST['cnum']),
           'status' => trim($_POST['status']),
-          'snotes' => trim($_POST['snotes'])
+          'snotes' => trim($_POST['snotes']),
+          'packageid' => ''
           ];
 
           if(empty($data['cname'])){
@@ -207,10 +244,19 @@
             $data['cnumError'] = 'Customer Number cant be empty';
           }
 
+          if(!empty($data['roomno']) && !empty($data['packagetypeid'])){
+            $roomno = $data['roomno'];
+            $packagetypeid = $data['packagetypeid'];
+            $packageid = $this->pageModel->getPackageId($roomno, $packagetypeid);
+            $data['packageid'] = $packageid->PackageId;
+          }
+
           if(empty($data['cnameError']) && empty($data['cidError']) && empty($data['cnumError'])){
-            if($this->pageModel->addReservations($data)){
-              if($this->pageModel->updateroomavailability($data)){
-                header('location: '. URLROOT . '/pages/index');
+            if($data['packageid']){
+              if($this->pageModel->addReservations($data)){
+                $result = $this->pageModel->getResNo();
+                $resno = $result->ResNo;
+                header('location: '. URLROOT . '/pages/success?resno='.$resno);
               }
               else{
               die('Something Went Wrong');
@@ -238,6 +284,14 @@
         ];
       }
       $this->view('pages/placereservation', $data);
+    }
+
+    public function success(){
+      $this->view('pages/success');
+    }
+
+    public function noreservationsfound(){
+      $this->view('pages/noreservationsfound');
     }
 
   }

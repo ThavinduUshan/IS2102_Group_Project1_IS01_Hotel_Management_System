@@ -1,4 +1,4 @@
-<?php if (!isset($_SESSION['UserID'])){ 
+<?php if (!isset($_SESSION['UserID'])|| $_SESSION["UserTypeID"] != 6){ 
       header('location: ' . URLROOT .  '/users/login');
 }?>
 <!DOCTYPE html>
@@ -51,7 +51,7 @@
   <div class="sys-right-col">
     
     <div class="rest-dash-search">
-      <form action="/action_page.php">
+      <form action="<?php echo URLROOT ?>/users/moderator" method="post">
         <input type="text" placeholder="Search Issue" name="search">
         <button type="submit"><i class="fa fa-search fa-2x"></i></button>
       </form>

@@ -1,3 +1,6 @@
+<?php if (!isset($_SESSION['UserID']) || $_SESSION["UserTypeID"] != 5){ 
+      header('location: ' . URLROOT .  '/users/login');
+}?>
 <!DOCTYPE html>
 <html lang="en">
 <head>
@@ -7,7 +10,7 @@
   <link rel="preconnect" href="https://fonts.googleapis.com">
   <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
   <link href="https://fonts.googleapis.com/css2?family=Open+Sans:wght@300;400;600;700;800&display=swap" rel="stylesheet">
-  <link rel="stylesheet" href="<?php echo URLROOT ?>/public/css/system.css">
+  <link rel="stylesheet" href="<?php echo URLROOT ?>/public/css/stylen.css">
   <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/@fortawesome/fontawesome-free@5.15.4/css/fontawesome.min.css" integrity="sha384-jLKHWM3JRmfMU0A5x5AkjWkw/EYfGUAGagvnfryNV3F9VqM98XiIH7VBGVoxVSc7" crossorigin="anonymous">
   <script src="https://use.fontawesome.com/a6a11daad8.js"></script>
  
@@ -24,7 +27,6 @@
           <i class="fa fa-user-circle-o fa-2x"></i>
         </button>
         <div class="dropdown-content">
-          <a href="<?php echo URLROOT?>/kitchens/settings">Settings</a>
           <a href="<?php echo URLROOT; ?>/users/logout">Logout</a>
         </div>
       </div>
@@ -43,7 +45,6 @@
   </script>
 
   <!-- System Block -->
-
   <div class="sys-left-col">
   <div class="bar-dash-plus1">
       <a href="<?php echo URLROOT ?>/users/headchef">
@@ -74,16 +75,8 @@
       </div>
             <h5 class="Kitchen-orderlist">ORDER LIST :</h5>
             
-            <div class="Kitchen-wrap">
-                <div class="Kitchen-search">
-                   <input type="text" class="Kitchen-searchTerm">
-                   <a href="#searchrestorder"><button type="submit" class="Kitchen-searchButton">
-                    <i class="fa fa-search" aria-hidden="true"></i>
-                  </button></a>
-                </div>
-             </div>
+          
 
-             
 <table class="Kitchen-table">
 <tr>
   <th>Order No</th>
@@ -91,17 +84,19 @@
   <th>Status</th>
   <th></th>
 </tr>
+<?php foreach($data['restaurantorders'] as $restorder): ?>
 <tr>
-  <td></td>
-  <td></td>
-  <td></td>
-<td><a href="<?php echo URLROOT?>/kitchens/updateorderstatus"><i class="fa fa-pencil-square-o" aria-hidden="true"></i></a></td> 
+<td><?php echo $restorder->RestaurantOrderNo?></td>
+  <td><?php echo $restorder->TableNo?></td>
+  <td><?php echo $restorder->Status?></td>
+<td><a href="<?php echo URLROOT.'/kitchens/Restaurantorderstatus?orderno='. $restorder->RestaurantOrderNo ?>"><i class="fa fa-pencil-square-o" aria-hidden="true"></i></a></td> 
+
+
 </tr>
-
-
-
-</table> 
-  </div>
+<?php endforeach; ?>
+</table>
+<br><br>
+</div>
 
 </body>
 </html>

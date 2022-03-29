@@ -1,4 +1,4 @@
-<?php if (!isset($_SESSION['UserID'])){ 
+<?php if (!isset($_SESSION['UserID']) || $_SESSION["UserTypeID"] != 1){ 
       header('location: ' . URLROOT .  '/users/login');
 }?>
 <!DOCTYPE html>
@@ -28,7 +28,6 @@
           <i class="fa fa-user-circle-o fa-2x"></i>
         </button>
         <div class="dropdown-content">
-          <a href="<?php echo URLROOT ?>/admins/settings">Settings</a>
           <a href="<?php echo URLROOT; ?>/users/logout">Logout</a>
         </div>
       </div>
@@ -37,7 +36,6 @@
     <div class="admin-dashboard">
     <span class="admin-button-set">
         <button type="button" class="admin-button"><a href="<?php echo URLROOT; ?>/admins/manageusers">Manage Users</a></button>
-        <button type="button" class="admin-button"><a href="<?php echo URLROOT; ?>/admins/databases">Databases</a></button>
         <button type="button" class="admin-button"><a href="<?php echo URLROOT; ?>/admins/reportmanagement">Reports</a></button>
         <button type="button" class="admin-button"><a href="<?php echo URLROOT; ?>/admins/changepackage">Manage Rooms</a></button>
         <!--<button type="button" class="admin-button"><a href="/<?php echo URLROOT; ?>/admins/manageissues">Issues</a></button> -->
@@ -79,7 +77,7 @@
             <h1>Total Earnings</h1>
           </div>
           <div class="admin-data-name-col">
-            <h1 style="color:grey"><?php echo $data['earningstoday']?></h1>
+            <h1 style="color:grey"><?php echo "Rs." .$data['earningstoday'] . ".00"?></h1>
           </div>
         </div>  
         <hr>

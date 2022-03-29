@@ -105,11 +105,11 @@
           'results' => ''
         ];
 
-          if(isset($_POST['yearselect'])){
-            $data['year'] = trim($_POST['yearselect']);
+          if(!empty($_POST['yearselect'])){
+            $data['year'] = $_POST['yearselect'];
           }
           
-          if(isset($_POST['monthselect'])){
+          if(!empty($_POST['monthselect'])){
 
             $year = date("Y", strtotime($_POST['monthselect']));
             $month = date("m", strtotime($_POST['monthselect']));
@@ -140,15 +140,122 @@
     }
 
     public function restaurantreports(){
-      $this->view('admins/restaurantreports');
+
+      if($_SERVER['REQUEST_METHOD'] == 'POST'){
+        $_POST = filter_input_array(INPUT_POST, FILTER_SANITIZE_STRING);
+
+        $data = [
+          'sort' => trim($_POST['sort']),
+          'reporttype' => trim($_POST['reporttype']),
+          'orderby' => trim($_POST['orderby']),
+          'year' => '',
+          'month' => '',
+          'day' => trim($_POST['day']),
+          'results' => ''
+        ];
+
+          if(!empty($_POST['yearselect'])){
+            $data['year'] = trim($_POST['yearselect']);
+          }
+          
+          if(!empty($_POST['monthselect'])){
+
+            $year = date("Y", strtotime($_POST['monthselect']));
+            $month = date("m", strtotime($_POST['monthselect']));
+
+            $data['year'] = $year;
+            $data['month'] = $month;
+
+          }
+
+          $data['results'] = $this->adminModel->generateRestaurantReport($data);
+
+          $this->view('admins/popularfooditems',$data);
+
+      }else{
+        $this->view('admins/restaurantreports');
+      }
     }
 
     public function barreports(){
-      $this->view('admins/barreports');
+      if($_SERVER['REQUEST_METHOD'] == 'POST'){
+        $_POST = filter_input_array(INPUT_POST, FILTER_SANITIZE_STRING);
+
+        $data = [
+          'sort' => trim($_POST['sort']),
+          'reporttype' => trim($_POST['reporttype']),
+          'orderby' => trim($_POST['orderby']),
+          'year' => '',
+          'month' => '',
+          'day' => trim($_POST['day']),
+          'results' => ''
+        ];
+
+          if(!empty($_POST['yearselect'])){
+            $data['year'] = trim($_POST['yearselect']);
+          }
+          
+          if(!empty($_POST['monthselect'])){
+
+            $year = date("Y", strtotime($_POST['monthselect']));
+            $month = date("m", strtotime($_POST['monthselect']));
+
+            $data['year'] = $year;
+            $data['month'] = $month;
+
+          }
+
+          $data['results'] = $this->adminModel->generateBarReport($data);
+
+          if($data['reporttype'] == '1'){
+            $this->view('admins/popularbaritems', $data);
+          }
+          else if($data['reporttype'] == '2'){
+            $this->view('admins/popularsnackitems', $data);
+          }
+
+      }else{
+        $this->view('admins/barreports');
+      }
     }
 
     public function complainreports(){
-      $this->view('admins/complainreports');
+
+      if($_SERVER['REQUEST_METHOD'] == 'POST'){
+        $_POST = filter_input_array(INPUT_POST, FILTER_SANITIZE_STRING);
+
+        $data = [
+          'sort' => trim($_POST['sort']),
+          'reporttype' => trim($_POST['reporttype']),
+          'orderby' => trim($_POST['orderby']),
+          'year' => '',
+          'month' => '',
+          'day' => trim($_POST['day']),
+          'results' => ''
+        ];
+
+          if(!empty($_POST['yearselect'])){
+            $data['year'] = trim($_POST['yearselect']);
+          }
+          
+          if(!empty($_POST['monthselect'])){
+
+            $year = date("Y", strtotime($_POST['monthselect']));
+            $month = date("m", strtotime($_POST['monthselect']));
+
+            $data['year'] = $year;
+            $data['month'] = $month;
+
+          }
+
+          $data['results'] = $this->adminModel->generateComplainReport($data);
+
+          $this->view('admins/issuescomplained',$data);
+
+      }else{
+        $this->view('admins/complainreports');
+      }
+      
     }
 
     public function reportmanagement(){

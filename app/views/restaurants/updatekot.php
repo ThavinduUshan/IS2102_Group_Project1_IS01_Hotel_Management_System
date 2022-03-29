@@ -1,4 +1,4 @@
-<?php if (!isset($_SESSION['UserID'])){ 
+<?php if (!isset($_SESSION['UserID'])|| $_SESSION["UserTypeID"] != 3){ 
       header('location: ' . URLROOT .  '/users/login');
 }?>
 <!DOCTYPE html>
@@ -10,9 +10,22 @@
   <link rel="preconnect" href="https://fonts.googleapis.com">
   <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
   <link href="https://fonts.googleapis.com/css2?family=Open+Sans:wght@300;400;600;700;800&display=swap" rel="stylesheet">
-  <link rel="stylesheet" href="<?php echo URLROOT ?>/public/css/stylen.css">
+  <link rel="stylesheet" href="<?php echo URLROOT ?>/public/css/stylef.css">
   <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/@fortawesome/fontawesome-free@5.15.4/css/fontawesome.min.css" integrity="sha384-jLKHWM3JRmfMU0A5x5AkjWkw/EYfGUAGagvnfryNV3F9VqM98XiIH7VBGVoxVSc7" crossorigin="anonymous">
   <script src="https://use.fontawesome.com/a6a11daad8.js"></script>
+  <script type="text/javascript" src="https://ajax.googleapis.com/ajax/libs/jquery/3.5.1/jquery.min.js"></script>
+  <script type="text/javascript">
+  function add_row()
+  {
+    $rowno=$("#dynamic_table tr").length;
+    $rowno=$rowno+1;
+    $("#dynamic_table tr:last").after("<tr id='row"+$rowno+"'><td><select id='itemName' name='itemName[]'><option value='select an option' select='selected'>--select an item--</option><?php foreach($data['fooditems'] as $fooditems): ?><option value='<?php echo $fooditems->itemName; ?>'><?php echo $fooditems->itemName; ?></option><?php endforeach; ?></select></td><td><select id='portion' name='portion[]'><option value='select an option' select='selected'>--select an item--</option><option value='Small'>Small</option><option value='Regular'>Regular</option><option value='Large'>Large</option></select></td><td><input type='number' id='quantity' name='quantity[]' placeholder='Quantity' min='1'></td><td><input type='button' value='DELETE' onclick=delete_row('row"+$rowno+"')></td></tr>");
+  }
+  function delete_row(rowno)
+  {
+    $('#'+rowno).remove();
+  }
+</script>
   <title>Update KOT</title>
 </head>
 <body>
@@ -70,47 +83,64 @@
   </div>
   
   <div class="sys-right-col">
-    <div class="KOT-right">
+  <div class="rest-bill-date">
+      <table>
+        <tr>
+          <td>Order No:<?php echo " " .$_GET['orderno']?></td>
+        </tr>
+      </table>
+    </div>
 
     <!--Place KOT Heading -->
 
     <div class="KOT-Heading">
-      <form action="sendkot.php">
+    
+    <div class="dynamic_form">      
+      <h2 style="color:#01661b">Add Food Item</h2>
+      <br><br>
+      <form method="post" action="<?php echo URLROOT; ?>/restaurants/updatekot">
 
-        <div class="kot-form-head2">
-          <label for="roomno"><h3>Table No:</h3></label>
-          <input type="text" id="roomno" name="roomno">
-        </div><br>
+      
 
-        <label for="kotno"><h3>KOT No:</h3></label>
-        <input type="text" id="kotno" name="kotno"><br>
+      <input type="button" onclick="add_row();" value="ADD ROW"><br><br>
+      <input type="text" name="restaurantorderno" value="<?php echo $_GET['orderno']?>" hidden>
+      <input type="text" name="tableno" value="<?php echo $_GET['tableno']?>" hidden>
+
+        <table id="dynamic_table" align=center>
+        <tr id="row1">
+          <td>
+              <select id="itemName" name="itemName[]">
+              <option value="select an option" select="selected">--select an option--</option>
+              <?php foreach($data['fooditems'] as $fooditems): ?>
+              <option value="<?php echo $fooditems->itemName; ?>"><?php echo $fooditems->itemName; ?></option>
+              <?php endforeach; ?>
+              </select>
+          </td>
+          <td>
+              <select id="portion" name="portion[]">
+              <option value="select an option" select="selected">--select an option--</option>
+                <option value="Small">Small</option>
+                <option value="Regular">Regular</option>
+                <option value="Large">Large</option>
+              </select>
+          </td>
+          <td>
+              <input type="number" id="quantity" name="quantity[]" placeholder="Quantity" min="1">
+          </td>
+        </tr>
+        </table>
+              <select id="status" name="status" hidden>
+                <option value="Pending" select=selected>Pending</option>
+                <option value="Prepared">Prepared</option>
+                <option value="Completed">closed</option>
+              </select>
+              <br><br>
+        <input type="submit" name="submit_row" value="SUBMIT">
       </form>
     </div>
-
-    <div class="kot-food-add-form">
-      
-      <form action="add.php">
-
-        <select id="name" name="name">
-          <option value="item ">Select the Food Item</option>
-          <option value="item 1">item 1</option>
-          <option value="item 2">item 2</option>
-          <option value="item 3">item 3</option>
-        </select><br><br>
-
-        <input type="text" id="quantity" name="quantity" placeholder="Quantity"><br><br>
-
-        <select id="potion" name="portion">
-          <option value="Small">Small</option>
-          <option value="Normal">Normal</option>
-          <option value="large">large</option>
-        </select><br><br><br>
-      
-        <input type="submit" value="Add the Food Item"><br><br>
-
-      
-      </form>
     </div>
+
+    
 
     <!-- Room KOT Details -->
     <div class="res-kot-detail-heading">       
@@ -130,57 +160,31 @@
               <th style="width:10%;"></th>
               </tr>
               
+              <?php foreach($data['fooditemnames'] as $fooditemnames): ?>
               <tr>
-              <td></td>
-              <td></td>
-              <td></td>
-              <td><a href="#"><i class="fa fa-pencil-square-o fa-2x" aria-hidden="true"></i></a></td>
-              <td><a href="#"><i class="fa fa-trash-o fa-2x" aria-hidden="true"></i></a></td>
+              <td><?php echo $fooditemnames->itemName; ?></td>
+              <td><?php echo $fooditemnames->Quantity; ?></td>
+              <td><?php echo $fooditemnames->PortionType; ?></td>
+              <td><a href="<?php echo URLROOT; ?>/restaurants/updateorderfooditem?itemno=<?php echo $fooditemnames->RestaurantOrderItemNo?>&orderno=<?php echo $fooditemnames->RestaurantOrderNo?>"><i class="fa fa-pencil-square-o fa-2x" aria-hidden="true"></i></a></td>
+              <td><form action="<?php echo URLROOT .'/restaurants/deleteorderitem?itemno='. $fooditemnames->RestaurantOrderItemNo?>" method="POST"><button type="submit"><i class="fa fa-trash-o fa-2x" aria-hidden="true"></i></button></form></td>
               </tr>
-
-              <tr>
-              <td></td>
-              <td></td>
-              <td></td>
-              <td><a href="#"><i class="fa fa-pencil-square-o fa-2x" aria-hidden="true"></i></a></td>
-              <td><a href="#"><i class="fa fa-trash-o fa-2x" aria-hidden="true"></i></a></td>
-              </tr>
-
-              <tr>
-              <td></td>
-              <td></td>
-              <td></td>
-              <td><a href="#"><i class="fa fa-pencil-square-o fa-2x" aria-hidden="true"></i></a></td>
-              <td><a href="#"><i class="fa fa-trash-o fa-2x" aria-hidden="true"></i></a></td>
-              </tr>
-
+              <?php endforeach; ?>
             </table><br><br>
 
             <div class="recep-kot-form">
-      
-            <form action="<?php echo URLROOT ?>/restaurants/restaurantbill">
-              <label for="snotes">Special Notes:</label><br>
-              <textarea name="" id="" cols="30" rows="8"></textarea><br><br>
               
-              <div class="res-kot-details-update-button"> 
-                <a href="#roomplaceorder"><button type="submit">Update KOT</button></a>
-              </div>
-
               <div class="res-kot-details-cancel-button"> 
-                <a href="#roomplaceorder"><button type="submit">Cancel KOT</button></a>
+                <a href="<?php echo URLROOT?>/restaurants/cancelorder?orderno=<?php echo $_GET['orderno']?>"><button type="submit">Cancel KOT</button></a>
               </div><br>
 
               <div class="res-kot-details-close-button"> 
-              <a href="<?php echo URLROOT ?>/restaurants/restaurantbill"><button type="submit">Close Order</button></a>
+              <a href="<?php echo URLROOT?>/restaurants/restaurantbill?orderno=<?php echo $_GET['orderno']?>" ><button type="submit">Close Order</button></a>
             </div>
             <br><br>
-
-            </form>
             
             </div>
                 
           </div>
-  </div>
   </div>
 
 </body>

@@ -1,4 +1,4 @@
-<?php if (!isset($_SESSION['UserID'])){ 
+<?php if (!isset($_SESSION['UserID']) || $_SESSION["UserTypeID"] != 3){ 
       header('location: ' . URLROOT .  '/users/login');
 }?>
 <!DOCTYPE html>
@@ -26,7 +26,6 @@
           <i class="fa fa-user-circle-o fa-2x"></i>
         </button>
         <div class="dropdown-content">
-          <a href="<?php echo URLROOT ?>/restaurants/settings">Settings</a>
           <a href="<?php echo URLROOT; ?>/users/logout">Logout</a>
         </div>
       </div>
@@ -77,35 +76,33 @@
 
     <div class="rest-add-food-form">
       
-      <form action="<?php echo URLROOT ?>/restaurants/updatefooditem" name="add-food-item-form" method="post">
-        <label for="itemname">Item Name:</label><br>
-        <input type="text" id="itemname" name="itemName" placeholder="Enter the Name"><br>
+      <form action="" method="post">
+        <label for="name">Name:</label><br>
+        <input type="text" id="itemName" name="itemName" value="<?php echo $data['fooditems']->itemName?>"><br><br>
 
-        <label for="category">Food Category:</label><br>
+        <label for="fcategory">Food Category:</label><br>
         <select id="category" name="category">
-          <option value="Starter">Starter</option>
+        <option value="<?php echo $data['fooditems']->category?>"><?php echo $data['fooditems']->category?></option>
+        <option value="Starter">Starter</option>
           <option value="Soup">Soup</option>
           <option value="Dish">Dish</option>
           <option value="Dessert">Dessert</option>
           <option value="Beverage">Beverage</option>
-        </select><br>
+        </select><br><br>
 
         <label for="portion">Portion:</label><br>
         <select id="portion" name="portion">
-          <option value="Small">Small</option>
-          <option value="Regular">Regular</option>
-          <option value="Large">Large</option>
-        </select><br>
+        <option value="<?php echo $data['fooditems']->portion?>"><?php echo $data['fooditems']->portion?></option>
+        <option value="Small">Small</option>
+          <option value="Normal">Normal</option>
+          <option value="large">large</option>
+        </select><br><br>
 
-        <label for="status">Availability</label><br>
-        <select id="status" name="status">
-            <option value="Available" selected="selected">Available</option>
-            <option value="Unavailable">Unavailable</option>
-          </select><br>
         <label for="price">Price:</label><br>
-        <input type="text" id="price" name="price" placeholder="Price">
-        <br>
-        <input type="submit" name="submit" value="Update Item">
+        <input type="text" id="price" name="price" value="<?php echo $data['fooditems']->price?>"><br><br>
+      
+        <input type="submit" value="Update Item">
+      
       </form>
     </div>
 
