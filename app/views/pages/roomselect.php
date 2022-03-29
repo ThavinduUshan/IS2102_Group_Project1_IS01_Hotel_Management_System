@@ -38,6 +38,7 @@ if(empty($data['checkin']) && empty ($data['checkout'])){
           $checkin = strtotime($data['checkin']);
           $checkout = strtotime($data['checkout']);
           $datediff = ($checkout - $checkin) / (60*60*24);
+          $datediff = ceil($datediff);
           $calculatedprice = $datediff * intval($room->Price);
         ?>
       <div class="room-card">

@@ -62,6 +62,7 @@ if(empty($_GET['resno'])){
       <br><br>
       <a href="<?php echo URLROOT?>/pages/"><p> Go Back to Home</a>
   </div>
+  <br><br>
 </section>
 </body>
 </html>
