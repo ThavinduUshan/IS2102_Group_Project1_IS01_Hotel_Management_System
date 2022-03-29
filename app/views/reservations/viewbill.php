@@ -1,4 +1,4 @@
-<?php if (!isset($_SESSION['UserID'])|| $_SESSION["UserTypeID"] != 2){ 
+<?php if (!isset($_SESSION['UserID']) || $_SESSION["UserTypeID"] != 2){ 
       header('location: ' . URLROOT .  '/users/login');
 }?>
 <!DOCTYPE html>
@@ -13,14 +13,7 @@
   <link rel="stylesheet" href="<?php echo URLROOT ?>/public/css/stylen.css">
   <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/@fortawesome/fontawesome-free@5.15.4/css/fontawesome.min.css" integrity="sha384-jLKHWM3JRmfMU0A5x5AkjWkw/EYfGUAGagvnfryNV3F9VqM98XiIH7VBGVoxVSc7" crossorigin="anonymous">
   <script src="https://use.fontawesome.com/a6a11daad8.js"></script>
-  <title>Room Bill</title>
-  <style>
-    input::-webkit-outer-spin-button,
-    input::-webkit-inner-spin-button {
-      -webkit-appearance: none;
-      margin: 0;
-    }
-  </style>
+  <title>View Bill</title>
 </head>
 <body>
   <section class="system">
@@ -38,7 +31,7 @@
       </div>
       <a href="javascript:void(0);" style="width:15px;" class="icon" onclick="dropdown()">&#9776;</a>
     </nav>
-  </section>
+    </section>
   <script>
     function dropdown() {
       var x = document.getElementById("sysnav");
@@ -65,8 +58,7 @@
       </a>
       <p>Dashboard</p>
     </div>
-
-    <div class="reservation-dash-plus1">
+    <div class="bar-dash-plus1">
       <a href="<?php echo URLROOT ?>/reservations/completedreservations">
         <i class="fa fa-list-alt fa-4x" aria-hidden="true"></i>
       </a>
@@ -84,8 +76,8 @@
     <div class="rest-bill-date">
       <table>
         <tr>
-          <td>Res No:<?php echo " " . $_GET['resno']?></td>
-          <td>Room No:<?php echo " " . $_GET['roomno']?></td>
+          <td>Res No:<?php echo " " . $data['results']->ResNo?></td>
+          <td>Room No:<?php echo " " . $data['results']->RoomNo?></td>
         </tr>
       </table>
     </div>
@@ -133,75 +125,23 @@
     </div>
 
     <div class="rest-bill-3">
-      <form action="<?php echo URLROOT ?>/reservations/roombill?resno=<?php echo $_GET['resno']?>&roomno=<?php echo $_GET['roomno']?>" method="post">
+      <form action="<?php echo URLROOT ?>/reservations/roombill?resno=<?php echo $data['results']->ResNo?>&roomno=<?php echo $data['results']->RoomNo?>" method="post">
         <label for="tprice">Total Price:</label>
-        <input type="number" id="tprice" name="tprice" value="<?php echo $days*$data['results']->Price?>" readonly><br>
+        <input type="text" id="tprice" name="tprice" value="<?php echo $data['results']->TotalPrice?>" readonly><br>
         <label for="discount">Discount:</label>
-        <input type="number" id="discount" name="discount" style="background-color:#e5e5e5" min="0">  %</br>
+        <input type="text" id="discount" name="discount" onkeyup="getDiscount()" style="background-color:#e5e5e5" value="<?php echo $data['results']->TotalPrice?>" readonly>  %</br>
         <label for="dtprice">Discounted Total Price:</label>
-        <input type="number" id="dtprice" name="dtprice" readonly><br>
+        <input type="text" id="dtprice" name="dtprice" value="<?php echo $data['results']->DiscountedPrice?>" readonly><br>
         <label for="amount">Amount:</label>
-        <input type="number" id="amount" name="amount" style="background-color:#e5e5e5" min="1" required><br>
+        <input type="text" id="amount" name="amount" onkeyup="getBalance()" style="background-color:#e5e5e5" value="<?php echo $data['results']->Amount?>" readonly><br>
         <label for="balance">Balance:</label>
-        <input type="number" id="balance" name="balance" min="0" readonly><br><br>
-        <input type="submit" value="Generate Bill"><br><br>
-        <span class="error">
-            <p><?php echo $data['discountError'];?></p>
-        </span>
-        <span class="error">
-            <p><?php echo $data['amountError'];?></p>
-        </span>
+        <input type="text" id="balance" name="balance" value="<?php echo $data['results']->Balance?>" readonly><br>
       </form>
-      <br>
     </div>
 
     </div>
-    <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.6.0/jquery.min.js"></script>
+    </section>
     <script>
-     $(document).on("change keyup keydown blur", "#discount", function() {
- 
-         var grandtotal =0;
-         var dis =0;
-         dis = $("#discount").val();
-         var subtotal = $("#tprice").val();
-         var pamount = $("#amount").val();
-         if(dis !=0 && dis>0 && dis< 101){
-             grandtotal =  (parseFloat(subtotal)*(100-parseFloat(dis)))/100;
-             
-             if (pamount != 0 && pamount>0){
-                var  balance =  parseFloat(pamount )- parseFloat(grandtotal);
-                $('#balance').val( balance.toFixed(2));
-                $('#dtprice').val( grandtotal.toFixed(2));
-             }else{
-               $('#balance').val(null);
-             $('#dtprice').val( grandtotal.toFixed(2));
-                 }
-             // $('#balance').val(null );
- 
-         }else{
-           $('#dtprice').val( subtotal);
-         }
- 
-     });
-     $(document).on("change keyup keydown blur", "#amount", function() {
- 
-         var balance =0;
-         var pamount = $("#amount").val();
-         var grandtotal = $("#dtprice").val();
-         if(pamount !=0 && pamount > 0){
-             balance =  parseFloat(pamount )- parseFloat(grandtotal);
- 
-             $('#balance').val( balance.toFixed(2));
-         }else{
-           $('#balance').val(balance);
-         }
- 
-     });
- 
- 
- 
- </script>
-    <!-- <script>
         getDiscount = function() {
             var numVal1 = Number(document.getElementById("tprice").value);
             var numVal2 = Number(document.getElementById("discount").value) / 100;
@@ -223,6 +163,7 @@
             document.getElementById("balance").value = '';
           }
         }
-    </script> -->
+    </script>
+    
 </body>
 </html>

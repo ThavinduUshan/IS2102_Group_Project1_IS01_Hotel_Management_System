@@ -1,4 +1,4 @@
-<?php if (!isset($_SESSION['UserID'])){ 
+<?php if (!isset($_SESSION['UserID'])|| $_SESSION["UserTypeID"] != 2){ 
       header('location: ' . URLROOT .  '/users/login');
 }?>
 <!DOCTYPE html>
@@ -16,7 +16,7 @@
   <title>Place Reservation</title>
 </head>
 <body>
-  <section class="system">
+<section class="system">
     <nav class="sys-nav" id="sysnav">
       <a href="<?php echo URLROOT ?>/users/receptionist">
           <img src="<?php echo URLROOT ?>/public/img/logo-nav.jpg">
@@ -26,42 +26,20 @@
           <i class="fa fa-user-circle-o fa-2x"></i>
         </button>
         <div class="dropdown-content">
-          <a href="<?php echo URLROOT ?>/reservations/settings">Settings</a>
           <a href="<?php echo URLROOT; ?>/users/logout">Logout</a>
         </div>
       </div>
       <a href="javascript:void(0);" style="width:15px;" class="icon" onclick="dropdown()">&#9776;</a>
     </nav>
   </section>
-  <script>
-    function dropdown() {
-      var x = document.getElementById("sysnav");
-      if (x.className === "sys-nav") {
-        x.className += " responsive";
-      } else {
-        x.className = "sys-nav";
-      }
-    }
-  </script>
 
   <!-- System Block -->
-
   <div class="sys-left-col">
-
-  <div class="recep-dash-plus1">
-      <a href="<?php echo URLROOT ?>/reservations/selectdate">
-        <i class="fa fa-plus-square fa-4x" aria-hidden="true"></i>
-      </a>
-      <p>Place Reservation</p>
-    </div>
-
-    <div class="bar-dash-plus1">
+    <div class="place-res-img">
       <a href="<?php echo URLROOT ?>/users/receptionist">
-        <i class="fa fa-home fa-4x" aria-hidden="true"></i>
+        <img src="<?php echo URLROOT ?>/public/img/logo.png">
       </a>
-      <p>Dashboard</p>
     </div>
-  </div>
   </div>
   
   <div class="sys-right-col">
@@ -70,39 +48,35 @@
 
     <div class="recep-reserv-form">
 
-      <form action="recerve.php">
+      <form action="<?php echo URLROOT?>/reservations/placereservation" method="post">
 
-        <label for="cname">Customer Name:</label>
+        <h1>Enter Your Info</h1>
+        <input type="hidden" name="roomno" value="<?php echo $data['roomno']?>">
+        <input type="hidden" name="checkin" value="<?php echo $data['checkin']?>">
+        <input type="hidden" name="checkout" value="<?php echo $data['checkout']?>">
+        <input type="hidden" name="packagetypeid" value="<?php echo $data['packagetypeid']?>">
+        <input type="hidden" name="peoplecount" value="<?php echo $data['peoplecount']?>">
+        <label for="cname">Customer Name: *</label>
         <input type="text" id="cname" name="cname"><br><br>
 
-        <label for="cid">Customer ID:</label>
+        <label for="cid">Customer ID: *</label>
         <input type="text" id="cid" name="cid"><br><br>
 
-        <label for="cnum">Customer Mobile:</label>
+        <label for="cnum">Customer Mobile: *</label>
         <input type="text" id="cnum" name="cnum"><br><br>
 
-        <label for="ptype">Package Type:</label>
-        <select id="ptype" name="ptype">
-          <option value="">Room Only</option>
-          <option value="">Bed & Breakfast</option>
-          <option value="">Half Board</option>
-          <option value="">Full Board</option>
-        </select><br><br>
-
         <select id="status" name="status" class="res-status">
-          <option value="available" select="selected">Available</option>
-          <option value="unavailable">Unavaialable</option>
+          <option value="Booked" select="selected">Booked</option>
         </select><br><br>
 
         <label for="snotes">Special Notes:</label><br><br>
-        <textarea name="" id="" cols="30" rows="3"></textarea> <br><br>
+        <textarea name="snotes" id="" cols="30" rows="3"></textarea> <br><br>
 
-        <button>Place Reservation</button><br><br>
+        <button type="submit">Place Reservation</button><br><br>
        </form>
       </div>
     </div>
 
   </div>
-
 </body>
 </html>

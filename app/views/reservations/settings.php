@@ -45,7 +45,6 @@
   </script>
 
   <!-- System Block -->
-
   <div class="sys-left-col">
 
   <div class="bar-dash-plus1">
@@ -60,6 +59,12 @@
         <i class="fa fa-plus-square fa-4x" aria-hidden="true"></i>
       </a>
       <p>Place Reservation</p>
+    </div>
+    <div class="reservation-dash-plus1">
+      <a href="<?php echo URLROOT ?>/reservations/completedreservations">
+        <i class="fa fa-list-alt fa-4x" aria-hidden="true"></i>
+      </a>
+      <p>Completed<br> Reservations</p>
     </div>
   </div>
   <div class="sys-right-col">
