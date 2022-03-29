@@ -57,13 +57,25 @@
         <input type="hidden" name="packagetypeid" value="<?php echo $data['packagetypeid']?>">
         <input type="hidden" name="peoplecount" value="<?php echo $data['peoplecount']?>">
         <label for="cname">Customer Name: *</label>
-        <input type="text" id="cname" name="cname"><br><br>
-
+        <input type="text" id="cname" name="cname">
+        <br><br>
+        <span class="error">
+          <p><?php echo $data['cnameError'];?></p>
+        </span>
+        <br>
         <label for="cid">Customer ID: *</label>
-        <input type="text" id="cid" name="cid"><br><br>
+        <input type="text" id="cid" name="cid">
+        <span class="error"><br><br>
+            <p><?php echo $data['cidError'];?></p>
+          </span>
+          <br>
 
         <label for="cnum">Customer Mobile: *</label>
-        <input type="text" id="cnum" name="cnum"><br><br>
+        <input type="text" id="cnum" name="cnum">
+        <span class="error"><br><br>
+            <p><?php echo $data['cnumError'];?></p>
+          </span>
+          <br>
 
         <select id="status" name="status" class="res-status">
           <option value="Booked" select="selected">Booked</option>

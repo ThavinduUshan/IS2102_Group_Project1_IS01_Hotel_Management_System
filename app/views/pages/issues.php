@@ -47,6 +47,14 @@
           <input type="text" name="cusName" placeholder="Enter Your Name" required >
           <input type="text" name="cusEmail" placeholder="Enter Your Email Address" required >
           <input type="text" name="subject" placeholder="Enter the Subject of the Complain" required>
+          <select name="ctype" id="ctype">
+            <option value="0" selected>---Select a Complain Type---</option>
+            <option value="Reservation">Reservation</option>
+            <option value="Restaurant">Restaurant</option>
+            <option value="Pub">PUB</option>
+            <option value="Kitchen">Kitchen</option>
+            <option value="Other">Other</option>
+          </select>
           <textarea rows="8" name="description" placeholder="Describe the Complain" requried></textarea>
           <input type="text" name="status" value="Pending" hidden>
           <button type="submit" name="submit" class="hero-btn">Send Message</button>

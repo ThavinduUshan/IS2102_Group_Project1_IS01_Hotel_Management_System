@@ -28,7 +28,7 @@
           <li><a style="color:green;" href="<?php echo URLROOT; ?>/pages/issues">Complains</a></li>
           </ul>
         </div>
-    </nav><br><br><br>
+    </nav><br>
 
   <div class="select-date">
     <h1>Select the Dates</h1>
@@ -62,18 +62,18 @@
     function validateform(){
       var checkin = (new Date(document.forms["selectdate"]["check-in"].value)).getTime();
       var checkout = (new Date(document.forms["selectdate"]["check-out"].value)).getTime();
-      var today = (new Date()).getTime();
-
+      var yesterday = (new Date()).getTime() - 24*60*60*1000;
+      
       console.log(checkin);
       console.log(checkout);
-      console.log(today);
+      console.log(yesterday);
 
-      if(checkin < today){
+      if(checkin < yesterday){
         document.getElementById("error1").style.display = "block";
         return false;
       }
 
-      if(checkout < today){
+      if(checkout < yesterday){
         document.getElementById("error2").style.display = "block";
         return false;
       }

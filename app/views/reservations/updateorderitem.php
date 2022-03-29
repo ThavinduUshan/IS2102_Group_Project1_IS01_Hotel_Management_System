@@ -1,4 +1,4 @@
-<?php if (!isset($_SESSION['UserID'])|| $_SESSION["UserTypeID"] != 2){ 
+<?php if (!isset($_SESSION['UserID']) || $_SESSION["UserTypeID"] != 2){ 
       header('location: ' . URLROOT .  '/users/login');
 }?>
 <!DOCTYPE html>
@@ -13,7 +13,7 @@
   <link rel="stylesheet" href="<?php echo URLROOT ?>/public/css/stylen.css">
   <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/@fortawesome/fontawesome-free@5.15.4/css/fontawesome.min.css" integrity="sha384-jLKHWM3JRmfMU0A5x5AkjWkw/EYfGUAGagvnfryNV3F9VqM98XiIH7VBGVoxVSc7" crossorigin="anonymous">
   <script src="https://use.fontawesome.com/a6a11daad8.js"></script>
-  <title>Update KOT</title>
+  <title>Update Order Item</title>
 </head>
 <body>
   <section class="system">
@@ -46,10 +46,10 @@
   <!-- System Block -->
   <div class="sys-left-col">
   <div class="recep-dash-plus1">
-      <a href="<?php echo URLROOT ?>/reservations/updatereservation?resno=<?php echo $_GET['resno']?>&roomno=<?php echo $_GET['roomno']?>">
+      <a href="<?php echo URLROOT ?>/reservations/selectdate">
         <i class="fa fa-plus-square fa-4x" aria-hidden="true"></i>
       </a>
-      <p>Update Reservation</p>
+      <p>Place Reservation</p>
     </div>
 
     <div class="bar-dash-plus1">
@@ -67,43 +67,39 @@
     </div>
   </div>
   
-  <div class="sys-right-col">
-    <div class="KOT-right">
 
-    <!-- Room KOT Details -->
-    <div class="res-kot-detail-heading"><br>   
-      <h1 style="color:#01661b">Room Order #<?php echo $_GET['roomorderno']?></h1>
+  <div class="sys-right-col">
+  <div class="recep-bill-right"><br>
+ 
+
+    <div class="recep-bill-heading">
+      <h1 style="color:#01661b">Update Order Item</h1>
     </div>
 
-    <!-- KOT Item Details -->
-             
-            <div class="res-kot-details">
-            <table>
-              
-              <tr>
-              <th style="width:30%;">Food Item</th>
-              <th style="width:30%;">Portion</th>
-              <th style="width:20%;">Quantity</th>
-              <th style="width:10%;"></th>
-              <th style="width:10%;"></th>
-              </tr>
-            <?php foreach($data['roomorderitems'] as $item): ?>
-              <tr>
-              <td><?php echo $item->itemName?></td>
-              <td><?php echo $item->PortionType?></td>
-              <td><?php echo $item->Quantity?></td>
-              <td><a href="<?php echo URLROOT ?>/reservations/updateorderitem?roomorderno=<?php echo $_GET['roomorderno']?>&itemno=<?php echo $item->RoomOrderItemNo?>"><i class="fa fa-pencil-square-o fa-2x" aria-hidden="true"></i></a></td>
-              <td><a href="<?php echo URLROOT ?>/reservations/deleteorderitem?resno=<?php echo $_GET['resno']?>&roomno=<?php echo $_GET['roomno']?>&roomorderno=<?php echo $_GET['roomorderno']?>&itemno=<?php echo $item->RoomOrderItemNo?>"><i class="fa fa-trash-o fa-2x" aria-hidden="true"></i></a></td>
-              </tr>
-            <?php endforeach; ?>
-            </table><br><br>
-                
-          </div>
 
+    <div class="recep-bill-form">
+      
+      <form action="<?php echo URLROOT ?>/reservations/updateorderitem?itemno=<?php echo $_GET['itemno'] ?>" method="post">
+        <div class="bill-form-left">
+          <label for="fooditem">Food Item</label><br>
+          <input type="text" id="foodiem" name="fooditem" value="<?php echo $data['orderitem']->itemName?>" disabled><br><br>
+        </div>
 
+        <label for="portion">Portion Type:</label><br>
+          <select name="ptype" id="ptype">
+            <option value="<?php echo $data['orderitem']->PortionType?>" select = "selected" ><?php echo $data['orderitem']->PortionType?></option>
+            <option value="Small">Small</option>
+            <option value="Regular">Regular</option>
+            <option value="Large">Large</option>
+          </select><br><br>
 
+          <label for="quantity" class="recep-bill-form-l1">Quantity</label><br>
+          <input type="number" id="quantity" name="quantity" value="<?php echo $data['orderitem']->Quantity?>" min="1"><br><br>
+
+        <input type="submit" name="submit" value="Update Order Item"><br><br>
+      </form>
+    </div>
   </div>
   </div>
-
 </body>
 </html>
