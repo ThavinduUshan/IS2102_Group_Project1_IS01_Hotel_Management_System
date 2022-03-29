@@ -75,6 +75,9 @@
           case 'HeadChef':
             $data['utypeid'] = 5;
             break;
+          case 'Moderator':
+            $data['utypeid'] = 6;
+            break;
         }
 
         $nameValidation = "/^[a-zA-Z0-9]*$/";
@@ -85,6 +88,11 @@
           $data['unameError'] = 'Please Enter Your UserName';
         }else if(!preg_match($nameValidation,$data['uname'])){
           $data['unameError'] = 'Name can only have letters and Numbers';
+        }else{
+          //check email is already exists
+          if($this->userModel->findUserName($data['uname'])){
+            $data['unameError'] = 'Username already taken!';
+          }
         }
 
         //validate email
@@ -247,6 +255,10 @@
         header('location: ' . URLROOT . '/users/headchef');
       }
 
+      if($_SESSION['UserTypeID'] == 6){
+        header('location: ' . URLROOT . '/users/moderator');
+      }
+
     }
 
     public function logout(){
@@ -257,20 +269,294 @@
     }
 
     public function admin(){
-      $this->view('users/admin');
+
+      $roomsbookedtoday = $this->userModel->getRoomsBookedToday();
+      $resplacedtoday = $this->userModel ->getResPlacedToday();
+      $barplacedtoday = $this->userModel->getBarPlacedToday();
+      $roomsearningstoday = $this->userModel->getRoomsEarningsToday();
+      $researningstoday = $this->userModel->getResEarningsToday();
+      $barearningstoday = $this->userModel->getBarEarningsToday();
+      $earningstoday = (int)($roomsearningstoday->Total) + (int)($roomsearningstoday->Total)+ (int)($roomsearningstoday->Total);
+
+      $roomsbooked = $this->userModel->getRoomsBooked();
+      $resordersplaced = $this->userModel->getResOrderspalced();
+      $barordersplaced = $this->userModel->getBarOrderspalced();
+      $issuescomplained =  $this->userModel->getIssuesComplained();
+      $reservationscanceled =  $this->userModel->getRoomsCanceled();
+      $resorderscanceled =  $this->userModel->getResCanceled();
+      $barorderscanceled =  $this->userModel->getBarCanceled();
+      $issuessolved =  $this->userModel->getIssuesSolved();
+      $earnedbyrooms = $this->userModel->earningsFromRooms();
+      $earnedbyres = $this->userModel->earningsFromRestaurants();
+      $earnedbybars = $this->userModel->earningsFromBars();
+
+      $popularrooms = $this->userModel->popularRooms();
+
+      $topfivefooditems = $this->userModel->topfivefooditems();
+      $topfivebaritems =$this->userModel->topfivebaritems();
+ 
+      $data = [
+
+        'roomsbookedtoday' => $roomsbookedtoday,
+        'resplacedtoday' => $resplacedtoday,
+        'barplacedtoday' => $barplacedtoday,
+        'earningstoday' => $earningstoday,
+        'roomsbooked' => $roomsbooked,
+        'resordersplaced' => $resordersplaced,
+        'barordersplaced' => $barordersplaced,
+        'issuescomplained' => $issuescomplained,
+        'reservationscanceled' => $reservationscanceled,
+        'resorderscanceled' => $resorderscanceled,
+        'barorderscanceled' => $barorderscanceled,
+        'issuessolved' => $issuessolved,
+        'earnedbyrooms' => $earnedbyrooms,
+        'earnedbyres' => $earnedbyres,
+        'earnedbybars' => $earnedbybars,
+        'popularrooms' => $popularrooms,
+        'topfivefooditems' => $topfivefooditems,
+        'topfivebaritems' => $topfivebaritems
+      ];
+
+      $this->view('users/admin', $data);
     }
     public function receptionist(){
-      $this->view('users/receptionist');
+
+      $reservations = $this->userModel->getReservations();
+
+      if($_SERVER['REQUEST_METHOD'] == 'POST'){
+        $_POST = filter_input_array(INPUT_POST, FILTER_SANITIZE_STRING);
+
+        $data = [
+          'reservations' => $reservations,
+          'search' => trim($_POST['search']),
+          'searchError' => '',
+          'resultsEmpty' => ''
+        ];
+
+        if(empty($data['search'])){
+          $data['searchError'] = 'Search value cant be empty!';
+        }
+
+        if(empty($data['searchError'])){
+          $results = $this->userModel->getCustomReservations($data);
+
+          if($results){
+            $data = [
+              'reservations' => $results,
+              'search' => trim($_POST['search']),
+              'searchError' => '',
+              'resultsEmpty' => '',
+            ];
+          }else{
+            $data = [
+              'reservations' => '',
+              'search' => trim($_POST['search']),
+              'searchError' => '',
+              'resultsEmpty' => '',
+            ];
+
+            $data['resultsEmpty'] = 'Sorry! No results Found!';
+          }
+          
+        }
+
+        $this->view('users/receptionist',$data);
+
+      }else{
+
+        $data = [
+          'reservations' => $reservations,
+          'search' => '',
+          'searchError' => '',
+          'resultsEmpty' => ''
+        ];
+
+        $this->view('users/receptionist',$data);
+      }
+
     }
+
     public function cashier(){
-      $this->view('users/cashier');
-    }
-    public function headchef(){
-      $this->view('users/headchef');
-    }
-    public function barman(){
-      $this->view('users/barman');
+      $restaurantorderdetails = $this->userModel->viewrestaurantorderdetails();
+
+      if($_SERVER['REQUEST_METHOD'] == 'POST'){
+        $_POST = filter_input_array(INPUT_POST, FILTER_SANITIZE_STRING);
+
+        $data = [
+          'restaurantorderdetails' => $restaurantorderdetails,
+          'search' => trim($_POST['search']),
+          'searchError' => '',
+          'resultsEmpty' => ''
+        ];
+
+        if(empty($data['search'])){
+          $data['searchError'] = 'Search value cant be empty!';
+        }
+
+        if(empty($data['searchError'])){
+          $restaurantorderdetails = $this->userModel->getRestaurantOrders($data);
+
+          if($restaurantorderdetails){
+            $data = [
+              'restaurantorderdetails' => $restaurantorderdetails,
+              'search' => trim($_POST['search']),
+              'searchError' => '',
+              'resultsEmpty' => '',
+            ];
+          }else{
+            $data = [
+              'restaurantorderdetails' => '',
+              'search' => trim($_POST['search']),
+              'searchError' => '',
+              'resultsEmpty' => '',
+            ];
+
+            $data['resultsEmpty'] = 'Sorry! No results Found!';
+          }
+          
+        }
+
+        $this->view('users/cashier', $data);
+
+      }else{
+
+        $data = [
+          'restaurantorderdetails' => $restaurantorderdetails,
+          'search' => '',
+          'searchError' => '',
+          'resultsEmpty' => ''
+        ];
+
+        $this->view('users/cashier', $data);
+      }
     }
 
     
+    public function headchef(){
+      $restaurantorders = $this->userModel->viewrestaurantorderdetails();
+
+      $data = [
+        'restaurantorders' => $restaurantorders
+      ];
+
+      $this->view('users/headchef', $data);
+    }
+
+    public function barman(){
+      $barorderdetails = $this->userModel->viewbarorderdetails();
+
+      
+      if($_SERVER['REQUEST_METHOD'] == 'POST'){
+        $_POST = filter_input_array(INPUT_POST, FILTER_SANITIZE_STRING);
+
+        $data = [
+          'barorderdetails' => $barorderdetails,
+          'search' => trim($_POST['search']),
+          'searchError' => '',
+          'resultsEmpty' => ''
+        ];
+
+        if(empty($data['search'])){
+          $data['searchError'] = 'Search value cant be empty!';
+        }
+
+        if(empty($data['searchError'])){
+          $barorderdetails = $this->userModel->getBarOrders($data);
+
+          if($barorderdetails){
+            $data = [
+              'barorderdetails' => $barorderdetails,
+              'search' => trim($_POST['search']),
+              'searchError' => '',
+              'resultsEmpty' => '',
+            ];
+          }else{
+            $data = [
+              'barorderdetails' => '',
+              'search' => trim($_POST['search']),
+              'searchError' => '',
+              'resultsEmpty' => '',
+            ];
+
+            $data['resultsEmpty'] = 'Sorry! No results Found!';
+          }
+          
+        }
+
+        $this->view('users/barman', $data);
+
+      }else{
+
+        $data = [
+          'barorderdetails' => $barorderdetails,
+          'search' => '',
+          'searchError' => '',
+          'resultsEmpty' => ''
+        ];
+
+        $this->view('users/barman', $data);
+      }
+    }
+
+
+    public function moderator(){
+      
+      $issues = $this->userModel->viewissues();
+
+      $data = [
+        'issues' => $issues
+      ];
+
+      if($_SERVER['REQUEST_METHOD'] == 'POST'){
+        $_POST = filter_input_array(INPUT_POST, FILTER_SANITIZE_STRING);
+
+        $data = [
+          'issues' => $issues,
+          'search' => trim($_POST['search']),
+          'searchError' => '',
+          'resultsEmpty' => ''
+        ];
+
+        if(empty($data['search'])){
+          $data['searchError'] = 'Search value cant be empty!';
+        }
+
+        if(empty($data['searchError'])){
+          $results = $this->userModel->getCustomIssues($data);
+
+          if($results){
+            $data = [
+              'issues' => $results,
+              'search' => trim($_POST['search']),
+              'searchError' => '',
+              'resultsEmpty' => '',
+            ];
+          }else{
+            $data = [
+              'issues' => '',
+              'search' => trim($_POST['search']),
+              'searchError' => '',
+              'resultsEmpty' => '',
+            ];
+
+            $data['resultsEmpty'] = 'Sorry! No results Found!';
+          }
+          
+        }
+
+        $this->view('users/moderator',$data);
+
+      }else{
+        $data = [
+          'issues' => $issues,
+          'search' => '',
+          'searchError' => '',
+          'resultsEmpty' => '',
+        ];
+
+        $data['resultsEmpty'] = 'Sorry! No results Found!';
+      }
+
+      $this->view('users/moderator', $data);
+    }
   }
