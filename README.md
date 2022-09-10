@@ -14,7 +14,7 @@ After the customer arrives and sits at the table, the waiter offers the book wit
 # Pub
 
 Barman is the primary user who is involved in the Pub. Barman can place the orders of customers received at the pub, he can 
-update those orders  &  can close the orders if requested. And also, he is capable of managing the bar stock via the system. He can add new liquor items and their quantities. Barman place the snack orders to the kitchen via Bar Ordering Tickets(KO
+update those orders  &  can close the orders if requested. And also, he is capable of managing the bar stock via the system. He can add new liquor items and their quantities. Barman place the snack orders to the kitchen via Bar Ordering Tickets(BOT)
 
 # Kitchen
 
